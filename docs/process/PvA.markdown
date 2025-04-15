@@ -128,13 +128,13 @@ randvoorwaarden voldaan worden.
 
 ## 7. Op te leveren producten en kwaliteitseisen
 
-Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze staan in de onderstaande tabel beschreven. Om tot een kwalitatief voldoende product te komen moeten aan deze eisen voldaan worden. Dit doe ik door minimaal de stappen in de kolom "Benodigde activiteit" uit te voeren en mij daarbij te houden aan de "Proceskwaliteitseisen".
+Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze staan in de onderstaande tabel beschreven. Om tot een kwalitatief voldoende product te komen moeten aan deze eisen voldaan worden. Dit doe ik door minimaal de stappen in de kolom "Benodigde activiteit" uit te voeren en mij daarbij te houden aan de "Proceskwaliteitseisen". De producten zijn ingedeeld in een aantal categorieën en wanneer er in de rij van de categorieaanduiding een veld is ingevuld dan geldt dat veld voor alle producten in die categorie.
 
 | **Product**        | **Kwaliteitseisen**| **Benodigde activiteit**| **Proceskwaliteitseisen**|
 |---|---|---|---|
-| **Onderzoeken**| | | - Onderzoek wordt voorgelegd aan begeleider voor feedback.    |
+| **Onderzoeken**| | | **- Onderzoek wordt voorgelegd aan begeleider voor feedback.**    |
 | Keuze type database/platform| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.| - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. |- Voorleggen aan vakinhoudelijke medewerker wanneer het onderzoeksresultaat bekend is.|
-| Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data.| - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.||
+| Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data.| - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.| - Gesprek met collega's/begeleiders die meer verstand hebben van dit soort systemen voeren om aan informatie te komen.|
 | Keuze embedded controller | - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.| - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.||
 | **Prototypes** ||||
 | Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan de maximale zend- en ontvangstcapaciteit van de PLC bijhouden.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. ||
