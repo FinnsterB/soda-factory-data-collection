@@ -33,29 +33,31 @@ diagnosticeren.
 
 Dit document bevat de volgende hoofdstukken:
 
-1.  **Inleiding**: Kleine opdrachtomschrijving en leeswijzer.
+1.  **Inhoudsopgave**
+   
+2.  **Inleiding**: Kleine opdrachtomschrijving en leeswijzer.
 
-2.  **Achtergrond van het project**: Beschrijving van de organisatie,
+3.  **Achtergrond van het project**: Beschrijving van de organisatie,
     opdracht en relevante stakeholders.
 
-3.  **Doelstelling**, opdracht en op te leveren resultaten voor het
+4.  **Doelstelling**, opdracht en op te leveren resultaten voor het
     bedrijf:** Gaat dieper in op de opdracht.
 
-4.  **Projectgrenzen:** Beschrijft waar mijn project eindigt in termen
+5.  **Projectgrenzen:** Beschrijft waar mijn project eindigt in termen
     van tijd en inhoud.
 
-5.  **Randvoorwaarden:** Aan welke voorwaarden moet voldaan worden wil
+6.  **Randvoorwaarden:** Aan welke voorwaarden moet voldaan worden wil
     het project succesvol aflopen?
 
-6.  **Ontwikkelmethoden:** Welke projectmethode gebruik ik?
+7.  **Ontwikkelmethoden:** Welke projectmethode gebruik ik?
 
-7.  **Projectorganisatie en -communicatie:** Gegevens van belangrijke
+8.  **Projectorganisatie en -communicatie:** Gegevens van belangrijke
     personen in het project en de afspraken daarmee.
 
-8.  **Planning:** Wanneer vinden belangrijke gebeurtenissen, zowel van
+9.  **Planning:** Wanneer vinden belangrijke gebeurtenissen, zowel van
     de projectmethode als in het afstudeertraject, plaats?
 
-9.  **Risico's:** Welke risico's zijn er in het project en wat is hun
+10. **Risico's:** Welke risico's zijn er in het project en wat is hun
     impact?
 
 ## 3. Achtergrond van het project
@@ -68,20 +70,21 @@ diagnosticeren en anticiperen op potentiële gebreken en stilstand door
 veroudering, slijtage of defecten aan de installaties. Sensoren worden
 steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik
 van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie
-genereren dan hun basale signalen. PLC\'s zijn hiervoor geen geëigende
-apparaten om deze \'overvloed\' aan informatie te verwerken. Welke
-embedded controllers kunnen hiervoor wel ingezet worden?
+genereren dan hun basale signalen. PLC\'s kunnen deze informatie
+doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing 
+aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is 
+mijn afstudeerproject. 
 
 ## 4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
-Om dit te onderzoeken gebruik ik de limonademachine van MA-IT. Deze
+Om dit te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze
 draait op een PLC die maar gelimiteerd sensorinformatie
 opslaat/ontsluit. De sensoren op de installatie zijn echter van een
 slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook
 dingen als temperatuur of druk meten. Daarnaast zijn de operation times
 van de verschillende sensoren en actuatoren van belang om predictive
 maintenance toe te passen. Al deze gegevens worden verstuurd met een
-IO-link protocol en het is belangrijk om van alle types sensoren en
+IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en
 actuatoren de waarden uit te lezen. Dit wordt gedaan door een embedded
 systeem dat ik zelf in moet richten die de gegevens wegschrijft naar een
 database. Uiteindelijk moet er een soort dashboard komen waarin
@@ -114,8 +117,8 @@ opleiding Embedded Software Development horen.
 Om het project succesvol te laten verlopen moet er aan de volgende
 randvoorwaarden voldaan worden.
 
--   Het opdrachtgever stelt een werkplek beschikbaar tussen 8.00 en
-    18.00 gedurende de stageperiode.
+-   Het opdrachtgever stelt een werkplek beschikbaar tussen 8.30 en
+    17.00 gedurende de stageperiode.
 
 -   De opdrachtgever biedt gedurende de stageperiode een begeleider die
     vakinhoudelijke kennis heeft.
@@ -125,27 +128,27 @@ randvoorwaarden voldaan worden.
 
 ## 7. Op te leveren producten en kwaliteitseisen
 
-| **Product**        | **Kwaliteitseisen**| **Benodigde activiteit**| **Proceskwaliteit**|
+Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze staan in de onderstaande tabel beschreven. Om tot een kwalitatief voldoende product te komen moeten aan deze eisen voldaan worden. Dit doe ik door minimaal de stappen in de kolom "Benodigde activiteit" uit te voeren en mij daarbij te houden aan de "Proceskwaliteitseisen".
+
+| **Product**        | **Kwaliteitseisen**| **Benodigde activiteit**| **Proceskwaliteitseisen**|
 |---|---|---|---|
 | **Onderzoeken**| | | - Onderzoek wordt voorgelegd aan begeleider voor feedback.    |
-| Keuze type database| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.| - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. ||
+| Keuze type database/platform| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.| - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. |- Voorleggen aan vakinhoudelijke medewerker wanneer het onderzoeksresultaat bekend is.|
 | Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data.| - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.||
 | Keuze embedded controller | - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.| - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.||
 | **Prototypes** ||||
-| Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan de maximale zend- en ontvangstcapaciteit van de PLC bijhouden.<br>- Geschreven in C/C++.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. ||
+| Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan de maximale zend- en ontvangstcapaciteit van de PLC bijhouden.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. ||
 | Database           | - Kan de maximale output van de controller aan.<br>- Gedocumenteerd in SDD.| - Database definiëren in DDL.<br>- Testdata invoeren.<br>- Bepalen welke query's handig zijn en deze vastleggen.||
-| Gebruikersinterface| - Biedt mogelijkheid om gegevens per sensor of actuator in te zien.<br>- Biedt mogelijkheid om ingeplande onderhoudsmomenten in te zien.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.|- Keuze maken voor interfacemethode, Web of desktop-applicatie. <br>- Softwareontwerp maken. <br>- Software schrijven. <br>- Unittests schrijven||
-| Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.| - Uitzoeken welke gegevens van de sensoren relevant zijn zoals ID, typeaanduiding, welke data ze doorgeven.<br>- Gegevensvelden bedenken voor predictive maintenance. Welke soorten onderhoud zijn relevant? Vastleggen in SRS.||
+| Gebruikersinterface| - Biedt mogelijkheid om gegevens per sensor of actuator in te zien.<br>- Biedt mogelijkheid om ingeplande onderhoudsmomenten in te zien.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.|- Keuze maken voor interfacemethode, Web of desktop-applicatie. <br>- Softwareontwerp maken. <br>- Software schrijven. <br>- Unittests schrijven||
+| Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.| - Uitzoeken welke gegevens van de sensoren relevant zijn zoals ID, typeaanduiding, welke data ze doorgeven.<br>- Gegevensvelden bedenken voor predictive maintenance. Welke soorten onderhoud zijn relevant? Vastleggen in SRS.||
 | **Documentatie**       ||||
 | SRS                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SRS-template document (van Heesch, 2016a).<br>- Gebruikt MoSCoW-prioriteitsindeling voor de eisen.<br>-Voldoet aan AIM-controlekaart.|- Dit is een lopend document, waar gedurende de hele ontwikkeling aan wordt gewerkt. <br>- De eisen aan het op te leveren systeem worden in een vroeg stadium verzameld. <br>- ||
-| SDD                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SDD-template document (van Heesch, 2016b).<br>-Voldoet aan AIM-controlekaart.|||
-| Testdocumentatie   | - Bevat testcases die elke eis uit het SRS testen.<br>- Bevat een beschrijving van de unittests.<br>-Voldoet aan AIM-controlekaart.|||
-| Handleidingen      | - Handleiding voor installatie van het systeem.<br>- Handleiding voor het gebruik van het systeem.<br>- Handleidingen omvatten de functionele eisen uit het SRS.<br>-Voldoen aan AIM-controlekaart.|||
+| SDD                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SDD-template document (van Heesch, 2016b).<br>-Voldoet aan AIM-controlekaart.|- Ook dit is een lopen document, waar gedurende de onwikkeling steeds meer ontwerpkeuzes in zullen verschijnen. <br>- Elk prototype wordt vastgelegd||
+| Testdocumentatie   | - Bevat testcases die elke eis uit het SRS testen.<br>- Bevat een beschrijving van de unittests.<br>-Voldoet aan AIM-controlekaart.|- Opstellen van testcases a.d.h.v. de requirements uit het SRS. <br>- Uitleg over de unittests schrijven. ||
+| Handleidingen      | - Handleiding voor installatie van het systeem.<br>- Handleiding voor het gebruik van het systeem.<br>- Handleidingen omvatten de functionele eisen uit het SRS.<br>-Voldoen aan AIM-controlekaart.| _ Nagaan of er een template voor handleidingen wordt gehanteerd. <br>- Alle functionaliteit in het SRS uitwerken met screenshots en begeleidende tekst. | - Laten doorlezen door iemand uit het bedrijf. |
 | **Eindproduct**        ||||
 | Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Alle unittesten moeten slagen.|||
-| Afstudeerverslag| | | |
-| Eindpresentatie| | | |
-| Bijlagen| | | |
+| Afstudeerverslag|- Beschrijft hoe mijn afstudeerstage verloopt. <br>- Volgt de "Schrijfwijzer Afstudeerverslag"(Hogeschool van Arnhem en Nijmegen, 2022). |- Wanneer een van de bovenstaande producten voorlopig af is voeg ik inhoud aan het verslag toe. <br>- Richting het eind van het afstudeertraject schrijf ik de managementsamenvatting. <br>- | |
 
 
 ## 8. Ontwikkelmethoden
@@ -153,7 +156,7 @@ randvoorwaarden voldaan worden.
 Voor dit project gebruik ik RUP als projectmethode. Hierbij houd ik er
 rekening mee dat RUP een groot aantal rollen biedt die ik in mijn eentje
 niet ga kunnen vervullen en dat een groot deel van de ceremonies
-daardoor ook afvallen.
+daardoor ook afvallen. 
 
 ## 9. Projectorganisatie en communicatie
 
