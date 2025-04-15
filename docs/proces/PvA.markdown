@@ -1,9 +1,6 @@
----
-title: "![](logo.jpeg){width=\"0.7569444444444444in\"
-  height=\"0.5104166666666666in\"}Plan van aanpak"
----
 
-Inhoudsopgave
+
+## Inhoudsopgave
 
 [1 Inleiding 3](#inleiding)
 
@@ -28,7 +25,7 @@ Inhoudsopgave
 
 [10 Risico's 9](#risicos)
 
-# Inleiding
+## Inleiding
 
 In dit document licht ik de planning van mijn afstudeerproject toe en
 leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn
@@ -68,7 +65,7 @@ Dit document bevat de volgende hoofdstukken:
 9.  **Risico's:** Welke risico's zijn er in het project en wat is hun
     impact?
 
-# Achtergrond van het project
+## Achtergrond van het project
 
 MyAutomation MA-IT is al sterk vertegenwoordigd in de industriële
 automatisering binnen energietechniek, machinebouw en procestechniek.
@@ -82,7 +79,7 @@ genereren dan hun basale signalen. PLC\'s zijn hiervoor geen geëigende
 apparaten om deze \'overvloed\' aan informatie te verwerken. Welke
 embedded controllers kunnen hiervoor wel ingezet worden?
 
-# Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
+## Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
 Om dit te onderzoeken gebruik ik de limonademachine van MA-IT. Deze
 draait op een PLC die maar gelimiteerd sensorinformatie
@@ -104,7 +101,7 @@ berichten uitgelezen moeten worden. Op deze manier is het een modulair
 systeem dat aangepast kan worden naar de configuratie van verschillende
 fabrieksprocessen.
 
-# Projectgrenzen
+## Projectgrenzen
 
 Tijdens het project hanteer ik de onderstaande grenzen. Naast het
 inbakenen van de projecttijd zorg ik er hier voor dat de
@@ -120,7 +117,7 @@ opleiding Embedded Software Development horen.
 |  			Ik ontwikkel geen cross-platform software. 		            |  			Afhankelijk van de microcontroller die ik kies zal ik in principe 			voor Linux ontwikkelen. Omdat de software in een “embedded” 			context ontwikkeld wordt en het niet de bedoeling is dat 			eindgebruikers dit zelf kunnen installeren. 		                                  |
 |  			Ik ontwikkel geen eigen AI/ML modellen. 		               |  			Bij het ontwikkelen en trainen van een AI/ML model gaat heel veel 			tijd zitten in andere zaken dan het ontwerpen en implementeren van 			software, zoals het vergaren en voorbereiden van trainingsdata en 			het fine-tunen. Dit past niet bij de opleidingscompetenties. 		 |
 
-# Randvoorwaarden
+## Randvoorwaarden
 
 Om het project succesvol te laten verlopen moet er aan de volgende
 randvoorwaarden voldaan worden.
@@ -134,236 +131,37 @@ randvoorwaarden voldaan worden.
 -   De opdrachtgever zorgt bij de inrichting van het project dat de
     student in staat wordt gesteld inleverdeadlines van school te halen.
 
-# Op te leveren producten en kwaliteitseisen
+## Op te leveren producten en kwaliteitseisen
 
-+----------------+----------------+-----------------+-----------------+
-| **Product**    | **Kwa          | **Benodigde     | **Pr            |
-|                | liteitseisen** | activiteit**    | oceskwaliteit** |
-+----------------+----------------+-----------------+-----------------+
-| Onderzoeken    |                |                 | \- Onderzoek    |
-|                |                |                 | wordt           |
-|                |                |                 | voorgelegd aan  |
-|                |                |                 | begeleider voor |
-|                |                |                 | feedback.       |
-+----------------+----------------+-----------------+-----------------+
-| Keuze type     | \- Onderzoek   | \- Vaststellen  |                 |
-| database       | is relevant    | welke data in   |                 |
-|                | voor het       | de database     |                 |
-|                | project.       | komt.           |                 |
-|                |                |                 |                 |
-|                | \- Onderzoek   | \- Vaststellen  |                 |
-|                | stelt criteria | hoeveel data in |                 |
-|                | vast.          | de database     |                 |
-|                |                | komt.           |                 |
-|                | \- Onderzoek   |                 |                 |
-|                | vergelijkt     | \- Long list    |                 |
-|                | meerdere       | van             |                 |
-|                | alternatieven  | databasetypes   |                 |
-|                | op basis van   | maken.          |                 |
-|                | criteria.      |                 |                 |
-|                |                | \- Criteria     |                 |
-|                |                | opstellen.      |                 |
-|                |                |                 |                 |
-|                |                | \- A.d.h.v.     |                 |
-|                |                | criteria een    |                 |
-|                |                | keuze maken.    |                 |
-+----------------+----------------+-----------------+-----------------+
-| Protocollen:   | \- Onderzoek   | \- Vaststellen  |                 |
-| IO-Lin         | is relevant    | hoe IO-Link     |                 |
-| k/TCP-profinet | voor het       | werkt.          |                 |
-|                | project.       |                 |                 |
-|                |                | \- Vaststellen  |                 |
-|                | \- Onderzoek   | hoe             |                 |
-|                | vergelijkt     | TCP-profinet    |                 |
-|                | indien nodig   | werkt.          |                 |
-|                | methoden van   |                 |                 |
-|                | het ophalen    | \- Gegevens     |                 |
-|                | van data.      | onderscheppen   |                 |
-|                |                | met een         |                 |
-|                |                | library.        |                 |
-+----------------+----------------+-----------------+-----------------+
-| Keuze embedded | \- Onderzoek   | \- Long list    |                 |
-| controller     | is relevant    | van embedded    |                 |
-|                | voor het       | controllers     |                 |
-|                | project.       | maken.          |                 |
-|                |                |                 |                 |
-|                | \- Onderzoek   | \- Criteria     |                 |
-|                | stelt criteria | opstellen.      |                 |
-|                | vast.          |                 |                 |
-|                |                | \- A.d.h.v.     |                 |
-|                | \- Onderzoek   | criteria een    |                 |
-|                | vergelijkt     | keuze maken.    |                 |
-|                | meerdere       |                 |                 |
-|                | alternatieven  |                 |                 |
-|                | op basis van   |                 |                 |
-|                | criteria.      |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Prototypes     |                |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Uitlezen       | \- Controller  | \- Resultaat    |                 |
-| sensordata en  | kan zonder     | van het         |                 |
-| actuatorstatus | invloed op de  | proto           |                 |
-| met controller | PLC de         | collenonderzoek |                 |
-|                | gegevens       | gebruiken.      |                 |
-|                | uitlezen.      |                 |                 |
-|                |                | \-              |                 |
-|                | \- Controller  | Testopstelling  |                 |
-|                | kan de         | maken voor      |                 |
-|                | maximale zend  | maximale        |                 |
-|                | en             | c               |                 |
-|                | ont            | apaciteitstest. |                 |
-|                | vangcapaciteit |                 |                 |
-|                | van de PLC     | \-              |                 |
-|                | bijhouden.     | Softwareontwerp |                 |
-|                |                | maken.          |                 |
-|                | \- Geschreven  |                 |                 |
-|                | in C/C++.      | \- Software     |                 |
-|                |                | schrijven.      |                 |
-|                | \- Getest met  |                 |                 |
-|                | unittests.     | \- Testen met   |                 |
-|                |                | testopstelling. |                 |
-|                | \-             |                 |                 |
-|                | Gedocumenteerd |                 |                 |
-|                | d.m.v. UML en  |                 |                 |
-|                | toelichting.   |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Database       | \- Kan de      | \- Database     |                 |
-|                | maximale       | definieren in   |                 |
-|                | output van de  | DDL.            |                 |
-|                | controller     |                 |                 |
-|                | aan.           | \- Testdata     |                 |
-|                |                | invoeren.       |                 |
-|                | \-             |                 |                 |
-|                | Gedocumenteerd | \- Bepalen      |                 |
-|                | in SDD.        | welke querys    |                 |
-|                |                | handig zijn en  |                 |
-|                |                | deze            |                 |
-|                |                | vastleggen.     |                 |
-+----------------+----------------+-----------------+-----------------+
-| Predictive     | \- Kan o.b.v.  |                 |                 |
-| maintenance    | analyse        |                 |                 |
-| scheduler      | onde           |                 |                 |
-|                | rhoudsmomenten |                 |                 |
-|                | inplannen.     |                 |                 |
-|                |                |                 |                 |
-|                | \- Geschreven  |                 |                 |
-|                | in C/C++.      |                 |                 |
-|                |                |                 |                 |
-|                | \- Getest met  |                 |                 |
-|                | unittests.     |                 |                 |
-|                |                |                 |                 |
-|                | \-             |                 |                 |
-|                | Gedocumenteerd |                 |                 |
-|                | d.m.v. UML en  |                 |                 |
-|                | toelichting.   |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Gebu           | \- Biedt       |                 |                 |
-| ikersinterface | mogelijkheid   |                 |                 |
-|                | om gegevens    |                 |                 |
-|                | per sensor of  |                 |                 |
-|                | actuator in te |                 |                 |
-|                | zien.          |                 |                 |
-|                |                |                 |                 |
-|                | \- Getest met  |                 |                 |
-|                | unittests.     |                 |                 |
-|                |                |                 |                 |
-|                | \-             |                 |                 |
-|                | Gedocumenteerd |                 |                 |
-|                | d.m.v. UML en  |                 |                 |
-|                | toelichting.   |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Configurator   | \- Biedt een   |                 |                 |
-|                | CRUD interface |                 |                 |
-|                | voor           |                 |                 |
-|                | sensor         |                 |                 |
-|                | en/actuatoren. |                 |                 |
-|                |                |                 |                 |
-|                | \- Getest met  |                 |                 |
-|                | unittests.     |                 |                 |
-|                |                |                 |                 |
-|                | \-             |                 |                 |
-|                | Gedocumenteerd |                 |                 |
-|                | d.m.v. UML en  |                 |                 |
-|                | toelichting.   |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Documentatie   |                |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| SRS            | \- Bevat een   |                 |                 |
-|                | uitwerking van |                 |                 |
-|                | alle relevante |                 |                 |
-|                | hoofdstukken   |                 |                 |
-|                | uit het        |                 |                 |
-|                | SRS-te         |                 |                 |
-|                | mplatedocument |                 |                 |
-|                | (van Heesch,   |                 |                 |
-|                | 2016a).        |                 |                 |
-|                |                |                 |                 |
-|                | \- Gebruikt    |                 |                 |
-|                | MoSCoW-prior   |                 |                 |
-|                | iteitsindeling |                 |                 |
-|                | voor de eisen. |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| SDD            | \- Bevat een   |                 |                 |
-|                | uitwerking van |                 |                 |
-|                | alle relevante |                 |                 |
-|                | hoofdstukken   |                 |                 |
-|                | uit het        |                 |                 |
-|                | SDD-templa     |                 |                 |
-|                | tedocument(van |                 |                 |
-|                | Heesch,        |                 |                 |
-|                | 2016b).        |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Te             | \- Bevat       |                 |                 |
-| stdocumentatie | testcases die  |                 |                 |
-|                | elke eis uit   |                 |                 |
-|                | het SRS        |                 |                 |
-|                | testen.        |                 |                 |
-|                |                |                 |                 |
-|                | \- Bevat een   |                 |                 |
-|                | beschrijving   |                 |                 |
-|                | van de         |                 |                 |
-|                | unittests.     |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Handleidingen  | \- Handleiding |                 |                 |
-|                | voor           |                 |                 |
-|                | installatie    |                 |                 |
-|                | van het        |                 |                 |
-|                | systeem.       |                 |                 |
-|                |                |                 |                 |
-|                | \- Handleiding |                 |                 |
-|                | voor het       |                 |                 |
-|                | gebruik van    |                 |                 |
-|                | het systeem.   |                 |                 |
-|                |                |                 |                 |
-|                | \-             |                 |                 |
-|                | Handleidingen  |                 |                 |
-|                | omvatten de    |                 |                 |
-|                | functionele    |                 |                 |
-|                | eisen uit het  |                 |                 |
-|                | SRS.           |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Eindproduct    |                |                 |                 |
-+----------------+----------------+-----------------+-----------------+
-| Geintegreerd   | \- Voldoet aan |                 |                 |
-| systeem        | alle           |                 |                 |
-|                | MUST-eisen in  |                 |                 |
-|                | het SRS.       |                 |                 |
-|                |                |                 |                 |
-|                | \-             |                 |                 |
-|                | Slag           |                 |                 |
-|                | ingspercentage |                 |                 |
-|                | unittesten is  |                 |                 |
-|                | 100%.          |                 |                 |
-+----------------+----------------+-----------------+-----------------+
+| **Product**        | **Kwaliteitseisen**                                                                                                                                                                                                 | **Benodigde activiteit**                                                                                                                                                                  | **Proceskwaliteit**                                          |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
+| Onderzoeken        |                                                                                                                                                                                                                     |                                                                                                                                                                                            | - Onderzoek wordt voorgelegd aan begeleider voor feedback.    |
+| Keuze type database| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.                                                             | - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. |                                                               |
+| Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data.                                                                                   | - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.                                                                    |                                                               |
+| Keuze embedded controller | - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.                                                  | - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.                                                                                   |                                                               |
+| Prototypes         |                                                                                                                                                                                                                     |                                                                                                                                                                                            |                                                               |
+| Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan de maximale zend- en ontvangstcapaciteit van de PLC bijhouden.<br>- Geschreven in C/C++.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. |                                                               |
+| Database           | - Kan de maximale output van de controller aan.<br>- Gedocumenteerd in SDD.                                                                                                                                        | - Database definiëren in DDL.<br>- Testdata invoeren.<br>- Bepalen welke query's handig zijn en deze vastleggen.                                                                          |                                                               |
+| Predictive maintenance scheduler | - Kan o.b.v. analyse onderhoudsmomenten inplannen.<br>- Geschreven in C/C++.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.                                              |                                                                                                                                                                                            |                                                               |
+| Gebruikersinterface| - Biedt mogelijkheid om gegevens per sensor of actuator in te zien.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.                                                                  |                                                                                                                                                                                            |                                                               |
+| Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.                                                                                  |                                                                                                                                                                                            |                                                               |
+| Documentatie       |                                                                                                                                                                                                                     |                                                                                                                                                                                            |                                                               |
+| SRS                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SRS-template document (van Heesch, 2016a).<br>- Gebruikt MoSCoW-prioriteitsindeling voor de eisen.                                                 |                                                                                                                                                                                            |                                                               |
+| SDD                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SDD-template document (van Heesch, 2016b).                                                                   |                                                                                                                                                                                            |                                                               |
+| Testdocumentatie   | - Bevat testcases die elke eis uit het SRS testen.<br>- Bevat een beschrijving van de unittests.                                                                                                                  |                                                                                                                                                                                            |                                                               |
+| Handleidingen      | - Handleiding voor installatie van het systeem.<br>- Handleiding voor het gebruik van het systeem.<br>- Handleidingen omvatten de functionele eisen uit het SRS.                                                |                                                                                                                                                                                            |                                                               |
+| Eindproduct        |                                                                                                                                                                                                                     |                                                                                                                                                                                            |                                                               |
+| Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Slagingspercentage unittesten is 100%.                                                                                     |                                                                                                                                                                                            |                                                               |
 
-# Ontwikkelmethoden
+
+## Ontwikkelmethoden
 
 Voor dit project gebruik ik RUP als projectmethode. Hierbij houd ik er
 rekening mee dat RUP een groot aantal rollen biedt die ik in mijn eentje
 niet ga kunnen vervullen en dat een groot deel van de ceremonies
 daardoor ook afvallen.
 
-# Projectorganisatie en communicatie
+## Projectorganisatie en communicatie
 
 Tijdens mijn afstudeerperiode heb ik een aantal begeleiders:
 
@@ -380,6 +178,6 @@ Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>.
 De begeleiders van MA-IT zijn in principe altijd op locatie beschikbaar
 en daar kan ik gewoon bij terecht als er vragen zijn.
 
-# Planning
+## Planning
 
-# Risico**'s**
+## Risico**'s**
