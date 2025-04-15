@@ -1,31 +1,21 @@
 
 
-## Inhoudsopgave
+## 1. Inhoudsopgave
 
-[1 Inleiding 3](#inleiding)
+- [1. Inhoudsopgave](#1-inhoudsopgave)
+- [2. Inleiding](#2-inleiding)
+- [3. Achtergrond van het project](#3-achtergrond-van-het-project)
+- [4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf](#4-doelstelling-opdracht-en-op-te-leveren-resultaten-voor-het-bedrijf)
+- [5. Projectgrenzen](#5-projectgrenzen)
+- [6. Randvoorwaarden](#6-randvoorwaarden)
+- [7. Op te leveren producten en kwaliteitseisen](#7-op-te-leveren-producten-en-kwaliteitseisen)
+- [8. Ontwikkelmethoden](#8-ontwikkelmethoden)
+- [9. Projectorganisatie en communicatie](#9-projectorganisatie-en-communicatie)
+- [10. Planning](#10-planning)
+- [11. Risico's](#11-risicos)
 
-[2 Achtergrond van het project 4](#achtergrond-van-het-project)
 
-[3 Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
-5](#doelstelling-opdracht-en-op-te-leveren-resultaten-voor-het-bedrijf)
-
-[4 Projectgrenzen 6](#projectgrenzen)
-
-[5 Randvoorwaarden 6](#randvoorwaarden)
-
-[6 Op te leveren producten en kwaliteitseisen
-7](#op-te-leveren-producten-en-kwaliteitseisen)
-
-[7 Ontwikkelmethoden 9](#ontwikkelmethoden)
-
-[8 Projectorganisatie en communicatie
-9](#projectorganisatie-en-communicatie)
-
-[9 Planning 9](#planning)
-
-[10 Risico's 9](#risicos)
-
-## Inleiding
+## 2. Inleiding
 
 In dit document licht ik de planning van mijn afstudeerproject toe en
 leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn
@@ -65,7 +55,7 @@ Dit document bevat de volgende hoofdstukken:
 9.  **Risico's:** Welke risico's zijn er in het project en wat is hun
     impact?
 
-## Achtergrond van het project
+## 3. Achtergrond van het project
 
 MyAutomation MA-IT is al sterk vertegenwoordigd in de industriële
 automatisering binnen energietechniek, machinebouw en procestechniek.
@@ -79,7 +69,7 @@ genereren dan hun basale signalen. PLC\'s zijn hiervoor geen geëigende
 apparaten om deze \'overvloed\' aan informatie te verwerken. Welke
 embedded controllers kunnen hiervoor wel ingezet worden?
 
-## Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
+## 4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
 Om dit te onderzoeken gebruik ik de limonademachine van MA-IT. Deze
 draait op een PLC die maar gelimiteerd sensorinformatie
@@ -101,7 +91,7 @@ berichten uitgelezen moeten worden. Op deze manier is het een modulair
 systeem dat aangepast kan worden naar de configuratie van verschillende
 fabrieksprocessen.
 
-## Projectgrenzen
+## 5. Projectgrenzen
 
 Tijdens het project hanteer ik de onderstaande grenzen. Naast het
 inbakenen van de projecttijd zorg ik er hier voor dat de
@@ -117,7 +107,7 @@ opleiding Embedded Software Development horen.
 |  			Ik ontwikkel geen cross-platform software. 		            |  			Afhankelijk van de microcontroller die ik kies zal ik in principe 			voor Linux ontwikkelen. Omdat de software in een “embedded” 			context ontwikkeld wordt en het niet de bedoeling is dat 			eindgebruikers dit zelf kunnen installeren. 		                                  |
 |  			Ik ontwikkel geen eigen AI/ML modellen. 		               |  			Bij het ontwikkelen en trainen van een AI/ML model gaat heel veel 			tijd zitten in andere zaken dan het ontwerpen en implementeren van 			software, zoals het vergaren en voorbereiden van trainingsdata en 			het fine-tunen. Dit past niet bij de opleidingscompetenties. 		 |
 
-## Randvoorwaarden
+## 6. Randvoorwaarden
 
 Om het project succesvol te laten verlopen moet er aan de volgende
 randvoorwaarden voldaan worden.
@@ -131,7 +121,7 @@ randvoorwaarden voldaan worden.
 -   De opdrachtgever zorgt bij de inrichting van het project dat de
     student in staat wordt gesteld inleverdeadlines van school te halen.
 
-## Op te leveren producten en kwaliteitseisen
+## 7. Op te leveren producten en kwaliteitseisen
 
 | **Product**        | **Kwaliteitseisen**                                                                                                                                                                                                 | **Benodigde activiteit**                                                                                                                                                                  | **Proceskwaliteit**                                          |
 |--------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|
@@ -154,14 +144,14 @@ randvoorwaarden voldaan worden.
 | Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Slagingspercentage unittesten is 100%.                                                                                     |                                                                                                                                                                                            |                                                               |
 
 
-## Ontwikkelmethoden
+## 8. Ontwikkelmethoden
 
 Voor dit project gebruik ik RUP als projectmethode. Hierbij houd ik er
 rekening mee dat RUP een groot aantal rollen biedt die ik in mijn eentje
 niet ga kunnen vervullen en dat een groot deel van de ceremonies
 daardoor ook afvallen.
 
-## Projectorganisatie en communicatie
+## 9. Projectorganisatie en communicatie
 
 Tijdens mijn afstudeerperiode heb ik een aantal begeleiders:
 
@@ -178,6 +168,6 @@ Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>.
 De begeleiders van MA-IT zijn in principe altijd op locatie beschikbaar
 en daar kan ik gewoon bij terecht als er vragen zijn.
 
-## Planning
+## 10. Planning
 
-## Risico**'s**
+## 11. Risico's
