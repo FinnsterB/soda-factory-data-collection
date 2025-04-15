@@ -111,42 +111,14 @@ inbakenen van de projecttijd zorg ik er hier voor dat de
 afstudeeropdracht niet te ver afwijkt van de competenties die bij mijn
 opleiding Embedded Software Development horen.
 
-  -------------------------- --------------------------------------------
-  Beschrijving projectgrens  Toelichting
-
-  Het afstudeerproject is    Hiermee is de maximale looptijd van de
-  afgelopen op: 3 oktober    afstudeerstage bereikt. In uitzonderlijke
-  2025.                      gevallen kan dit met maximaal 8 weken
-                             verlengd worden in overleg met de
-                             organisatie.
-
-  Ik ontwikkel geen          Dit past als Embedded Software Developer
-  PLC-software.              niet geheel bij mijn opleidingscompetenties
-                             en draagt dus niet bij aan het succesvol
-                             afstuderen.
-
-  Ik ontwikkel geen mobiele  Dit past ook niet bij de
-  app.                       opleidingscompetenties.
-
-  Ik gebruik geen bestaande  Idem.
-  SCADA-software.            
-
-  Ik ontwikkel geen          Afhankelijk van de microcontroller die ik
-  cross-platform software.   kies zal ik in principe voor Linux
-                             ontwikkelen. Omdat de software in een
-                             "embedded" context ontwikkeld wordt en het
-                             niet de bedoeling is dat eindgebruikers dit
-                             zelf kunnen installeren.
-
-  Ik ontwikkel geen eigen    Bij het ontwikkelen en trainen van een AI/ML
-  AI/ML modellen.            model gaat heel veel tijd zitten in andere
-                             zaken dan het ontwerpen en implementeren van
-                             software, zoals het vergaren en voorbereiden
-                             van trainingsdata en het fine-tunen. Dit
-                             past niet bij de opleidingscompetenties.
-
-                             
-  -------------------------- --------------------------------------------
+|  			Beschrijving projectgrens 		                             |  			Toelichting 		                                                                                                                                                                                                                                                         |
+|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|  			Het afstudeerproject is afgelopen op: 3 oktober 2025. 		 |  			Hiermee is de maximale looptijd van de afstudeerstage bereikt. In 			uitzonderlijke gevallen kan dit met maximaal 8 weken verlengd 			worden in overleg met de organisatie. 		                                                                                               |
+|  			Ik ontwikkel geen PLC-software. 		                       |  			Dit past als Embedded Software Developer niet geheel bij mijn 			opleidingscompetenties en draagt dus niet bij aan het succesvol 			afstuderen. 		                                                                                                                           |
+|  			Ik ontwikkel geen mobiele app. 		                        |  			Dit past ook niet bij de opleidingscompetenties. 		                                                                                                                                                                                                                    |
+|  			Ik gebruik geen bestaande SCADA-software. 		             |  			Idem. 		                                                                                                                                                                                                                                                               |
+|  			Ik ontwikkel geen cross-platform software. 		            |  			Afhankelijk van de microcontroller die ik kies zal ik in principe 			voor Linux ontwikkelen. Omdat de software in een “embedded” 			context ontwikkeld wordt en het niet de bedoeling is dat 			eindgebruikers dit zelf kunnen installeren. 		                                  |
+|  			Ik ontwikkel geen eigen AI/ML modellen. 		               |  			Bij het ontwikkelen en trainen van een AI/ML model gaat heel veel 			tijd zitten in andere zaken dan het ontwerpen en implementeren van 			software, zoals het vergaren en voorbereiden van trainingsdata en 			het fine-tunen. Dit past niet bij de opleidingscompetenties. 		 |
 
 # Randvoorwaarden
 
