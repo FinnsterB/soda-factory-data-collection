@@ -20,16 +20,8 @@
 
 ## 2. Inleiding
 
-In dit document licht ik de planning van mijn afstudeerproject toe en
-leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn
-voor een succesvolle afronding. Gedurende het project gebruik ik het PvA
-om steeds mijn volgende taken te bepalen. Zo zorg ik ervoor dat mijn
-werkmethode inzichtelijk is voor mijzelf en de begeleiders.
-
-In opdracht van MA-IT maak ik een embedded systeem dat gegevens
-verzamelt van alle sensoren en actuatoren in een productielijn en de
-mogelijkheid biedt om deze te analyseren en eventuele problemen te
-diagnosticeren.
+In dit document licht ik de planning van mijn afstudeerproject toe en leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn voor een succesvolle afronding. Gedurende het project gebruik ik het PvA om steeds mijn volgende taken te bepalen. Zo zorg ik ervoor dat mijn werkmethode inzichtelijk is voor mijzelf en de begeleiders.
+ In opdracht van MA-IT maak ik een embedded systeem dat gegevens verzamelt van alle sensoren en actuatoren in een productielijn en de mogelijkheid biedt om deze te analyseren en eventuele problemen te diagnosticeren.
 
 Dit document bevat de volgende hoofdstukken:
 
@@ -62,47 +54,18 @@ Dit document bevat de volgende hoofdstukken:
 
 ## 3. Achtergrond van het project
 
-MyAutomation MA-IT is al sterk vertegenwoordigd in de industriële
-automatisering binnen energietechniek, machinebouw en procestechniek.
-Tot nu toe beperkt dit zich vooral tot de software engineering van
-PLC-bestuurde installaties. Bij klanten zit veel interesse naar slimmer
-diagnosticeren en anticiperen op potentiële gebreken en stilstand door
-veroudering, slijtage of defecten aan de installaties. Sensoren worden
-steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik
-van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie
-genereren dan hun basale signalen. PLC\'s kunnen deze informatie
-doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing 
-aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is 
-mijn afstudeerproject. 
+MyAutomation MA-IT is al sterk vertegenwoordigd in de industriële automatisering binnen energietechniek, machinebouw en procestechniek.
+ Tot nu toe beperkt dit zich vooral tot de software engineering van PLC-bestuurde installaties. Bij klanten zit veel interesse naar slimmer diagnosticeren en anticiperen op potentiële gebreken en stilstand door veroudering, slijtage of defecten aan de installaties. Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie genereren dan hun basale signalen. PLC\'s kunnen deze informatie doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is mijn afstudeerproject.
 
 ## 4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
-Om dit te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze
-draait op een PLC die maar gelimiteerd sensorinformatie
-opslaat/ontsluit. De sensoren op de installatie zijn echter van een
-slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook
-dingen als temperatuur of druk meten. Daarnaast zijn de operation times
-van de verschillende sensoren en actuatoren van belang om predictive
-maintenance toe te passen. Al deze gegevens worden verstuurd met een
-IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en
-actuatoren de waarden uit te lezen. Dit wordt gedaan door een embedded
-systeem dat ik zelf in moet richten die de gegevens wegschrijft naar een
-database. Uiteindelijk moet er een soort dashboard komen waarin
-zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort
-vervangen worden, wat zijn de meetwaarden enzovoorts.\
-Om de sensoren en actuatoren te configureren moet er een
-configuratiesysteem zijn. Dit kan bestaan uit een lijst of database van
-sensoren en actuatoren en hun interfaces met daarin bijgehouden hoe hun
-berichten uitgelezen moeten worden. Op deze manier is het een modulair
-systeem dat aangepast kan worden naar de configuratie van verschillende
-fabrieksprocessen.
+Om dit te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een PLC die maar gelimiteerd sensorinformatie
+ opslaat/ontsluit. De sensoren op de installatie zijn echter van een slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. Daarnaast zijn de operation times van de verschillende sensoren en actuatoren van belang om predictive maintenance toe te passen. Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Dit wordt gedaan door een embedded systeem dat ik zelf in moet richten die de gegevens wegschrijft naar een database. Uiteindelijk moet er een soort dashboard komen waarin
+ zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden enzovoorts. Om de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Dit kan bestaan uit een lijst of database van sensoren en actuatoren en hun interfaces met daarin bijgehouden hoe hun berichten uitgelezen moeten worden. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen.
 
 ## 5. Projectgrenzen
 
-Tijdens het project hanteer ik de onderstaande grenzen. Naast het
-inbakenen van de projecttijd zorg ik er hier voor dat de
-afstudeeropdracht niet te ver afwijkt van de competenties die bij mijn
-opleiding Embedded Software Development horen.
+Tijdens het project hanteer ik de onderstaande grenzen. Naast het inbakenen van de projecttijd zorg ik er hier voor dat de afstudeeropdracht niet te ver afwijkt van de competenties die bij mijn opleiding Embedded Software Development horen.
 
 |Beschrijving projectgrens|Toelichting|
 |---|---|
@@ -114,17 +77,10 @@ opleiding Embedded Software Development horen.
 
 ## 6. Randvoorwaarden
 
-Om het project succesvol te laten verlopen moet er aan de volgende
-randvoorwaarden voldaan worden.
-
--   Het opdrachtgever stelt een werkplek beschikbaar tussen 8.30 en
-    17.00 gedurende de stageperiode.
-
--   De opdrachtgever biedt gedurende de stageperiode een begeleider die
-    vakinhoudelijke kennis heeft.
-
--   De opdrachtgever zorgt bij de inrichting van het project dat de
-    student in staat wordt gesteld inleverdeadlines van school te halen.
+-   Om het project succesvol te laten verlopen moet er aan de volgende randvoorwaarden voldaan worden.
+     -   Het opdrachtgever stelt een werkplek beschikbaar tussen 8.30 en 17.00 gedurende de stageperiode.
+     -   De opdrachtgever biedt gedurende de stageperiode een begeleider die vakinhoudelijke kennis heeft.
+     -   De opdrachtgever zorgt bij de inrichting van het project dat de student in staat wordt gesteld inleverdeadlines van school te halen.
 
 ## 7. Op te leveren producten en kwaliteitseisen
 
