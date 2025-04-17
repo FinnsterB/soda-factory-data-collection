@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="698pt" height="322pt" viewBox="0.00 0.00 698 322.4">
+<g id="graph0" class="graph" transform="translate(4,318.3999938964844) scale(1)" data-name="RUP_Phases">
+
+<polygon fill="white" stroke="none" points="-4,4 -4,-318.4 694,-318.4 694,4 -4,4"/>
+<g id="clust1" class="cluster" data-name="cluster_inception">
+
+<polygon fill="lightgrey" stroke="lightgrey" points="8,-80 8,-306.4 166,-306.4 166,-80 8,-80"/>
+<text text-anchor="middle" x="87" y="-289.8" font-family="Times,serif" font-size="14.00">Inceptie</text>
+</g>
+<g id="clust2" class="cluster" data-name="cluster_elaboration">
+
+<polygon fill="lightgrey" stroke="lightgrey" points="174,-8 174,-306.4 336,-306.4 336,-8 174,-8"/>
+<text text-anchor="middle" x="255" y="-289.8" font-family="Times,serif" font-size="14.00">Elaboratie</text>
+</g>
+<g id="clust3" class="cluster" data-name="cluster_construction">
+
+<polygon fill="lightgrey" stroke="lightgrey" points="344,-82.8 344,-306.4 498,-306.4 498,-82.8 344,-82.8"/>
+<text text-anchor="middle" x="421" y="-289.8" font-family="Times,serif" font-size="14.00">Constructie</text>
+</g>
+<g id="clust4" class="cluster" data-name="cluster_transition">
+
+<polygon fill="lightgrey" stroke="lightgrey" points="506,-82.8 506,-306.4 682,-306.4 682,-82.8 506,-82.8"/>
+<text text-anchor="middle" x="594" y="-289.8" font-family="Times,serif" font-size="14.00">Transitie</text>
+</g>
+<!-- Task1 -->
+<g id="node1" class="node" pointer-events="visible" data-name="Task1">
+
+<polygon fill="lightblue" stroke="lightblue" points="157.97,-273.6 16.03,-273.6 16.03,-237.6 157.97,-237.6 157.97,-273.6"/>
+<text text-anchor="middle" x="87" y="-251.4" font-family="Times,serif" font-size="14.00">Opdrachtomschrijving</text>
+</g>
+<!-- Task2 -->
+<g id="node2" class="node" pointer-events="visible" data-name="Task2">
+
+<polygon fill="lightblue" stroke="lightblue" points="140.75,-201.6 33.25,-201.6 33.25,-165.6 140.75,-165.6 140.75,-201.6"/>
+<text text-anchor="middle" x="87" y="-179.4" font-family="Times,serif" font-size="14.00">Plan van aanpak</text>
+</g>
+<!-- Task1&#45;&gt;Task2 -->
+
+<!-- Task3 -->
+<g id="node3" class="node" pointer-events="visible" data-name="Task3">
+
+<polygon fill="lightblue" stroke="lightblue" points="145.9,-129.4 28.1,-129.4 28.1,-88.2 145.9,-88.2 145.9,-129.4"/>
+<text text-anchor="middle" x="87" y="-113" font-family="Times,serif" font-size="14.00">Functionele eisen </text>
+<text text-anchor="middle" x="87" y="-96.2" font-family="Times,serif" font-size="14.00">vaststellen in SRS</text>
+</g>
+<!-- Task2&#45;&gt;Task3 -->
+
+<!-- Task4 -->
+<g id="node4" class="node" pointer-events="visible" data-name="Task4">
+
+<polygon fill="lightblue" stroke="lightblue" points="328.5,-273.6 181.5,-273.6 181.5,-237.6 328.5,-237.6 328.5,-273.6"/>
+<text text-anchor="middle" x="255" y="-251.4" font-family="Times,serif" font-size="14.00">Onderzoeken uitvoeren</text>
+</g>
+<!-- Task3&#45;&gt;Task4 -->
+
+<!-- Task5 -->
+<g id="node5" class="node" pointer-events="visible" data-name="Task5">
+
+<polygon fill="lightblue" stroke="lightblue" points="325.03,-201.6 184.97,-201.6 184.97,-165.6 325.03,-165.6 325.03,-201.6"/>
+<text text-anchor="middle" x="255" y="-179.4" font-family="Times,serif" font-size="14.00">Prototypen ontwerpen</text>
+</g>
+<!-- Task4&#45;&gt;Task5 -->
+
+<!-- Task6 -->
+<g id="node6" class="node" pointer-events="visible" data-name="Task6">
+
+<polygon fill="lightblue" stroke="lightblue" points="317.77,-126.8 192.23,-126.8 192.23,-90.8 317.77,-90.8 317.77,-126.8"/>
+<text text-anchor="middle" x="255" y="-104.6" font-family="Times,serif" font-size="14.00">Prototypen bouwen</text>
+</g>
+<!-- Task5&#45;&gt;Task6 -->
+
+<!-- Task7 -->
+<g id="node7" class="node" pointer-events="visible" data-name="Task7">
+
+<polygon fill="lightblue" stroke="lightblue" points="311.6,-52 198.4,-52 198.4,-16 311.6,-16 311.6,-52"/>
+<text text-anchor="middle" x="255" y="-29.8" font-family="Times,serif" font-size="14.00">Prototypen testen</text>
+</g>
+<g id="node8" class="node" pointer-events="visible" data-name="Task8" data-comment="Task7">
+
+<polygon fill="lightblue" stroke="lightblue" points="489.69,-273.6 352.31,-273.6 352.31,-237.6 489.69,-237.6 489.69,-273.6"/>
+<text text-anchor="middle" x="421" y="-251.4" font-family="Times,serif" font-size="14.00">Prototypen integreren</text>
+</g><!-- Task7&#45;&gt;Task8 -->
+
+<!-- Task9 -->
+<g id="node9" class="node" pointer-events="visible" data-name="Task9">
+
+<polygon fill="lightblue" stroke="lightblue" points="471.39,-201.6 370.61,-201.6 370.61,-165.6 471.39,-165.6 471.39,-201.6"/>
+<text text-anchor="middle" x="421" y="-179.4" font-family="Times,serif" font-size="14.00">SDD voltooien</text>
+</g>
+<!-- Task8&#45;&gt;Task9 -->
+
+<!-- Task10 -->
+<g id="node10" class="node" pointer-events="visible" data-name="Task10">
+
+<polygon fill="lightblue" stroke="lightblue" points="478.63,-126.8 363.37,-126.8 363.37,-90.8 478.63,-90.8 478.63,-126.8"/>
+<text text-anchor="middle" x="421" y="-104.6" font-family="Times,serif" font-size="14.00">End-to-end testen</text>
+</g><!-- Task11 --><g id="node11" class="node" pointer-events="visible" data-name="Task11">
+
+<polygon fill="lightblue" stroke="lightblue" points="663.37,-273.6 524.63,-273.6 524.63,-237.6 663.37,-237.6 663.37,-273.6"/>
+<text text-anchor="middle" x="594" y="-251.4" font-family="Times,serif" font-size="14.00">Laatste bugs oplossen</text>
+</g><!-- Task10&#45;&gt;Task11 --><!-- Task12 --><g id="node12" class="node" pointer-events="visible" data-name="Task12">
+
+<polygon fill="lightblue" stroke="lightblue" points="670.74,-201.6 517.26,-201.6 517.26,-165.6 670.74,-165.6 670.74,-201.6"/>
+<text text-anchor="middle" x="594" y="-179.4" font-family="Times,serif" font-size="14.00">Handleidingen schrijven</text>
+</g><!-- Task11&#45;&gt;Task12 -->
+<!-- Task13 -->
+<g id="node13" class="node" pointer-events="visible" data-name="Task13">
+
+<polygon fill="lightblue" stroke="lightblue" points="673.83,-126.8 514.17,-126.8 514.17,-90.8 673.83,-90.8 673.83,-126.8"/>
+<text text-anchor="middle" x="594" y="-104.6" font-family="Times,serif" font-size="14.00">Overdrachtsdocumentatie</text>
+</g>
+<!-- Task12&#45;&gt;Task13 -->
+</g>
+</svg>

@@ -1,0 +1,50 @@
+digraph RUP_Phases {
+    rankdir=TB; // Change direction to top-to-bottom
+    node [shape=box, style=filled, color=lightblue];
+
+    // Define phases
+    subgraph cluster_inception {
+        label = "Inceptie";
+        style = filled;
+        color = lightgrey;
+        Task1 [label="Opdrachtomschrijving"];
+        Task2 [label="Plan van aanpak"];
+        Task3 [label="Functionele eisen \nvaststellen in SRS"];
+    }
+
+    subgraph cluster_elaboration {
+        label = "Elaboratie";
+        style = filled;
+        color = lightgrey;
+        Task4 [label="Onderzoeken uitvoeren"];
+        Task5 [label="Prototypen ontwerpen"];
+        Task6 [label="Prototypen bouwen"];
+        Task7 [label="Prototypen testen"];
+    }
+
+    subgraph cluster_construction {
+        label = "Constructie";
+        style = filled;
+        color = lightgrey;
+        Task8 [label="Prototypen integreren"];
+        Task9 [label="SDD voltooien"];
+        Task10 [label="End-to-end testen"];
+    }
+
+    subgraph cluster_transition {
+        label = "Transitie";
+        style = filled;
+        color = lightgrey;
+        Task11 [label="Laatste bugs oplossen"];
+        Task12 [label="Handleidingen schrijven"];
+        Task13 [label="Overdrachtsdocumentatie"];
+    }
+
+    // Define task dependencies
+    Task1 -> Task2 -> Task3[style = invis]
+    Task4 -> Task5 -> Task6 -> Task7[style = invis]
+    Task8 -> Task9 -> Task10[style = invis]
+    Task11 -> Task12 -> Task13[style = invis]
+
+}
+
