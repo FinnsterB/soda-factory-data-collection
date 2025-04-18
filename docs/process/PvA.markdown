@@ -45,58 +45,56 @@ Dit document bevat de volgende hoofdstukken:
    
 2.  **Inleiding**: Kleine opdrachtomschrijving en leeswijzer.
 
-3.  **Achtergrond van het project**: Beschrijving van de organisatie,
-    opdracht en relevante stakeholders.
+3.  **Achtergrond van het project**: Beschrijving van de organisatie, opdracht en relevante stakeholders.
+    
+4.  **Doelstelling, opdracht en op te leveren resultaten voor het
+    bedrijf:** Gaat dieper in op de opdracht en specificeert de deelproducten die gedurende het project opgeleverd worden.
 
-4.  **Doelstelling**, opdracht en op te leveren resultaten voor het
-    bedrijf:** Gaat dieper in op de opdracht.
-
-5.  **Projectgrenzen:** Beschrijft waar mijn project eindigt in termen
-    van tijd en inhoud.
-
-6.  **Randvoorwaarden:** Aan welke voorwaarden moet voldaan worden wil
-    het project succesvol aflopen?
-
+5.  **Projectgrenzen:** Beschrijft waar mijn project eindigt in termen van tijd en inhoud.
+    
+6.  **Randvoorwaarden:** Aan welke voorwaarden moet voldaan worden wil het project succesvol aflopen?
+    
 7.  **Ontwikkelmethoden:** Welke projectmethode gebruik ik?
 
-8.  **Projectorganisatie en -communicatie:** Gegevens van belangrijke
-    personen in het project en de afspraken daarmee.
-
-9.  **Planning:** Wanneer vinden belangrijke gebeurtenissen, zowel van
-    de projectmethode als in het afstudeertraject, plaats?
-
-10. **Risico's:** Welke risico's zijn er in het project en wat is hun
-    impact?
+8.  **Projectorganisatie en -communicatie:** Gegevens van belangrijke personen in het project en de afspraken daarmee.
+    
+9.  **Planning:** Wanneer vinden belangrijke gebeurtenissen, zowel van de projectmethode als in het afstudeertraject, plaats?
+    
+10.  **Risico's:** Welke risico's zijn er in het project en wat is hun impact?
 
 ## 3. Achtergrond van het project
 
-MA-IT MyAutomation  is al sterk vertegenwoordigd in de industriële automatisering binnen energietechniek, machinebouw en procestechniek. Tot nu toe beperkt dit zich vooral tot de software engineering van PLC-bestuurde installaties. Bij klanten zit veel interesse naar slimmer diagnosticeren en anticiperen op potentiële gebreken en stilstand door veroudering, slijtage of defecten aan de installaties. Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie genereren dan hun basale signalen. PLC\'s kunnen deze informatie doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is mijn afstudeerproject. 
+MA-IT MyAutomation  is al sterk vertegenwoordigd in de industriële automatisering binnen energietechniek, machinebouw en procestechniek. Tot nu toe beperkt dit zich vooral tot de software engineering van PLC-bestuurde installaties. Bij klanten zit veel interesse naar slimmer diagnosticeren en anticiperen op potentiële gebreken en stilstand door veroudering, slijtage of defecten aan de installaties. 
+
+Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie genereren dan hun basale signalen. PLC\'s kunnen deze informatie doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is mijn afstudeerproject. 
 
 ## 4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
 Het doel van deze afstudeeropdracht is om, met een embedded systeem, van bestaande fabrieksinstallaties zoveel mogelijk gegevens te verzamelen en daarmee predictive maintenance en andere optimalisaties toe te passen. 
 
-Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn echter van een slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een database en per sensor of actuator verschillende parameters bijhouden. Bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens zijn van belang om predictive maintenance toe te passen. Het is dus meer dan alleen een doorgeefluik voor informatie. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden enzovoorts. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
+Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn echter van een slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een analyseplatform dat een oordeel maakt over de staat van het systeem. Dit oordeel wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+
+Bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens zijn van belang om predictive maintenance toe te passen. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. 
+
+Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden enzovoorts. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
 **Analyse/onderzoeken(met behulp van de ICT Research Methods):** <br>
 • Berichten van sensoren uitlezen: tussenlaag voor bedenken<br>
 • Keuze van embedded controller <br>
-• Keuze van type database <br>
+• Keuze van type database/analyseplatform <br>
 • Keuze van opzet database <br>
 • Protocollen: io-link/tcp-profinet <br>
-• Prototype embedded controller die de sensoren uitleest<br>
-• Prototype database<br>
-• Prototype gebruikersinterface en configurator<br>
+
+**Prototypes**<br>• Prototype embedded controller die de sensoren uitleest<br>
+• Prototype database<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
 **Softwareontwikkeling:** <br>
 • SRS <br>
 • SDD <br>
 • Testdocumentatie<br>
 • Handleidingen <br>
 • Geintegreerd systeem<br>
-
-
 
 ## 5. Projectgrenzen
 
@@ -130,7 +128,7 @@ Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze 
 | Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data. <br>- Onderzoek biedt de basis voor het prototype "Uitlezen sensordata en actuatorstatus met controller". | - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.| - Gesprek met collega's/begeleiders die meer verstand hebben van dit soort systemen voeren om aan informatie te komen.|
 | Keuze embedded controller | - Onderzoek is relevant voor het project.- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.<br>- Onderzoek geeft een eenduidig resultaat waarop verder gebouwd kan worden. | - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.||
 | **Prototypes** |||**- Prototypes worden als branches in het versiebeheer opgenomen om in de constructiefase geïntegreerd te worden.<br>- Prototypes worden wanneer ze klaar zijn gedemonstreerd in een Milestone-meeting.**|
-| Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller buiten de cyclische datastromen van de PLC gegevens opvragen van de sensoren.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br>|
+| Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan buiten de cyclische datastromen van de PLC gegevens opvragen van de sensoren.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br>|
 | Database/platform  | - Kan de maximale output van de controller aan.<br>- Gedocumenteerd in SDD.| - Database definiëren in DDL.<br>- Testdata invoeren.<br>- Bepalen welke query's handig zijn en deze vastleggen.||
 | Gebruikersinterface| - Biedt mogelijkheid om gegevens per sensor of actuator in te zien.<br>- Biedt mogelijkheid om ingeplande onderhoudsmomenten in te zien.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.|- Keuze maken voor interfacemethode, Web of desktop-applicatie. <br>- Softwareontwerp maken. <br>- Software schrijven. <br>- Unittests schrijven en uitvoeren|- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br/>|
 | Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.| - Uitzoeken welke gegevens van de sensoren relevant zijn zoals ID, typeaanduiding, welke data ze doorgeven.<br>- Gegevensvelden bedenken voor predictive maintenance. Welke soorten onderhoud zijn relevant? Vastleggen in SRS.<br>- Softwareontwerp maken.<br>-Software schrijven.<br>-Unittests schrijven. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br/>|
@@ -141,7 +139,7 @@ Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze 
 | Testdocumentatie   | - Bevat testcases die elke eis uit het SRS testen.<br>- Bevat een beschrijving van de unittests.<br>-Voldoet aan AIM-controlekaart.|- Opstellen van testcases a.d.h.v. de requirements uit het SRS. <br>- Uitleg over de unittests schrijven. ||
 | Handleidingen      | - Handleiding voor installatie van het systeem.<br>- Handleiding voor het gebruik van het systeem.<br>- Handleidingen omvatten de functionele eisen uit het SRS.<br>-Voldoen aan AIM-controlekaart.| - Nagaan of er een template voor handleidingen wordt gehanteerd. <br>- Alle functionaliteit in het SRS uitwerken met screenshots en begeleidende tekst. | - Laten doorlezen door iemand uit het bedrijf voor feedback. |
 | **Eindproduct**        ||||
-| Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Alle unittesten moeten slagen.|- Integreren van de verschillende prototypes.<br>- Testcases doorlopen uit de testdocumentatie.||
+| Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Voldoet aan alle SHOULD-eisen in het SRS.<br>- Alle unittesten moeten slagen. |- Integreren van de verschillende prototypes.<br>- Testcases doorlopen uit de testdocumentatie.||
 | Afstudeerverslag|- Beschrijft hoe mijn afstudeerstage verloopt. <br>- Volgt de "Schrijfwijzer Afstudeerverslag"(Hogeschool van Arnhem en Nijmegen, 2022). |- Wanneer een van de bovenstaande producten voorlopig af is voeg ik inhoud aan het verslag toe. <br>- Richting het eind van het afstudeertraject schrijf ik de managementsamenvatting. <br>- | |
 
 
@@ -159,7 +157,7 @@ In de elaboratiefase doe ik onderzoek naar de benodigde technieken en bouw ik pr
 
 ### Constructiefase
 
-In de constructiefase knoop ik de prototypen aan elkaar tot een geïntegreerd systeem. Hierbij breid ik het SDD uit zodat het een volledig naslagwerk wordt van de codestructuur en de bijbehorende ontwerpkeuzes. Ook breid ik hier de tests uit, deze zijn nu niet meer per prototype maar kunnen het hele systeem van de ene tot de andere kant testen. Zo kan er aan de ene kant testdata ingevoerd worden en aan de andere kant gekeken worden of dit op de juiste manier verwerkt wordt door het systeem. Dit levert een nagenoeg compleet en finaal systeem op dat slechts overgedragen hoeft te worden.
+In de constructiefase  integreer ik de prototypen tot een eenduidig systeem. Hierbij breid ik het SDD uit zodat het een volledig naslagwerk wordt van de codestructuur en de bijbehorende ontwerpkeuzes. Ook breid ik hier de tests uit, deze zijn nu niet meer per prototype maar kunnen het hele systeem van de ene tot de andere kant testen. Zo kan er aan de ene kant testdata ingevoerd worden en aan de andere kant gekeken worden of dit op de juiste manier verwerkt wordt door het systeem. Dit levert een nagenoeg compleet en finaal systeem op dat slechts overgedragen hoeft te worden.
 
 ### Transitiefase
 
@@ -169,11 +167,14 @@ In de transitiefase wordt het systeem klaargemaakt voor overdracht. In deze fase
 
 ## 9. Projectorganisatie en communicatie
 
-Tijdens mijn afstudeerperiode heb ik een aantal begeleiders: Chris van Uffelen: Begeleider vanuit de opleiding, <chris.vanuffelen@han.nl>.
- Eduard de Grefte: Inhoudelijk begeleider van MA-IT, <e.de.grefte@iaprofacademy.nl>.
- Koen Sleurink: Inhoudelijk begeleider van MA-IT, <sleurink@ma-it.nl>.
- Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever tijdens mijn stage.
- De begeleiders van MA-IT zijn in principe altijd op locatie beschikbaar en daar kan ik gewoon bij terecht als er vragen zijn.
+Tijdens mijn afstudeerperiode heb ik een aantal begeleiders: 
+
+Chris van Uffelen: Begeleider vanuit de opleiding, <chris.vanuffelen@han.nl>.<br>
+Eduard de Grefte: Inhoudelijk begeleider van MA-IT, <e.de.grefte@iaprofacademy.nl>.<br>
+Koen Sleurink: Inhoudelijk begeleider van MA-IT, <sleurink@ma-it.nl>.<br>
+Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever tijdens mijn stage.<br>Dingeman Knaap: Specialist big data en AI, <d.knaap@ma-it.nl>. <br>
+
+De begeleiders van MA-IT zijn in principe altijd op locatie of online beschikbaar en daar kan ik gewoon bij terecht als er vragen zijn.
 
 ### Reviews
 
@@ -207,12 +208,14 @@ In de onderstaande tabel staan gebeurtenissen met betrekking tot inleverdeadline
 
 ## 11. Risico's
 
-Tijdens mijn afstudeerproject zijn er een aantal risico's. Dit zijn situaties die onverhoopt invloed hebben op de loop van het project. In dit hoofdstuk probeer ik van tevoren zoveel mogelijk risico's te onderkennen en hier uitwijkstrategieën en tegenmaatregelen voor te bedenken. Ook geef ik per risico de een inschatting van de kans dat de situatie zich voordoet en een een inschatting van de impact. 
+Tijdens mijn afstudeerproject zijn er een aantal risico's. Dit zijn situaties die onverhoopt invloed hebben op de loop van het project. In dit hoofdstuk probeer ik van tevoren zoveel mogelijk risico's te onderkennen en hier uitwijkstrategieën en tegenmaatregelen voor te bedenken. Ook geef ik per risico een inschatting van de kans dat de situatie zich voordoet en een inschatting van de impact. 
 
-| Risico                         | Datum van onderkenning | Impact | Kans | Tegenmaatregel                                               | Uitwijkstrategie                                             |
-| ------------------------------ | ---------------------- | ------ | ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Hardware opstelling gaat kapot | 17-4                   | Laag   | Laag | - Reservehardware regelen van tevoren<br>- Voorzichtig omgaan met de hardware. | - Reservehardware inzetten.<br>-Vervangende hardware bestellen.<br> |
-| Eigen laptop gaat kapot        | 17-4                   | Middel | Laag | - Reservelaptop regelen van tevoren.<br>- Cloudplatform(GitHub) gebruiken als versiebeheer.<br>-Bijhouden welke lokale tooling/software wordt gebruikt. | -Reservelaptop gebruiken.<br>                                |
+| Risico                                      | Datum van onderkenning | Impact | Kans   | Tegenmaatregel                                               | Uitwijkstrategie                                             |
+| ------------------------------------------- | ---------------------- | ------ | ------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Hardware opstelling gaat kapot              | 17-4                   | Laag   | Laag   | - Reservehardware regelen van tevoren<br>- Voorzichtig omgaan met de hardware. | - Reservehardware inzetten.<br>-Vervangende hardware bestellen.<br> |
+| Eigen laptop gaat kapot                     | 17-4                   | Middel | Laag   | - Reservelaptop regelen van tevoren.<br>- Cloudplatform(GitHub) gebruiken als versiebeheer.<br>-Bijhouden welke lokale tooling/software wordt gebruikt. | -Reservelaptop gebruiken.<br>                                |
+| Complexiteit van de opdracht blijkt te hoog | 18-4                   | Groot  | Middel | - Een AGILE ontwikkelmethode gebruiken waardoor inhoudelijke sturing mogelijk is.<br> | - Op te leveren functionaliteit inkorten.<br>                |
+| Belangrijke stakeholders vallen uit         | 18-4                   | Middel | Laag   | - Opdracht goed documenteren zodat een eventuele vervanger zich in kan lezen.<br>- Afspraken tijdig plannen zodat er tijd is om ze naar een later moment te verplaatsen. | - Vervanger inschakelen.<br>- Afspraak verplaatsen.          |
 
 
 
