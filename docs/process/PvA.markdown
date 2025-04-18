@@ -76,20 +76,20 @@ Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
 **Analyse/onderzoeken(met behulp van de ICT Research Methods):** 
-• Berichten van sensoren uitlezen: tussenlaag voor bedenken 
-• Keuze van embedded controller 
-• Keuze van type database 
-• Keuze van opzet database 
-• Protocollen: io-link/tcp-profinet 
-• Prototype embedded controller die de sensoren uitleest 
-• Prototype database
-• Prototype gebruikersinterface en configurator 
+• Berichten van sensoren uitlezen: tussenlaag voor bedenken<br>
+• Keuze van embedded controller <br>
+• Keuze van type database <br>
+• Keuze van opzet database <br>
+• Protocollen: io-link/tcp-profinet <br>
+• Prototype embedded controller die de sensoren uitleest<br>
+• Prototype database<br>
+• Prototype gebruikersinterface en configurator<br>
 **Softwareontwikkeling:** 
-• SRS 
-• SDD 
-• Testdocumentatie 
-• Handleidingen 
-• Geintegreerd systeem
+• SRS <br>
+• SDD <br>
+• Testdocumentatie<br>
+• Handleidingen <br>
+• Geintegreerd systeem<br>
 
 
 
