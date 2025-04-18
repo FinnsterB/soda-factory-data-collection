@@ -22,7 +22,12 @@
   - [6. Randvoorwaarden](#6-randvoorwaarden)
   - [7. Op te leveren producten en kwaliteitseisen](#7-op-te-leveren-producten-en-kwaliteitseisen)
   - [8. Ontwikkelmethoden](#8-ontwikkelmethoden)
+    - [Inceptiefase](#inceptiefase)
+    - [Elaboratiefase](#elaboratiefase)
+    - [Constructiefase](#constructiefase)
+    - [Transitiefase](#transitiefase)
   - [9. Projectorganisatie en communicatie](#9-projectorganisatie-en-communicatie)
+    - [Reviews](#reviews)
   - [10. Planning](#10-planning)
   - [11. Risico's](#11-risicos)
   - [12. Bronnen](#12-bronnen)
@@ -75,7 +80,7 @@ Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. 
 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
-**Analyse/onderzoeken(met behulp van de ICT Research Methods):** 
+**Analyse/onderzoeken(met behulp van de ICT Research Methods):** <br>
 • Berichten van sensoren uitlezen: tussenlaag voor bedenken<br>
 • Keuze van embedded controller <br>
 • Keuze van type database <br>
@@ -84,7 +89,7 @@ Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk
 • Prototype embedded controller die de sensoren uitleest<br>
 • Prototype database<br>
 • Prototype gebruikersinterface en configurator<br>
-**Softwareontwikkeling:** 
+**Softwareontwikkeling:** <br>
 • SRS <br>
 • SDD <br>
 • Testdocumentatie<br>
