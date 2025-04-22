@@ -1,0 +1,43 @@
+@startuml Domain
+class Sensor{}
+class Actuator{}
+class Productielijn{}
+class Controller{}
+class Maintenance{}
+class PLC{}
+class IO_Link{}
+class Profinet{}
+class Fieldbus{}
+class IIOT_Platform{}
+class Oordeel{}
+class Dashboard{}
+class Data{}
+class Status{}
+class Configuratie{}
+class Configurator{}
+class Gebruikersinterface{}
+
+
+Productielijn "1"-"  0..*" Sensor
+Productielijn "1"--"0..*" Actuator
+Sensor "1"-"1" Data : Levert >
+Actuator "1"-"1" Status
+Sensor "1"-"1" Status
+Sensor "1"--"1" IO_Link
+Actuator "0..*"--"1" Profinet
+IO_Link "0..*"--"1" Profinet
+Profinet "1"--"1" PLC
+Profinet "1"--"1" Controller
+Controller "1"-"1" Configurator
+Configurator "1"--"1" Configuratie
+Controller "1"..>"1" IIOT_Platform
+Gebruikersinterface "1"--"1" Controller : < Biedt
+Gebruikersinterface "1"-"1" Dashboard
+Oordeel "1"---"  0..*" Dashboard : < Toont
+Profinet --|> Fieldbus
+Maintenance "0..*"--"0..*" Oordeel : < Bepaalt
+Productielijn "1"-left-"0..*" Maintenance : Ondergaat >
+
+
+
+@enduml
