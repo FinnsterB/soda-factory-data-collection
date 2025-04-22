@@ -2,12 +2,13 @@
 
 **Begrippenlijst**
 
-| Term  | Definitie                                                    |
-| ----- | ------------------------------------------------------------ |
-| SRS   | System Requirements Specification; document waar de eisen aan het te realiseren systeem in staan vastgelegd. |
-| SDD   | Software Design Description; document waar het softwareontwerp en ontwerpkeuzes in staan vastgelegd. |
-| RUP   | Rational Unified Process; ontwikkelmethode, bedacht door Rational Software, die bedoeld is om te schaalbaar en aanpasbaar te zijn naar de eisen van verschillende projecten en organisaties. |
-| MA-IT | MA-IT MyAutomation; het bedrijf waar mijn afstudeerstage plaatsvindt. |
+| Term                     | Definitie                                                    |
+| ------------------------ | ------------------------------------------------------------ |
+| SRS                      | System Requirements Specification; document waar de eisen aan het te realiseren systeem in staan vastgelegd. |
+| SDD                      | Software Design Description; document waar het softwareontwerp en ontwerpkeuzes in staan vastgelegd. |
+| RUP                      | Rational Unified Process; ontwikkelmethode, bedacht door Rational Software, die bedoeld is om te schaalbaar en aanpasbaar te zijn naar de eisen van verschillende projecten en organisaties. |
+| MA-IT                    | MA-IT MyAutomation; het bedrijf waar mijn afstudeerstage plaatsvindt. |
+| database/analyseplatform | Afhankelijk van de uitkomst van mijn onderzoek zal er gekozen worden voor een bepaald soort database voor industriële data. Deze bestaan met een analysemogelijkheid die op basis van de data bepaalde terugkoppeling geeft. Vandaar schrijf ik de term zo op. |
 
 
 
@@ -37,7 +38,7 @@
 
 In dit document licht ik de planning van mijn afstudeerproject toe en leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn voor een succesvolle afronding. Gedurende het project gebruik ik het plan van aanpak om steeds mijn volgende taken te bepalen. Zo zorg ik ervoor dat mijn werkmethode inzichtelijk is voor mijzelf en de begeleiders.
 
-In opdracht van MA-IT MyAutomation maak ik een embedded systeem dat gegevens verzamelt van alle sensoren en actuatoren in een productielijn en de mogelijkheid biedt om deze te analyseren voor "predictive maintenance" en productieoptimalisatie.
+In opdracht van MA-IT maak ik een embedded systeem dat gegevens verzamelt van alle sensoren en actuatoren in een productielijn en de mogelijkheid biedt om deze te analyseren voor "predictive maintenance" en productieoptimalisatie. 
 
 Dit document bevat de volgende hoofdstukken:
 
@@ -64,19 +65,23 @@ Dit document bevat de volgende hoofdstukken:
 
 ## 3. Achtergrond van het project
 
-MA-IT MyAutomation  is al sterk vertegenwoordigd in de industriële automatisering binnen energietechniek, machinebouw en procestechniek. Tot nu toe beperkt dit zich vooral tot de software engineering van PLC-bestuurde installaties. Bij klanten zit veel interesse naar slimmer diagnosticeren en anticiperen op potentiële gebreken en stilstand door veroudering, slijtage of defecten aan de installaties. 
+MA-IT is al sterk vertegenwoordigd in de industriële automatisering binnen energietechniek, machinebouw en procestechniek. Tot nu toe beperkt dit zich vooral tot de software engineering van PLC-bestuurde installaties. Bij klanten van MA-IT zit veel interesse naar slimmer diagnosticeren en anticiperen op potentiële gebreken en stilstand door veroudering, slijtage of defecten aan de installaties. 
 
-Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie genereren dan hun basale signalen. PLC\'s kunnen deze informatie doorgaans niet allemaal verwerken. MA-IT wil een embedded oplossing aanbieden die dit wél kan. Het ontwerpen en implementeren hiervan is mijn afstudeerproject. 
+Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met gebruik van alle mogelijkheden. Moderne sensoren kunnen veel meer informatie genereren dan hun basale signalen en het is zonde om daar geen gebruik van te maken. Zeker in deze tijd waarin mogelijkheden voor het automatisch analyseren van gegevens op de horizon ligt is het ontzettend relevant om hier gebruik van te maken.
 
 ## 4. Doelstelling, opdracht en op te leveren resultaten voor het bedrijf
 
-Het doel van deze afstudeeropdracht is om, met een embedded systeem, van bestaande fabrieksinstallaties zoveel mogelijk gegevens te verzamelen en daarmee predictive maintenance en andere optimalisaties toe te passen. 
+PLC\'s kunnen de informatie uit de moderne smart-sensoren doorgaans niet allemaal verwerken. Ze gebruiken de gegevens niet voor analyse, slechts voor het aansturen van de productielijn. MA-IT wil een embedded oplossing aanbieden die ze wél aan analyse kan onderwerpen. Het ontwerpen en implementeren van dit systeem is mijn afstudeerproject. 
 
-Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn echter van een slimme variant die naast zijn primaire waarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een analyseplatform dat een oordeel maakt over de staat van het systeem. Dit oordeel wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+Het doel van deze afstudeeropdracht is om op basis van zoveel mogelijk gegevens van een bestaande fabrieksinstallatie te kunnen voorspellen dat sensoren, actuatoren of mogelijk andere onderdelen stukgaan. Deze kunnen dan tijdig vervangen worden waardoor er minder ongepland onderhoud verricht hoeft te worden. Ook kan dit extra schade voorkomen wanneer er iets stukgaat. 
 
-Bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens zijn van belang om predictive maintenance toe te passen. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. 
+Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn dus van een slimme variant die naast zijn primaire schakelwaarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. 
 
-Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden enzovoorts. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
+Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een analyseplatform dat een oordeel maakt over de staat van het systeem(bijvoorbeeld welke onderdelen aan vervanging toe zijn). Het analyseplatform zal ik niet zelf inrichten, hier wordt een bestaand product voor gebruikt waar ik de integratie voor schrijf. Het oordeel van het analyseplatform wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+
+Naast de meetwaarden zijn bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens van belang om predictive maintenance toe te passen. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
+
+Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden, hoe vaak open/dicht geschakeld, enzovoorts. Zo komt alle opgevangen data samen met het oordeel van het analyseplatform en is dit inzichtelijk voor de eindgebruiker. 
 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
@@ -88,13 +93,13 @@ Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk
 • Protocollen: io-link/tcp-profinet <br>
 
 **Prototypes**<br>• Prototype embedded controller die de sensoren uitleest<br>
-• Prototype database<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
+• Prototype database/analyseplatform<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
 **Softwareontwikkeling:** <br>
 • SRS <br>
 • SDD <br>
 • Testdocumentatie<br>
 • Handleidingen <br>
-• Geintegreerd systeem<br>
+• Geïntegreerd systeem<br>
 
 ## 5. Projectgrenzen
 
@@ -127,20 +132,20 @@ Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze 
 | Keuze type database/platform| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.<br>-Onderzoek geeft een eenduidig resultaat waarop verder gebouwd kan worden. | - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. |- Voorleggen aan vakinhoudelijke medewerker wanneer het onderzoeksresultaat bekend is.|
 | Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data. <br>- Onderzoek biedt de basis voor het prototype "Uitlezen sensordata en actuatorstatus met controller". | - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.| - Gesprek met collega's/begeleiders die meer verstand hebben van dit soort systemen voeren om aan informatie te komen.|
 | Keuze embedded controller | - Onderzoek is relevant voor het project.- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.<br>- Onderzoek geeft een eenduidig resultaat waarop verder gebouwd kan worden. | - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.||
-| **Prototypes** |||**- Prototypes worden als branches in het versiebeheer opgenomen om in de constructiefase geïntegreerd te worden.<br>- Prototypes worden wanneer ze klaar zijn gedemonstreerd in een Milestone-meeting.**|
+| **Prototypes** |||**- Prototypes worden als branches in het versiebeheer opgenomen om in de constructiefase geïntegreerd te worden.<br>- Prototypes worden wanneer ze klaar zijn gedemonstreerd in een Milestone-meeting(toegelicht in H9).**|
 | Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan buiten de cyclische datastromen van de PLC gegevens opvragen van de sensoren.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br>|
-| Database/platform  | - Kan de maximale output van de controller aan.<br>- Gedocumenteerd in SDD.| - Database definiëren in DDL.<br>- Testdata invoeren.<br>- Bepalen welke query's handig zijn en deze vastleggen.||
+| Database/platform  | - Kan de maximale output van de controller aan.<br>- Gedocumenteerd in SDD.| - Integratie naar het platform schrijven om data weg te schrijven.<br>- Testdata invoeren.<br>- Integratie schrijven om oordeel te ontvangen. ||
 | Gebruikersinterface| - Biedt mogelijkheid om gegevens per sensor of actuator in te zien.<br>- Biedt mogelijkheid om ingeplande onderhoudsmomenten in te zien.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.|- Keuze maken voor interfacemethode, Web of desktop-applicatie. <br>- Softwareontwerp maken. <br>- Software schrijven. <br>- Unittests schrijven en uitvoeren|- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br/>|
-| Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.| - Uitzoeken welke gegevens van de sensoren relevant zijn zoals ID, typeaanduiding, welke data ze doorgeven.<br>- Gegevensvelden bedenken voor predictive maintenance. Welke soorten onderhoud zijn relevant? Vastleggen in SRS.<br>- Softwareontwerp maken.<br>-Software schrijven.<br>-Unittests schrijven. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br/>|
-| **Documentatie**       ||||
-| Plan van Aanpak |- Bevat een uitwerking van alle hoofdstukken uit "Toelichting op PvA V4.0"(Praktijkbureau AIM, 2022)|- Vergaren van de opdracht door spreken met bedrijfsbegeleider. <br>- Uitkiezen projectmethode.<br>-||
-| SRS                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SRS-template document (van Heesch, 2016a).<br>- Gebruikt MoSCoW-prioriteitsindeling voor de eisen.<br>-Voldoet aan AIM-controlekaart.|- Dit is een lopend document, waar gedurende de hele ontwikkeling aan wordt gewerkt. <br>- Het projectdomein wordt vastgesteld.<br>- De eisen aan het op te leveren systeem worden in een vroeg stadium verzameld. <br>- De eisen worden verder gespecificeerd d.m.v. Use Cases. <br>- |- Door opdrachtgever laten lezen.|
-| SDD                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SDD-template document (van Heesch, 2016b).<br>-Voldoet aan AIM-controlekaart. <br>- Is een logische uitwerking van de eisen uit het SRS. |- Ook dit is een lopend document, waar gedurende de ontwikkeling steeds meer ontwerpkeuzes in zullen verschijnen. <br>- Elk prototype vastleggen in een of meerdere diagrammen van zowel de programmastructuur als het gedrag. <br>-Elk van die diagrammen voorzien van begeleidende tekst waarmee de ontwerpkeuzes worden toegelicht. <br>|- Per gerealiseerd onderdeel laten controleren door inhoudelijk begeleider.|
+| Configurator       | - Biedt een CRUD interface voor sensor en/actuatoren.<br>- Code wordt objectgeorienteerd geschreven mits de gekozen programmeertaal dit toelaat.<br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting.| - Uitzoeken welke gegevens van de sensoren relevant zijn zoals ID, typeaanduiding, welke data ze doorgeven.<br>- Gegevensvelden bedenken voor predictive maintenance. Welke soorten onderhoud zijn relevant? Vastleggen in SRS.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Unittests schrijven. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br/>|
+| **Documentatie**       |**- Documentatie gebruikt de "docs as code"- workflow. Documentatie wordt in hetzelfde versiebeheer als de code opgenomen.**|||
+| Plan van Aanpak |- Bevat een uitwerking van alle hoofdstukken uit "Toelichting op PvA V4.0"(Praktijkbureau AIM, 2022a)|- Vergaren van de opdracht door spreken met bedrijfsbegeleider. <br>- Uitkiezen projectmethode.<br>|- Door opdrachtgever laten lezen.|
+| SRS                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SRS-template document (van Heesch, 2016a).<br>- Gebruikt MoSCoW-prioriteitsindeling voor de eisen.<br>- Voldoet aan AIM-controlekaart. <br>- Er wordt PlantUML gebruikt voor UML-diagrammen. |- Dit is een lopend document, waar gedurende de hele ontwikkeling aan wordt gewerkt. <br>- Het projectdomein wordt vastgesteld.<br>- De eisen aan het op te leveren systeem worden in een vroeg stadium verzameld. <br>- De eisen worden verder gespecificeerd d.m.v. Use Cases. <br> |- Door opdrachtgever laten lezen.|
+| SDD                | - Bevat een uitwerking van alle relevante hoofdstukken uit het SDD-template document (van Heesch, 2016b).<br>-Voldoet aan AIM-controlekaart. <br>- Is een logische uitwerking van de eisen uit het SRS.<br/>- Er wordt PlantUML gebruikt voor UML-diagrammen. |- Ook dit is een lopend document, waar gedurende de ontwikkeling steeds meer ontwerpkeuzes in zullen verschijnen. <br>- Elk prototype vastleggen in een of meerdere diagrammen van zowel de programmastructuur als het gedrag. <br>-Elk van die diagrammen voorzien van begeleidende tekst waarmee de ontwerpkeuzes worden toegelicht. <br>|- Per gerealiseerd onderdeel laten controleren door inhoudelijk begeleider.|
 | Testdocumentatie   | - Bevat testcases die elke eis uit het SRS testen.<br>- Bevat een beschrijving van de unittests.<br>-Voldoet aan AIM-controlekaart.|- Opstellen van testcases a.d.h.v. de requirements uit het SRS. <br>- Uitleg over de unittests schrijven. ||
 | Handleidingen      | - Handleiding voor installatie van het systeem.<br>- Handleiding voor het gebruik van het systeem.<br>- Handleidingen omvatten de functionele eisen uit het SRS.<br>-Voldoen aan AIM-controlekaart.| - Nagaan of er een template voor handleidingen wordt gehanteerd. <br>- Alle functionaliteit in het SRS uitwerken met screenshots en begeleidende tekst. | - Laten doorlezen door iemand uit het bedrijf voor feedback. |
 | **Eindproduct**        ||||
 | Geïntegreerd systeem | - Voldoet aan alle MUST-eisen in het SRS.<br>- Voldoet aan alle SHOULD-eisen in het SRS.<br>- Alle unittesten moeten slagen. |- Integreren van de verschillende prototypes.<br>- Testcases doorlopen uit de testdocumentatie.||
-| Afstudeerverslag|- Beschrijft hoe mijn afstudeerstage verloopt. <br>- Volgt de "Schrijfwijzer Afstudeerverslag"(Hogeschool van Arnhem en Nijmegen, 2022). |- Wanneer een van de bovenstaande producten voorlopig af is voeg ik inhoud aan het verslag toe. <br>- Richting het eind van het afstudeertraject schrijf ik de managementsamenvatting. <br>- | |
+| Afstudeerverslag|- Beschrijft hoe mijn afstudeerstage verloopt. <br>- Volgt de "Schrijfwijzer Afstudeerverslag"(Praktijkbureau AIM, 2022b). |- Wanneer een van de bovenstaande producten voorlopig af is voeg ik inhoud aan het verslag toe. <br>- Richting het eind van het afstudeertraject schrijf ik de managementsamenvatting. <br> | |
 
 
 ## 8. Ontwikkelmethoden
@@ -172,13 +177,13 @@ Tijdens mijn afstudeerperiode heb ik een aantal begeleiders:
 Chris van Uffelen: Begeleider vanuit de opleiding, <chris.vanuffelen@han.nl>.<br>
 Eduard de Grefte: Inhoudelijk begeleider van MA-IT, <e.de.grefte@iaprofacademy.nl>.<br>
 Koen Sleurink: Inhoudelijk begeleider van MA-IT, <sleurink@ma-it.nl>.<br>
-Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever tijdens mijn stage.<br>Dingeman Knaap: Specialist big data en AI, <d.knaap@ma-it.nl>. <br>
+Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever en stakeholder tijdens mijn stage.<br>Dingeman Knaap: Specialist big data en AI, <d.knaap@ma-it.nl>. <br>
 
-De begeleiders van MA-IT zijn in principe altijd op locatie of online beschikbaar en daar kan ik gewoon bij terecht als er vragen zijn.
+De begeleiders van MA-IT zijn in principe altijd op locatie of online beschikbaar en daar kan ik gewoon bij terecht als er vragen zijn. 
 
 ### Reviews
 
-Tijdens het project is het van belang dat ik af en toe inhoudelijke feedback ontvang van mijn begeleiders. Daarom wil ik een soort milestone-vergadering houden op het moment dat een van de deelproducten klaar is. Deze staan in de planning in het volgende hoofdstuk. 
+Tijdens het project is het van belang dat ik af en toe inhoudelijke feedback ontvang van mijn begeleiders. Daarom wil ik een soort milestone-vergadering houden op het moment dat een van de deelproducten klaar is. Deze staan in de planning in het volgende hoofdstuk. Wanneer er feedback is pas ik deze zo snel mogelijk toe zodat er zo min mogelijk vertraging opgelopen wordt. 
 
 ## 10. Planning
 
@@ -189,21 +194,25 @@ In de onderstaande tabel staan gebeurtenissen met betrekking tot inleverdeadline
 | 14-4  | Start inceptiefase                                           | Op deze dag begint de inceptiefase en zal ik beginnen met werken aan het plan van aanpak. |
 | 25-4  | Inleveren plan van aanpak(concept)                           | Deadline inleveren plan van aanpak. Hierna wordt er feedback op gegeven en een advies over de opdracht. |
 | 28-4  | Meivakantie                                                  | Op deze dag begint de meivakantie voor school. De docenten zullen niet beschikbaar zijn. |
+| 12-5  | Start elaboratiefase                                         | Op deze dag begint de elaboratiefase en begin ik met de onderzoeken. |
+| 16-5  | Milestone: Keuze database/platform gemaakt.                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en het resultaat te overleggen. |
 | 23-5  | Inleveren plan van aanpak(definitief)                        | Deadline inleveren definitieve versie plan van aanpak.       |
-| 26-5  | Start elaboratiefase                                         | Op deze dag begint de elaboratiefase en begin ik met de onderzoeken. |
-| 28-5  | Milestone: Keuze database/platform gemaakt.                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en het resultaat te overleggen. |
-| 2-6   | Milestone: IO-link/Profinet                                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |
-| 6-6   | Milestone: Keuze (micro)controller                           | Ik streef ernaar om op deze dag een keuze te hebben gemaakt m.b.t. de gebruikte (micro)controller. |
+| 30-5  | Milestone: IO-link/Profinet                                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |
+| 4-6   | Milestone: Keuze (micro)controller                           | Ik streef ernaar om op deze dag een keuze te hebben gemaakt m.b.t. de gebruikte (micro)controller. |
 | 13-6  | Milestone: Prototype uitlezen sensor- en actuatordata met controller | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 18-6  | Milestone: Prototype database/platform                       | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 25-6  | Milestone: Gebruikersinterface                               | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 2-7   | Milestone: Configurator                                      | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 3-7   | Start constructiefase                                        | Op deze dag begint, mits alle milestones geweest zijn, de constructiefase en daarmee de integratie van alle onderdelen. |
-| 10-7  | Placeholder: Use Case ? afgerond                             | Placeholder voor wanneer het SRS verder is uitgewerkt. In de constructiefase zal ik proberen per usecase of per eis te werken. |
+| 7-7   | Milestone: Gebruikersinterface met uitlezen van waarden geïntegreerd tot eindproduct. | Gebruikersinterface geeft sensorwaarden weer maar nog zonder koppeling naar het database/analyseplatform en terugkoppeling van analyse. |
+| 11-7  | Milestone: Database/platform gekoppeld aan eindproduct.      | Sensorwaarden worden doorgegeven aan het database/analyseplatform en worden weer teruggekoppeld naar de gebruikersinterface. |
 | 14-7  | Begin HAN-zomervakantie                                      | Deze week begint volgens het HAN-jaarrooster de zomervakantie. De docenten zullen niet beschikbaar zijn. |
 | 18-8  | Eind HAN-zomervakantie                                       | Vanaf vandaag is de zomervakantie afgelopen en zijn de docenten weer beschikbaar. |
 | 22-8  | Inleveren definitief eindverslag voor feedback.              | Dit is de deadline voor het inleveren van mijn eindverslag voor feedback. |
+| 29-8  | Milestone: Configurator gekoppeld aan eindproduct.           | Het eindproduct kan geconfigureerd worden met de configurator. |
 | 1-9   | Start transitiefase                                          | Op deze dag begint, mits de vorige fasen zijn afgerond de transitiefase en zal ik beginnen aan het schrijven van handleidingen, het uitvoeren van de laatste tests en de overdracht. |
+| 5-9   | Milestone: Handleidingen                                     | De handleidingen voor het eindproduct zijn geschreven.       |
+| 12-9  | Milestone: Testdocumentatie                                  | De unittesten en gebruikerstesten zijn uitgevoerd en gedocumenteerd. |
 | 19-9  | Inleveren definitief eindverslag                             | Dit is de laatste deadline voor het eindverslag.             |
 
 ## 11. Risico's
@@ -223,8 +232,18 @@ Tijdens mijn afstudeerproject zijn er een aantal risico's. Dit zijn situaties di
 
 *RUP op Maat* . (2011). https://www.rupopmaat.nl/naslagsite2011/index.html
 
-Praktijkbureau AIM. (2022). Toelichting op PVA 4.0. In *OnderwijsOnline*.
+Praktijkbureau AIM. (2022a). Toelichting op PVA 4.0. In *OnderwijsOnline*.
+
+Praktijkbureau AIM. (2022b). Schrijfwijzer afstudeerverslag. In *OnderwijsOnline*.
 
 Van Heesch, U. (2016a). Software Requirements Specification Template. In *OnderwijsOnline*.
 
 Van Heesch, U. (2016b). Software Design Description Template. In *OnderwijsOnline*.
+
+## 13. Revisiehistorie
+
+| Versienummer | Datum | Beschrijving van aanpassingen                                |
+| ------------ | ----- | ------------------------------------------------------------ |
+| V0.1         | 17-4  | Eerste versie voor review van bedrijfsbegeleider. Alle hoofdstukken hebben invulling gekregen maar zijn nog niet helemaal scherp. |
+| V0.2         | 22-4  | Hoofdstukken 3 en 4 aangescherpt volgens Toelichting op PVA. Planning is uitgebreid met milestones voor de constructiefase en de elaboratiefase(onderzoeken) starten iets eerder, deels voor het definitieve inleveren van het PvA. |
+
