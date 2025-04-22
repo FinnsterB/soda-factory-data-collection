@@ -19,7 +19,7 @@ Het domein voor dit project bestaat hoofdzakelijk uit een bestaande productielij
 
 ![](../../out/docs/development/domain/domain.png)
 
-Uiteindelijk is het de bedoeling dat ons systeem toevoegingen maakt aan het onderhoud van de productielijn. 
+Uiteindelijk is het de bedoeling dat ons systeem toevoegingen maakt aan het onderhoud van de productielijn en wellicht grond biedt voor optimalisaties. 
 
 
 
