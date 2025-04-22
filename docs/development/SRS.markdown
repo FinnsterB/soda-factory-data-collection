@@ -1,9 +1,12 @@
 # Software Requirements Specification
 
-
-
-[TOC]
-
+- [Software Requirements Specification](#software-requirements-specification)
+- [Inleiding](#inleiding)
+- [Domeinmodel](#domeinmodel)
+- [Usecase-beschrijvingen](#usecase-beschrijvingen)
+- [Overige functionele requirements](#overige-functionele-requirements)
+- [Niet-functionele requirements](#niet-functionele-requirements)
+- [Bronnen](#bronnen)
 
 
 # Inleiding
