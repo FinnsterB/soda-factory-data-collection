@@ -1,4 +1,4 @@
-@startuml Domain
+@startuml domain
 class Sensor{}
 class Actuator{}
 class Productielijn{}
@@ -32,12 +32,13 @@ Controller "1"-"1" Configurator
 Configurator "1"--"1" Configuratie
 Controller "1"..>"1" IIOT_Platform
 Gebruikersinterface "1"--"1" Controller : < Biedt
-Gebruikersinterface "1"-"1" Dashboard
-Oordeel "1"---"  0..*" Dashboard : < Toont
+Gebruikersinterface "1"--"1" Dashboard
+Oordeel "1"--left-"  0..*" Dashboard : < Toont
 Profinet --|> Fieldbus
 Maintenance "0..*"--"0..*" Oordeel : < Bepaalt
 Productielijn "1"-left-"0..*" Maintenance : Ondergaat >
-
+IIOT_Platform "1"--"0..*" Data : < Verzamelt
+IIOT_Platform "1"--"0..*" Oordeel : Genereert >
 
 
 @enduml
