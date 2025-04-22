@@ -14,7 +14,7 @@ In dit document leg ik vast wat de gestelde eisen zijn aan mijn afstudeeropdrach
 
 Het domein voor dit project bestaat hoofdzakelijk uit een bestaande productielijn die beschikt over een aantal sensoren en actuatoren. Deze hebben ieder een status, staan ze aan/uit, hoe staan ze ingesteld en nog meer. De sensoren in het bijzonder hebben data: de meetwaarden. De sensoren en actuatoren zitten via een Fieldbus(Profinet) aan de PLC aangesloten en dat is waar ons systeem ook terechtkomt. Onze Controller bevat allerlei onderdelen die gerealiseerd moeten worden: De Configurator, Gebruikersinterface en een integratie met een IIOT-Platform. 
 
-![](/home/finn/Documents/Afstudeerstage_MA_IT/soda-factory-data-collection/out/docs/development/domain/Domain.png)
+![](../../out/docs/development/domain/Domain.png)
 
 Uiteindelijk is het de bedoeling dat ons systeem toevoegingen maakt aan het onderhoud van de 
 
