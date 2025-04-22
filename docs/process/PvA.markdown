@@ -2,13 +2,13 @@
 
 **Begrippenlijst**
 
-| Term                     | Definitie                                                    |
-| ------------------------ | ------------------------------------------------------------ |
-| SRS                      | System Requirements Specification; document waar de eisen aan het te realiseren systeem in staan vastgelegd. |
-| SDD                      | Software Design Description; document waar het softwareontwerp en ontwerpkeuzes in staan vastgelegd. |
-| RUP                      | Rational Unified Process; ontwikkelmethode, bedacht door Rational Software, die bedoeld is om te schaalbaar en aanpasbaar te zijn naar de eisen van verschillende projecten en organisaties. |
-| MA-IT                    | MA-IT MyAutomation; het bedrijf waar mijn afstudeerstage plaatsvindt. |
-| database/analyseplatform | Afhankelijk van de uitkomst van mijn onderzoek zal er gekozen worden voor een bepaald soort database voor industriële data. Deze bestaan met een analysemogelijkheid die op basis van de data bepaalde terugkoppeling geeft. Vandaar schrijf ik de term zo op. |
+| Term          | Definitie                                                    |
+| ------------- | ------------------------------------------------------------ |
+| SRS           | System Requirements Specification; document waar de eisen aan het te realiseren systeem in staan vastgelegd. |
+| SDD           | Software Design Description; document waar het softwareontwerp en ontwerpkeuzes in staan vastgelegd. |
+| RUP           | Rational Unified Process; ontwikkelmethode, bedacht door Rational Software, die bedoeld is om te schaalbaar en aanpasbaar te zijn naar de eisen van verschillende projecten en organisaties. |
+| MA-IT         | MA-IT MyAutomation; het bedrijf waar mijn afstudeerstage plaatsvindt. |
+| IIOT-platform | Industrial Internet-Of-Things. Afhankelijk van de uitkomst van mijn onderzoek zal er gekozen worden voor een bepaald soort database voor industriële data. Deze bestaan met een analysemogelijkheid die op basis van de data bepaalde terugkoppeling geeft. |
 
 
 
@@ -77,23 +77,23 @@ Het doel van deze afstudeeropdracht is om op basis van zoveel mogelijk gegevens 
 
 Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn dus van een slimme variant die naast zijn primaire schakelwaarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. 
 
-Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een analyseplatform dat een oordeel maakt over de staat van het systeem(bijvoorbeeld welke onderdelen aan vervanging toe zijn). Het analyseplatform zal ik niet zelf inrichten, hier wordt een bestaand product voor gebruikt waar ik de integratie voor schrijf. Het oordeel van het analyseplatform wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een IIOT-platform dat een oordeel maakt over de staat van het systeem(bijvoorbeeld welke onderdelen aan vervanging toe zijn). Het IIOT-platform zal ik niet zelf inrichten, hier wordt een bestaand product voor gebruikt waar ik de integratie voor schrijf. Het oordeel van het IIOT-platform wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
 
 Naast de meetwaarden zijn bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens van belang om predictive maintenance toe te passen. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
 
-Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden, hoe vaak open/dicht geschakeld, enzovoorts. Zo komt alle opgevangen data samen met het oordeel van het analyseplatform en is dit inzichtelijk voor de eindgebruiker. 
+Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden, hoe vaak open/dicht geschakeld, enzovoorts. Zo komt alle opgevangen data samen met het oordeel van het IIOT-platform en is dit inzichtelijk voor de eindgebruiker. 
 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
 **Analyse/onderzoeken(met behulp van de ICT Research Methods):** <br>
 • Berichten van sensoren uitlezen: tussenlaag voor bedenken<br>
 • Keuze van embedded controller <br>
-• Keuze van type database/analyseplatform <br>
+• Keuze van type IIOT-platform <br>
 • Keuze van opzet database <br>
 • Protocollen: io-link/tcp-profinet <br>
 
 **Prototypes**<br>• Prototype embedded controller die de sensoren uitleest<br>
-• Prototype database/analyseplatform<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
+• Prototype IIOT-platform<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
 **Softwareontwikkeling:** <br>
 • SRS <br>
 • SDD <br>
@@ -200,12 +200,12 @@ In de onderstaande tabel staan gebeurtenissen met betrekking tot inleverdeadline
 | 30-5  | Milestone: IO-link/Profinet                                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |
 | 4-6   | Milestone: Keuze (micro)controller                           | Ik streef ernaar om op deze dag een keuze te hebben gemaakt m.b.t. de gebruikte (micro)controller. |
 | 13-6  | Milestone: Prototype uitlezen sensor- en actuatordata met controller | Ik streef ernaar op deze dag een demo van het prototype te geven. |
-| 18-6  | Milestone: Prototype database/platform                       | Ik streef ernaar op deze dag een demo van het prototype te geven. |
+| 18-6  | Milestone: Prototype database/IIOT-platform                  | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 25-6  | Milestone: Gebruikersinterface                               | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 2-7   | Milestone: Configurator                                      | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 3-7   | Start constructiefase                                        | Op deze dag begint, mits alle milestones geweest zijn, de constructiefase en daarmee de integratie van alle onderdelen. |
-| 7-7   | Milestone: Gebruikersinterface met uitlezen van waarden geïntegreerd tot eindproduct. | Gebruikersinterface geeft sensorwaarden weer maar nog zonder koppeling naar het database/analyseplatform en terugkoppeling van analyse. |
-| 11-7  | Milestone: Database/platform gekoppeld aan eindproduct.      | Sensorwaarden worden doorgegeven aan het database/analyseplatform en worden weer teruggekoppeld naar de gebruikersinterface. |
+| 7-7   | Milestone: Gebruikersinterface met uitlezen van waarden geïntegreerd tot eindproduct. | Gebruikersinterface geeft sensorwaarden weer maar nog zonder koppeling naar het IIOT-platform en terugkoppeling van analyse. |
+| 11-7  | Milestone: Database/platform gekoppeld aan eindproduct.      | Sensorwaarden worden doorgegeven aan het IIOT-platform en worden weer in de context van analyse weer teruggekoppeld naar de gebruikersinterface. |
 | 14-7  | Begin HAN-zomervakantie                                      | Deze week begint volgens het HAN-jaarrooster de zomervakantie. De docenten zullen niet beschikbaar zijn. |
 | 18-8  | Eind HAN-zomervakantie                                       | Vanaf vandaag is de zomervakantie afgelopen en zijn de docenten weer beschikbaar. |
 | 22-8  | Inleveren definitief eindverslag voor feedback.              | Dit is de deadline voor het inleveren van mijn eindverslag voor feedback. |
