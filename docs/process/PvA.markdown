@@ -150,7 +150,9 @@ Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze 
 
 ## 8. Ontwikkelmethoden
 
-Voor dit project gebruik ik RUP als projectmethode. Dit doe ik omdat RUP vrij schaalbaar is en een handige projectindeling biedt. Het werk dat ik in dit project moet verrichten past goed in de fases. 
+Voor dit project gebruik ik RUP als projectmethode. Dit doe ik omdat RUP vrij schaalbaar is en een handige projectindeling biedt. Mijn opdracht bevat vrij veel onderzoekwerk, maar er moet ook veel functionaliteit zoals een gebruikersinterface en API-integratie opgeleverd worden. Het werk dat ik in dit project moet verrichten past dus goed in de fases van RUP. 
+
+Bij MA-IT wordt van oudsher vooral aan Operational Technology gewerkt en gebruiken ze het V-model om PLC-software te bouwen. Dit in combinatie met ISA-88, een standaard voor het ontwikkelen van productieprocessen(*Wat Is ISA 88? | Engineers Zijn Nooit Uitgeleerd*, 2023). Voor PLC-software en procestechniek zijn deze ontwikkelmethoden erg handig, vanwege het volledig uitdenken en ontwerpen van het gehele systeem. Zo kunnen er vroeg kritische fouten uitgehaald worden en is het eenvoudiger te managen(GeeksforGeeks, 2025). Deze projectmethoden gaan echter niet zo goed om met de veranderende eisen en vrij snel veranderende techniek die ik verwacht tegen te komen. Daarvoor heb ik toch de fasen van RUP nodig:
 
 ### Inceptiefase
 
@@ -240,10 +242,19 @@ Van Heesch, U. (2016a). Software Requirements Specification Template. In *Onderw
 
 Van Heesch, U. (2016b). Software Design Description Template. In *OnderwijsOnline*.
 
+*Wat is ISA 88? | Engineers zijn nooit uitgeleerd*. (2023, 30 juni). Engineers Zijn Nooit Uitgeleerd. https://www.iaprofacademy.nl/wat-is-isa-88/
+
+GeeksforGeeks. (2025, 9 april). *SDLC VModel Software Engineering*. GeeksforGeeks. https://www.geeksforgeeks.org/software-engineering-sdlc-v-model/
+
 ## 13. Revisiehistorie
 
 | Versienummer | Datum | Beschrijving van aanpassingen                                |
 | ------------ | ----- | ------------------------------------------------------------ |
 | V0.1         | 17-4  | Eerste versie voor review van bedrijfsbegeleider. Alle hoofdstukken hebben invulling gekregen maar zijn nog niet helemaal scherp. |
-| V0.2         | 22-4  | Hoofdstukken 3 en 4 aangescherpt volgens Toelichting op PVA. Planning is uitgebreid met milestones voor de constructiefase en de elaboratiefase(onderzoeken) starten iets eerder, deels voor het definitieve inleveren van het PvA. |
+| V0.2         | 22-4  | Hoofdstukken 3 en 4 aangescherpt volgens Toelichting op PVA. Planning is uitgebreid met milestones voor de constructiefase en de elaboratiefase(onderzoeken) starten iets eerder, deels voor het definitieve inleveren van het PvA. Feedback van Marc(Zie bijlage "PvA-Review-18-4") toegepast met betrekking tot de terugkoppeling van het analyseplatform naar mijn systeem. Projectmethode is aangescherpt. |
 
+## 14. Bijlagen
+
+De bijlagen voor dit document staan in de map "PvA-bijlagen" die meegeleverd dient te zijn met dit document. Indien dit niet het geval is neem dan contact met mij op. Op deze revisie bestaan de bijlagen uit:
+
+- PvA-Review-18-4.pdf, Review van Marc Waarle op 18-4 van PvA V0.1.
