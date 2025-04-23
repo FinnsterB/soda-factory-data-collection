@@ -41,6 +41,14 @@ Het systeem moet eenvoudig in een regelkast van een productielijn ingebouwd kunn
 
 ## Productfuncties
 
+Om de productfuncties per actor duidelijk te maken heb ik een usecase-diagram gemaakt. Om het diagram leesbaar te houden zijn bepaalde usecases gegroepeerd in de blokjes **Informatietoegang** en **Configuratietoegang**. 
+
+![](../../out/docs/development/main_UCD/main_UCD.png)
+
+Het systeem biedt informatie aan de *inkoopmedewerker*, *procesoperator* en de *onderhoudsdienst*. Deze actors moeten allemaal kunnen zien of de productielijn nog goed draait, of er waarschuwingen zijn en in het geval van calamiteiten wellicht terugkijken naar historische gegevens. 
+
+De instelmogelijkheid van het systeem hoeft niet bereikbaar te zijn voor de *inkoopmedewerker*. Het is daarentegen wel nodig dat de *installateur*, dit wel kan. Zo kan de *installateur* een werkend systeem opleveren. Tevens kan de *installateur* ook bij de installatie van het systeem het analyseplatform instellen. Het analyseplatform wordt hoogstwaarschijnlijk een bestaand IIOT-platform waarvoor enige authenticatie en andere instelmogelijkheden zijn. 
+
 
 
 # Domeinmodel

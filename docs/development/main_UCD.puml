@@ -5,8 +5,9 @@ actor Procesoperator as a1
 actor Onderhoudsdienst as a2
 actor Inkoopmedewerker as a3
 actor Installateur as a4
+actor Analyseplatform as a5
 
-rectangle "<<CRUD>>" as rect1{
+rectangle "Configuratietoegang" as rect1{
 usecase "Aanmaken sensoren" as uc1
 usecase "Verwijderen sensoren" as uc2
 usecase "Aanpassen sensoren" as uc3
@@ -18,6 +19,8 @@ usecase "Inzien meetwaarden-historie" as uc6
 usecase "Inzien analyse-waarschuwingen" as uc7
 }
 usecase "Instellen analyseplatform" as uc8
+usecase "Aanleveren analyse-waarschuwingen" as uc9
+
 
 a3 --- rect2
 
@@ -29,8 +32,16 @@ a2 --- rect1
 
 a4 --- rect1
 
-a4 --- uc8
+a4 -- uc8
 
 a2 --- rect2
+
+uc7 --> uc9 : include
+
+uc9 - a5
+
+uc6 -- a5
+
+uc8 -- a5
 
 @enduml
