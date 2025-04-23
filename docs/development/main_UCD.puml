@@ -1,0 +1,41 @@
+@startuml main_UCD
+left to right direction
+
+actor Procesoperator as a1
+actor Onderhoudsdienst as a2
+actor Inkoopmedewerker as a3
+actor Installateur as a4
+
+rectangle "<<CRUD>>" as rect1{
+usecase "Aanmaken sensoren" as uc1
+usecase "Verwijderen sensoren" as uc2
+usecase "Aanpassen sensoren" as uc3
+usecase "Inzien sensoren" as uc4
+}
+rectangle "Informatietoegang" as rect2{
+usecase "Inzien meetwaarden-realtime" as uc5
+usecase "Inzien meetwaarden-historie" as uc6
+usecase "Inzien analyse-waarschuwingen" as uc7
+}
+usecase "Instellen analyseplatform" as uc8
+
+a3 -- rect2
+
+a1 -- rect1
+
+a1 -- rect2
+
+a2 -- rect1
+
+a4 -- rect1
+
+a4 -- uc8
+
+a2 -- rect2
+
+
+
+
+
+
+@enduml

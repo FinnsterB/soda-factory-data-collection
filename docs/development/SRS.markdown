@@ -13,6 +13,36 @@
 
 In dit document leg ik vast wat de gestelde eisen zijn aan mijn afstudeeropdracht. Dit omvat zowel de functionele- als niet-functionele eisen. De eisen krijgen een prioriteit aangewezen door middel van MoSCoW-prioritering. Op deze manier is duidelijk welke eisen het belangrijkst zijn en welke ik dus als eerste implementeer. Om meer inzicht te krijgen in de benodigde werking van de software zijn sommige eisen uitgewerkt in de vorm van Use Cases. 
 
+De opdracht wordt beschreven in H4 van het Plan Van Aanpak. Kort samengevat: er moet een embedded systeem ontwikkeld worden dat alle sensor- en actuatordata opvangt, analyseert(met behulp van een IIOT-Platform) en deze data en de analyse weergeeft aan een eindgebruiker.
+
+## Actors
+
+De actors die van dit systeem gebruik gaan maken zijn de volgende:
+
+### Procesoperator of procestechnoloog
+
+
+
+### Medewerker storingsdienst
+
+
+
+### Medewerker inkoop
+
+
+
+## Omgeving
+
+
+
+## Ontwerp- en implementatiebeperkingen
+
+Het systeem moet eenvoudig in een regelkast van een productielijn ingebouwd kunnen worden. In de regel bouw ik voor dit project een implementatie voor de limonadefabriek bij MA-IT. Deze beschikt over een Siemens PLC die met Profinet en IO-Link met zijn sensoren en actuatoren communiceert. Profinet is een fieldbus op basis van TCP/IP en gebruikt Ethernet als fysieke laag. Dit betekent dat ik vrijwel elke soort PC kan aansluiten, zolang die maar Ethernet ondersteunt. Nice-to-haves zijn wel dat deze PC gevoed kan worden met 24V en op een DIN-rail gemonteerd kan worden. 
+
+## Productfuncties
+
+
+
 # Domeinmodel
 
 Het domein voor dit project bestaat hoofdzakelijk uit een bestaande productielijn die beschikt over een aantal sensoren en actuatoren. Deze hebben ieder een status, staan ze aan/uit, hoe staan ze ingesteld en nog meer. De sensoren in het bijzonder hebben data: de meetwaarden. De sensoren en actuatoren zitten via een Fieldbus(Profinet) aan de PLC aangesloten en dat is waar ons systeem ook terechtkomt. Onze Controller bevat allerlei onderdelen die gerealiseerd moeten worden: De Configurator, Gebruikersinterface en een integratie met een IIOT-Platform. 
