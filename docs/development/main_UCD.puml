@@ -19,23 +19,18 @@ usecase "Inzien analyse-waarschuwingen" as uc7
 }
 usecase "Instellen analyseplatform" as uc8
 
-a3 -- rect2
+a3 --- rect2
 
-a1 -- rect1
+a1 --- rect1
 
-a1 -- rect2
+a1 --- rect2
 
-a2 -- rect1
+a2 --- rect1
 
-a4 -- rect1
+a4 --- rect1
 
-a4 -- uc8
+a4 --- uc8
 
-a2 -- rect2
-
-
-
-
-
+a2 --- rect2
 
 @enduml
