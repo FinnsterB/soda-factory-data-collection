@@ -21,11 +21,11 @@ De actors die van dit systeem gebruik gaan maken zijn de volgende:
 
 ### Productiemanager
 
-
+De productiemanager houdt zich bezig met de optimalisatie van de productielijn en verlangt een bepaald soort gegevens.
 
 ### Technische dienst
 
-
+De technische dienst houdt zich bezig met het onderhoud van de productielijn en verlangt een bepaald soort gegevens.
 
 ### Installateur
 
