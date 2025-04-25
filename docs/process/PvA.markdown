@@ -38,7 +38,7 @@
 
 In dit document licht ik de planning van mijn afstudeerproject toe en leg ik alle afspraken, grenzen, voorwaarden en eisen vast die nodig zijn voor een succesvolle afronding. Gedurende het project gebruik ik het plan van aanpak om steeds mijn volgende taken te bepalen. Zo zorg ik ervoor dat mijn werkmethode inzichtelijk is voor mijzelf en de begeleiders.
 
-In opdracht van MA-IT maak ik een embedded systeem dat gegevens verzamelt van alle sensoren en actuatoren in een productielijn en de mogelijkheid biedt om deze te analyseren voor "predictive maintenance" en productieoptimalisatie. 
+In opdracht van MA-IT maak ik een embedded systeem dat een informatiehistorie verzamelt van alle sensoren en actuatoren in een productielijn en de mogelijkheid biedt om deze te analyseren voor productieoptimalisatie. 
 
 Dit document bevat de volgende hoofdstukken:
 
@@ -73,27 +73,48 @@ Sensoren worden steeds slimmer, maar worden nog lang niet altijd toegepast met g
 
 PLC\'s kunnen de informatie uit de moderne smart-sensoren doorgaans niet allemaal verwerken. Ze gebruiken de gegevens niet voor analyse, slechts voor het aansturen van de productielijn. MA-IT wil een embedded oplossing aanbieden die ze wél aan analyse kan onderwerpen. Het ontwerpen en implementeren van dit systeem is mijn afstudeerproject. 
 
-Het doel van deze afstudeeropdracht is om op basis van zoveel mogelijk gegevens van een bestaande fabrieksinstallatie te kunnen voorspellen dat sensoren, actuatoren of mogelijk andere onderdelen stukgaan. Deze kunnen dan tijdig vervangen worden waardoor er minder ongepland onderhoud verricht hoeft te worden. Ook kan dit extra schade voorkomen wanneer er iets stukgaat. 
+Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Dit is een volledige productielijn voor het produceren van frisdrank. Het bestaat uit twee delen:
 
-Om dit embedded systeem te ontwikkelen gebruik ik de limonademachine van MA-IT. Deze draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn dus van een slimme variant die naast zijn primaire schakelwaarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. 
+- Het productiegedeelte, dit mengt drinkwater met verschillende siropen en voegt er koolzuur aan toe.
+- Het schoonmaakgedeelte, oftewel CIP(Cleaning In Place), waar water met schoonmaakmiddel gemengd en verwarmd wordt om vervolgens door de rest van de installatie te spoelen.
 
-Al deze gegevens worden verstuurd met een IO-link protocol en Profinet en het is belangrijk om van alle types sensoren en actuatoren de waarden uit te lezen. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een IIOT-platform dat een oordeel maakt over de staat van het systeem(bijvoorbeeld welke onderdelen aan vervanging toe zijn). Het IIOT-platform zal ik niet zelf inrichten, hier wordt een bestaand product voor gebruikt waar ik de integratie voor schrijf. Het oordeel van het IIOT-platform wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+Deze installatie draait op een Siemens PLC die maar gelimiteerd sensorinformatie opslaat/ontsluit. De sensoren op de installatie zijn dus van een slimme variant die naast zijn primaire schakelwaarde(b.v. flow ja of nee) ook dingen als temperatuur of druk meten. 
 
-Naast de meetwaarden zijn bijvoorbeeld de operation times van de verschillende sensoren, hoe vaak een klep open en dicht is gegaan en nog meer andere gegevens van belang om predictive maintenance toe te passen. Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
+De stakeholders zijn in mijn project de productiemanager en de technische dienst. Mijn bedrijfsbegeleider vervult deze rollen. Voor de productiemanager zijn de volgende gegevens van belang uit bijlage *Stakeholder_definitie_en_meetpuntenbepaling* voor de productieoptimalisatie:
+
+- Hoelang duurt het voorbereiden van de CIP-installatie? Dit bestaat uit verschillende deelprocessen; waterinname, verwarming, chemicaliën toevoegen en mengen.
+- Wat is het temperatuurverloop van de schoonmaakvloeistof in de productietank? 
+- Hoelang kan er worden geproduceerd van een volle productietank? Hoe staat dit in verhouding tot de totale duur van de reiniging?
+- Hoelang duurt een bepaald deelproces binnen de reiniging of productie?
+- Wanneer een (deel)proces langer (of korter) duurt dan nominaal of uit historische gegevens verzamelde informatie, kan dit een signaal zijn van
+  bijvoorbeeld leidingen die beginnen dicht te slibben of pompcapaciteit die afneemt. Dat zou kunnen worden opgepikt als een vroegtijdig signaal tot
+  behoefte aan reiniging.
+- Wanneer carbonisatie van de vloeistof langer duurt dan nominaal, zou dat een voorbode kunnen zijn van drukverlies in de koolzuurtank; binnenkort
+  vervangen.
+
+Als tweede stakeholder is er de technische dienst. Voor de technische dienst zijn bepaalde alarmen van belang die vastgesteld kunnen worden met historische data. Voorbeelden hiervan zijn(Wederom uit bijlage *Stakeholder_definitie_en_meetpuntenbepaling*):
+
+- Wanneer de opgewekte flow in een leiding verandert ten opzichte van historische data kan dit een indicatie zijn van een aantal dingen in de installatie; verontreiniging, slijtage of instellingen die zijn veranderd. Door dit te meten en patronen uit verleden te vergelijken met huidige
+  informatie kan hierop worden geanticipeerd.
+- Wanneer de PLC vertelt dat een component wordt aangestuurd, maar metingen uit veldapparatuur laten tegenstrijdige informatie zien, kan
+  hierop worden geacteerd.
+- Wanneer de carbonisatietijd van een batch langer duurt dan uit historische patronen vastgelegde nominale duur, kan dit een indicatie zijn van
+  teruglopende druk in de koolzuurcilinder of bijvoorbeeld meer limonade in de tank dan verwacht.
+
+In de bijlage *Stakeholder_definitie_en_meetpuntenbepaling* staat de concrete lijst met de benodigde gegevens om tot de bovenstaande punten. Al deze gegevens worden verstuurd met een IO-link protocol en Profinet. Het systeem dat ik moet implementeren zal de gegevens wegschrijven naar een IIOT-platform dat ze opslaat en kan analyseren. Het IIOT-platform zal ik niet zelf inrichten, hier wordt een bestaand product voor gebruikt waar ik de integratie voor schrijf. De analyse van het IIOT-platform wordt weer teruggekoppeld en aan de gebruiker weergegeven zodat er actie ondernomen kan worden. 
+
+Om de extra informatie van de sensoren en actuatoren te configureren moet er een configuratiesysteem zijn. Op deze manier is het een modulair systeem dat aangepast kan worden naar de configuratie van verschillende fabrieksprocessen. 
 
 Uiteindelijk moet er een soort dashboard komen waarin zichtbaar is wat de status van elk onderdeel is: moet deze binnenkort vervangen worden, wat zijn de meetwaarden, hoe vaak open/dicht geschakeld, enzovoorts. Zo komt alle opgevangen data samen met het oordeel van het IIOT-platform en is dit inzichtelijk voor de eindgebruiker. 
 
 Hieronder volgt een lijst met op te leveren resultaten. Deze worden in hoofdstuk 7 verder toegelicht met concrete kwaliteitseisen en acties.
 
 **Analyse/onderzoeken(met behulp van de ICT Research Methods):** <br>
-• Berichten van sensoren uitlezen: tussenlaag voor bedenken<br>
+• Berichten van sensoren uitlezen IO-Link/Profinet: tussenlaag voor bedenken<br>
 • Keuze van embedded controller <br>
 • Keuze van type IIOT-platform <br>
-• Keuze van opzet database <br>
-• Protocollen: io-link/tcp-profinet <br>
-
 **Prototypes**<br>• Prototype embedded controller die de sensoren uitleest<br>
-• Prototype IIOT-platform<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
+• Prototype integratie IIOT-platform<br>- Prototype terugkoppeling analyse<br>• Prototype gebruikersinterface en configurator<br>
 **Softwareontwikkeling:** <br>
 • SRS <br>
 • SDD <br>
@@ -130,7 +151,7 @@ Ieder product dat ik ga opleveren heeft één of meerdere kwaliteitseisen. Deze 
 |:--|---|---|---|
 | **Onderzoeken**| | | **- Onderzoeksdocumenten worden in versiebeheer bijgehouden.<br>- Onderzoek wordt voorgelegd aan begeleider voor feedback.** |
 | Keuze type database/platform| - Onderzoek is relevant voor het project.<br>- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.<br>-Onderzoek geeft een eenduidig resultaat waarop verder gebouwd kan worden. | - Vaststellen welke data in de database komt.<br>- Vaststellen hoeveel data in de database komt.<br>- Long list van databasetypes maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria. |- Voorleggen aan vakinhoudelijke medewerker wanneer het onderzoeksresultaat bekend is.|
-| Protocollen: IO-Link/TCP-profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data. <br>- Onderzoek biedt de basis voor het prototype "Uitlezen sensordata en actuatorstatus met controller". | - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe TCP-profinet werkt.<br>- Gegevens onderscheppen met een library.| - Gesprek met collega's/begeleiders die meer verstand hebben van dit soort systemen voeren om aan informatie te komen.|
+| Tussenlaag IO-Link/Profinet | - Onderzoek is relevant voor het project.<br>- Onderzoek vergelijkt indien nodig methoden van het ophalen van data. <br>- Onderzoek biedt de basis voor het prototype "Uitlezen sensordata en actuatorstatus met controller". | - Vaststellen hoe IO-Link werkt.<br>- Vaststellen hoe Profinet werkt.<br>- Gegevens uitlezen van sensors.<br>- Status van actuatoren uitlezen. | - Gesprek met collega's/begeleiders die meer verstand hebben van dit soort systemen voeren om aan informatie te komen.|
 | Keuze embedded controller | - Onderzoek is relevant voor het project.- Onderzoek stelt criteria vast.<br>- Onderzoek vergelijkt meerdere alternatieven op basis van criteria.<br>- Onderzoek geeft een eenduidig resultaat waarop verder gebouwd kan worden. | - Long list van embedded controllers maken.<br>- Criteria opstellen.<br>- Keuze maken a.d.h.v. criteria.||
 | **Prototypes** |||**- Prototypes worden als branches in het versiebeheer opgenomen om in de constructiefase geïntegreerd te worden.<br>- Prototypes worden wanneer ze klaar zijn gedemonstreerd in een Milestone-meeting(toegelicht in H9).**|
 | Uitlezen sensordata en actuatorstatus met controller | - Controller kan zonder invloed op de PLC de gegevens uitlezen.<br>- Controller kan buiten de cyclische datastromen van de PLC gegevens opvragen van de sensoren.<br>- Geschreven in C/C++.<br>- Code wordt objectgeorienteerd geschreven. <br>- Getest met unittests.<br>- Gedocumenteerd d.m.v. UML en toelichting. | - Eisen opvragen  en vastleggen in het SRS. <br>- Resultaat van het protocollenonderzoek gebruiken.<br>- Testopstelling maken voor maximale capaciteits­test.<br>- Softwareontwerp maken.<br>- Software schrijven.<br>- Testen met testopstelling. |- Controleren of de geïmplementeerde en geteste functionaliteit overeenkomt met de eisen in het SRS. <br>|
@@ -179,7 +200,7 @@ Tijdens mijn afstudeerperiode heb ik een aantal begeleiders:
 Chris van Uffelen: Begeleider vanuit de opleiding, <chris.vanuffelen@han.nl>.<br>
 Eduard de Grefte: Inhoudelijk begeleider van MA-IT, <e.de.grefte@iaprofacademy.nl>.<br>
 Koen Sleurink: Inhoudelijk begeleider van MA-IT, <sleurink@ma-it.nl>.<br>
-Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever en stakeholder tijdens mijn stage.<br>Dingeman Knaap: Specialist big data en AI, <d.knaap@ma-it.nl>. <br>
+Marc Waarle: Bedrijfsbegeleider van MA-IT, <waarle@ma-it.nl>. Opdrachtgever en vervult stakeholderrollen(productiemanager en technische dienst).<br>Dingeman Knaap: Specialist big data en AI, <d.knaap@ma-it.nl>. <br>
 
 De begeleiders van MA-IT zijn in principe altijd op locatie of online beschikbaar en daar kan ik gewoon bij terecht als er vragen zijn. 
 
@@ -199,7 +220,7 @@ In de onderstaande tabel staan gebeurtenissen met betrekking tot inleverdeadline
 | 12-5  | Start elaboratiefase                                         | Op deze dag begint de elaboratiefase en begin ik met de onderzoeken. |
 | 16-5  | Milestone: Keuze database/platform gemaakt.                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en het resultaat te overleggen. |
 | 23-5  | Inleveren plan van aanpak(definitief)                        | Deadline inleveren definitieve versie plan van aanpak.       |
-| 30-5  | Milestone: IO-link/Profinet                                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |
+| 30-5  | Milestone: Tussenlaag IO-link Profinet                       | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |
 | 4-6   | Milestone: Keuze (micro)controller                           | Ik streef ernaar om op deze dag een keuze te hebben gemaakt m.b.t. de gebruikte (micro)controller. |
 | 13-6  | Milestone: Prototype uitlezen sensor- en actuatordata met controller | Ik streef ernaar op deze dag een demo van het prototype te geven. |
 | 18-6  | Milestone: Prototype database/IIOT-platform                  | Ik streef ernaar op deze dag een demo van het prototype te geven. |
@@ -252,9 +273,11 @@ GeeksforGeeks. (2025, 9 april). *SDLC VModel Software Engineering*. GeeksforGeek
 | ------------ | ----- | ------------------------------------------------------------ |
 | V0.1         | 17-4  | Eerste versie voor review van bedrijfsbegeleider. Alle hoofdstukken hebben invulling gekregen maar zijn nog niet helemaal scherp. |
 | V0.2         | 22-4  | Hoofdstukken 3 en 4 aangescherpt volgens Toelichting op PVA. Planning is uitgebreid met milestones voor de constructiefase en de elaboratiefase(onderzoeken) starten iets eerder, deels voor het definitieve inleveren van het PvA. Feedback van Marc(Zie bijlage "PvA-Review-18-4") toegepast met betrekking tot de terugkoppeling van het analyseplatform naar mijn systeem. Projectmethode is aangescherpt. |
+| V0.3         | 25-4  | Aanpassing na feedback Chris. Hoofdstuk 4 uitgebreid met specifiekere eisen van de stakeholder uit de bijlage *Stakeholder_definitie_en_meetpuntenbepaling*. |
 
 ## 14. Bijlagen
 
 De bijlagen voor dit document staan in de map "PvA-bijlagen" die meegeleverd dient te zijn met dit document. Indien dit niet het geval is neem dan contact met mij op. Op deze revisie bestaan de bijlagen uit:
 
 - PvA-Review-18-4.pdf, Review van Marc Waarle op 18-4 van PvA V0.1.
+- Stakeholder_definitie_en_meetpuntenbepaling, bevat extra informatie m.b.t. stakeholders en de meetwaarden die van belang zijn. Afkomstig van Marc.
