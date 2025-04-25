@@ -19,19 +19,39 @@ De opdracht wordt beschreven in H4 van het Plan Van Aanpak. Kort samengevat: er 
 
 De actors die van dit systeem gebruik gaan maken zijn de volgende:
 
-### Procesoperator of procestechnoloog
+### Productiemanager
 
 
 
-### Medewerker storingsdienst
+### Technische dienst
 
 
 
-### Medewerker inkoop
+### Installateur
 
 
 
 ## Omgeving
+
+In de regel bouw ik voor dit project een implementatie voor de limonadefabriek bij MA-IT. Deze beschikt over een Siemens PLC die met Profinet en IO-Link met zijn sensoren en actuatoren communiceert. De limonadefabriek is ruwweg opgedeeld in twee onderdelen: de productiekant en de CIP(Cleaning-in-Place)-installatie. 
+
+### Productiekant van de installatie
+
+De productie gebeurt in de grote mengtank die vrij centraal staat aan de installatie. Deze mengtank beschikt over twee gewone ingangen, een viertal kleine ingangen voor siroop, een interne sproeier en een uitgang. De uitgang van de tank kan met kleppen met de afvoerleiding gekoppeld worden, of naar een pomp. De pomp kan op zijn beurt naar de koolzuurtank pompen of weer terug de mengtank in. Door het voortdurend terugpompen naar de mengtank wordt de siroop met het water gemengd.
+
+### CIP-installatie
+
+De schoonmaak van het hele systeem wordt gefaciliteerd door de CIP-installatie. Deze is complexer dan de hele productiekant van de installatie en bestaat uit twee tanks, drie grote pompen en twee kleine doseerpompen voor chemicaliën. Hier beschikken de tanks over verwarmingselementen en evenals aan de productiekant kan de inhoud rondgepompt worden om te mengen. 
+
+De uitvoer van beide tanks is aangesloten aan een pomp die de schoonmaakvloeistof naar de productietank pompt. Uiteraard kan er, door de juiste kleppen te schakelen, gekozen worden of de CIP-tanks hun inhoud mengen of naar de productietank sturen. Wanneer dit gebeurt is het de bedoeling dat het schoonmaakmiddel een aantal keer wordt rondgepompt in de productietank met gebruik van de sproeier. 
+
+### Fieldbus voor sensoren en actuatoren
+
+Alle sensoren en actuatoren zitten met Profinet aangesloten aan de PLC. De kleppen zijn op luchtdruk gestuurd door een ventieleiland. Deze stuurt luchtdruk naar de gewenste kleppen op basis van een bitpatroon. Ook deze komt van de Profinet-verbinding.
+
+### Regelkast
+
+Deel van de installatie is de regelkast. Hier zit onder andere de PLC, verschillende voedingen en schakelrelais gemonteerd. Deze regelkast is voorzien van een DIN-rail en kabelgoten. Het mooiste is om hier gebruik van te maken met mijn systeem.
 
 
 
@@ -57,7 +77,37 @@ Het domein voor dit project bestaat hoofdzakelijk uit een bestaande productielij
 
 ![](../../out/docs/development/domain/domain.png)
 
-Uiteindelijk is het de bedoeling dat ons systeem toevoegingen maakt aan het onderhoud van de productielijn en wellicht grond biedt voor optimalisaties. 
+Uiteindelijk is het de bedoeling dat ons systeem een analysemogelijkheid biedt van verschillende datapunten. De datapunten die opgehaald moeten worden zijn als volgt(uit bijlage Stakeholder_definitie_en_meetpuntenbepaling):
+
+**CIP-tanks**
+
+- Vulgraad (te bepalen middels de druktransmitter)
+- Temperatuur
+- Status van de circulatiepomp (meetpunt in de PLC; aan of uit)
+- Debietmeting in de circulatieleiding
+- Aansturing én status van de bodemklep (meetpunt in de PLC; aangestuurd ‘open’ en terugmelding open/dicht uit de IOlink master)
+
+**CIP-transportleiding**
+
+- Status van de circulatiepomp (meetpunt in de PLC; aan of uit)
+- Debietmeting in de transportleiding
+- Temperatuur van het medium in de transportleiding
+
+**Productietank**
+
+- Vulgraad (te bepalen middels de druktransmitter)
+- Temperatuur in de tank
+- Temperatuur in de circulatieleiding
+- Status van de circulatiepomp (meetpunten in de PLC; aan of uit én het bitpatroon waarmee de snelheid wordt opgegeven)
+- Debietmeting in de circulatieleiding
+- Debietmeting in de leiding naar carbonisatie
+- Aansturing én status van alle kleppen (meetpunt in de PLC; aangestuurd ‘open’ en terugmelding open/dicht uit de IOlink master)
+
+**Carbonisatie tank**
+
+- Druk in het vat
+- Aansturing én status van de bodemklep/uitgifteklep (meetpunt in de PLC; aangestuurd ‘open’ en terugmelding open/dicht uit de IOlink master)
+- Status van aansturing van de koolzuur toevoerklep(meetpunt in de PLC; aangestuurd 'open')
 
 
 
