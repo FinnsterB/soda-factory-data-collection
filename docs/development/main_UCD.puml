@@ -2,7 +2,7 @@
 left to right direction
 
 actor Productiemanager as a1
-actor Onderhoudsdienst as a2
+actor "Technische dienst" as a2
 actor Installateur as a4
 actor Analyseplatform as a5
 

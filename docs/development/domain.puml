@@ -37,6 +37,6 @@ Oordeel "1"--left-"  0..*" Dashboard : < Toont
 Profinet --|> Fieldbus
 Maintenance "0..*"--"0..*" Oordeel : < Bepaalt
 Productielijn "1"-left-"0..*" Maintenance : Ondergaat >
-IIOT_Platform "1"--"0..*" Data : < Verzamelt
+IIOT_Platform "1"--"0..*" Data :  Verzamelt >
 IIOT_Platform "1"--"0..*" Oordeel : Genereert >
 @enduml
