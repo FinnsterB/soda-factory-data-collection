@@ -13,7 +13,9 @@
 
 In dit document leg ik vast wat de gestelde eisen zijn aan mijn afstudeeropdracht. Dit omvat zowel de functionele- als niet-functionele eisen. De eisen krijgen een prioriteit aangewezen door middel van MoSCoW-prioritering. Op deze manier is duidelijk welke eisen het belangrijkst zijn en welke ik dus als eerste implementeer. Om meer inzicht te krijgen in de benodigde werking van de software zijn sommige eisen uitgewerkt in de vorm van Use Cases. 
 
-De opdracht wordt beschreven in H4 van het Plan Van Aanpak. Kort samengevat: er moet een embedded systeem ontwikkeld worden dat alle sensor- en actuatordata opvangt, analyseert(met behulp van een IIOT-Platform) en deze data en de analyse weergeeft aan een eindgebruiker.
+De opdracht wordt beschreven in H4 van het Plan Van Aanpak. Kort samengevat: er moet een embedded systeem ontwikkeld worden dat alle sensor- en actuatordata opvangt, analyseert(met behulp van een IIOT-Platform) en deze data en de analyse weergeeft aan een eindgebruiker. 
+
+In het SRS wordt vaak het woord "sensoren" gebruikt als aanduiding voor "sensoren en actuatoren". Hier weet ik nog geen goede benaming aan te geven.
 
 ## Actors
 
@@ -29,7 +31,7 @@ De technische dienst houdt zich bezig met het onderhoud van de productielijn en 
 
 ### Installateur
 
-De installateur zal het systeem installeren en instellen.
+De installateur zal het systeem installeren en instellen. 
 
 ## Omgeving
 
@@ -121,27 +123,27 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 **Level:** Configuratietoegang
 
+**Primary actor:** Technische dienst, installateur
 
-
-**Primary actor:**
-
-
-
-**Stakeholders and interests:**
+**Stakeholders and interests:** 
 
 
 
 **Preconditions:**
 
-
+Het systeem is aan en volledig opgestart.
 
 **Success guarantee:**
 
-
+Aangemaakte sensoren met hun ingevulde parameters worden opgenomen in de lijst van sensoren.
 
 **Main success scenario:**
 
-
+- Gebruiker klikt op "Voeg sensor toe".
+- Systeem geeft invoermogelijkheid weer.
+- Gebruiker vult relevante data in. (Tenminste naam, IP-adres en datatype)
+- Gebruiker klikt op "Toevoegen".
+- Systeem voegt gespecificeerde sensor toe aan de lijst.
 
 **Extensions:**
 
@@ -151,11 +153,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 **Level:** Configuratietoegang
 
-
-
-**Primary actor:**
-
-
+**Primary actor:** Technische dienst, installateur
 
 **Stakeholders and interests:**
 
@@ -163,15 +161,15 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 **Preconditions:**
 
-
+Het systeem is aan en volledig opgestart. Er zijn sensoren toegevoegd met use case "Aanmaken sensoren".
 
 **Success guarantee:**
 
-
+De lijst met ingestelde sensoren is zichtbaar en doorzoekbaar.
 
 **Main success scenario:**
 
-
+- Gebruiker kijkt
 
 **Extensions:**
 
@@ -181,7 +179,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor: **Technische dienst, installateur
 
 
 
@@ -209,11 +207,11 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor:** Technische dienst, installateur
 
 
 
-**Stakeholders and interests:**
+**Stakeholders and interests:** 
 
 
 
@@ -233,11 +231,11 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 ### Inzien meetwaarden realtime
 
-**Level: **Informatietoegang
+**Level:** Informatietoegang
 
 
 
-**Primary actor:**
+**Primary actor:** Productiemanager, technische dienst
 
 
 
@@ -265,7 +263,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor:** Productiemanager, technische dienst
 
 
 
@@ -293,7 +291,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor: **Productiemanager, technische dienst
 
 
 
@@ -321,7 +319,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor:** Analyseplatform
 
 
 
@@ -349,7 +347,7 @@ De functionele eisen van het systeem worden weergegeven als fully dressed use ca
 
 
 
-**Primary actor:**
+**Primary actor: **Analyseplatform
 
 
 
