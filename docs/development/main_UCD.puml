@@ -1,11 +1,14 @@
 @startuml main_UCD
 left to right direction
 
+skinparam linetype polyline
+
 actor Productiemanager as a1
 actor "Technische dienst" as a2
 actor Installateur as a4
 actor Analyseplatform as a5
 
+rectangle " " as rect{
 rectangle "Configuratietoegang" as rect1{
 usecase "Aanmaken sensoren" as uc1
 usecase "Verwijderen sensoren" as uc2
@@ -19,8 +22,7 @@ usecase "Inzien analyse-waarschuwingen" as uc7
 }
 usecase "Instellen analyseplatform" as uc8
 usecase "Aanleveren analyse-waarschuwingen" as uc9
-
-a1 --- rect1
+}
 
 a1 --- rect2
 

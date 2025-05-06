@@ -29,7 +29,7 @@ De technische dienst houdt zich bezig met het onderhoud van de productielijn en 
 
 ### Installateur
 
-
+De installateur zal het systeem installeren en instellen.
 
 ## Omgeving
 
@@ -65,9 +65,9 @@ Om de productfuncties per actor duidelijk te maken heb ik een usecase-diagram ge
 
 ![](../../out/docs/development/main_UCD/main_UCD.png)
 
-Het systeem biedt informatie aan de *inkoopmedewerker*, *procesoperator* en de *onderhoudsdienst*. Deze actors moeten allemaal kunnen zien of de productielijn nog goed draait, of er waarschuwingen zijn en in het geval van calamiteiten wellicht terugkijken naar historische gegevens. 
+Het systeem biedt informatie aan de *productiemanager* en de *technische dienst*. Deze actors moeten allemaal kunnen zien of de productielijn nog goed draait, of er waarschuwingen zijn en in het geval van calamiteiten wellicht terugkijken naar historische gegevens. 
 
-De instelmogelijkheid van het systeem hoeft niet bereikbaar te zijn voor de *inkoopmedewerker*. Het is daarentegen wel nodig dat de *installateur*, dit wel kan. Zo kan de *installateur* een werkend systeem opleveren. Tevens kan de *installateur* ook bij de installatie van het systeem het analyseplatform instellen. Het analyseplatform wordt hoogstwaarschijnlijk een bestaand IIOT-platform waarvoor enige authenticatie en andere instelmogelijkheden zijn. 
+De instelmogelijkheid van het systeem hoeft niet bereikbaar te zijn voor de *productiemanager*. Het is daarentegen wel nodig dat de *installateur* dit kan. Zo kan de *installateur* een werkend systeem opleveren. Tevens kan de *installateur* ook bij de installatie van het systeem het analyseplatform instellen. Het analyseplatform wordt hoogstwaarschijnlijk een bestaand IIOT-platform, dat is waarom het in het SRS als secundaire actor wordt beschouwd.
 
 
 
@@ -115,7 +115,261 @@ Uiteindelijk is het de bedoeling dat ons systeem een analysemogelijkheid biedt v
 
 # Usecase-beschrijvingen
 
+De functionele eisen van het systeem worden weergegeven als fully dressed use cases. Deze bieden per use case een uitgebreide beschrijving van de verantwoordelijkheden van het systeem op het moment dat een actor iets wil. De template voor deze fully dressed use cases komt uit het boek Applying UML and Patterns(Larman, z.d.). Alle use cases die in het diagram in hoofdstuk Productfuncties worden hier weergegeven in fully-dressed vorm.
 
+### Aanmaken sensoren
+
+**Level:** Configuratietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+
+
+### Inzien sensoren
+
+**Level:** Configuratietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Aanpassen sensoren
+
+**Level:** Configuratietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Verwijderen sensoren
+
+**Level:** Configuratietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Inzien meetwaarden realtime
+
+**Level: **Informatietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Inzien meetwaarden-historie
+
+**Level:** Informatietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Inzien analysewaarschuwingen
+
+**Level:** Informatietoegang
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Aanleveren analysewaarschuwingen
+
+**Level:** IIOT-integratie
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:**
+
+### Instellen analyseplatform
+
+**Level:** IIOT-integratie
+
+
+
+**Primary actor:**
+
+
+
+**Stakeholders and interests:**
+
+
+
+**Preconditions:**
+
+
+
+**Success guarantee:**
+
+
+
+**Main success scenario:**
+
+
+
+**Extensions:** 
 
 
 
@@ -132,3 +386,5 @@ Uiteindelijk is het de bedoeling dat ons systeem een analysemogelijkheid biedt v
 
 
 # Bronnen
+
+Larman, C. (z.d.). *Applying UML and Patterns: An Introduction to Object-oriented Analysis and Design and Iterative Development*. Pearson. https://www.craiglarman.com/wiki/downloads/applying_uml/larman-ch6-applying-evolutionary-use-cases.pdf
