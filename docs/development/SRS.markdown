@@ -67,9 +67,47 @@ Om de productfuncties per actor duidelijk te maken heb ik een usecase-diagram ge
 
 ![](../../out/docs/development/main_UCD/main_UCD.png)
 
-Het systeem biedt informatie aan de *productiemanager* en de *technische dienst*. Deze actors moeten allemaal kunnen zien of de productielijn nog goed draait, of er waarschuwingen zijn en in het geval van calamiteiten wellicht terugkijken naar historische gegevens. 
+Het systeem biedt informatie aan de *productiemanager* en de *technische dienst*. Deze actors moeten beide kunnen zien of de productielijn nog goed draait, of er waarschuwingen zijn en in het geval van calamiteiten wellicht terugkijken naar historische gegevens. Deze inhoud wordt op in een venster in de gebruikersinterface weergegeven. 
 
-De instelmogelijkheid van het systeem hoeft niet bereikbaar te zijn voor de *productiemanager*. Het is daarentegen wel nodig dat de *installateur* dit kan. Zo kan de *installateur* een werkend systeem opleveren. Tevens kan de *installateur* ook bij de installatie van het systeem het analyseplatform instellen. Het analyseplatform wordt hoogstwaarschijnlijk een bestaand IIOT-platform, dat is waarom het in het SRS als secundaire actor wordt beschouwd.
+De instelmogelijkheid van het systeem hoeft niet bereikbaar te zijn voor de *productiemanager* maar wel voor de *installateur*. Zo kan de *installateur* een werkend systeem opleveren. Tevens kan de *installateur* ook bij de installatie van het systeem het analyseplatform instellen. Het analyseplatform wordt hoogstwaarschijnlijk een bestaand IIOT-platform, dat is waarom het in het SRS als secundaire actor wordt beschouwd.
+
+Hieronder staat per use case een brief description:
+
+**Inzien sensoren**
+
+Wanneer de gebruiker(technische dienst, installateur) het configuratiepaneel opent krijgt deze een lijst met sensoren te zien mits deze zijn aangemaakt.
+
+**Aanmaken sensoren**
+
+De gebruiker kan een sensor toevoegen aan de persistente lijst van sensoren en daarbij een aantal parameters invullen zoals een naam, hoe de sensor verbonden is met de controller(precieze parameters moeten blijken uit onderzoek), en in welk datatype de sensor rapporteert. 
+
+**Aanpassen sensoren**
+
+Hetzelfde als "Aanmaken sensoren" alleen zijn de velden al ingevuld met de bestaande data. De bestaande sensor wordt overschreven.
+
+**Verwijderen sensoren**
+
+De gebruiker kan een specifieke sensor verwijderen uit de lijst. 
+
+**Inzien meetwaarden realtime**
+
+Per ingestelde sensor kan de gebruiker zien wat de huidige meetwaarde is. Dit wordt weergegeven in het hoofdvenster van het programma. De meetwaarde wordt opgehaald door de controller. 
+
+**Inzien meetwaarden-historie**
+
+Per ingestelde sensor kan de historie van meetwaarden opgehaald worden. Dit wordt weergegeven in het hoofdvenster van het programma. De meetwaarden-historie is afkomstig uit de database van het analyseplatform.
+
+**Inzien analysewaarschuwingen**
+
+De gebruiker ziet in het hoofdvenster een lijst met waarschuwingen over de betreffende productielijn. 
+
+**Aanleveren analysewaarschuwingen**
+
+Het analyseplatform heeft een interface of integratie met de controller waarmee het platform zijn waarschuwingen kan delen op het moment dat er een afwijking wordt gesignaleerd. 
+
+**Instellen analyseplatform**
+
+Om het analyseplatform te kunnen benaderen moeten er bepaalde zaken ingesteld worden zoals authenticatie, API-sleutels en servergegevens. 
 
 
 
@@ -119,36 +157,6 @@ Uiteindelijk is het de bedoeling dat ons systeem een analysemogelijkheid biedt v
 
 De functionele eisen van het systeem worden weergegeven als fully dressed use cases. Deze bieden per use case een uitgebreide beschrijving van de verantwoordelijkheden van het systeem op het moment dat een actor iets wil. De template voor deze fully dressed use cases komt uit het boek Applying UML and Patterns(Larman, z.d.). Alle use cases die in het diagram in hoofdstuk Productfuncties worden hier weergegeven in fully-dressed vorm.
 
-### Aanmaken sensoren
-
-**Level:** Configuratietoegang
-
-**Primary actor:** Technische dienst, installateur
-
-**Stakeholders and interests:** 
-
-
-
-**Preconditions:**
-
-Het systeem is aan en volledig opgestart.
-
-**Success guarantee:**
-
-Aangemaakte sensoren met hun ingevulde parameters worden opgenomen in de lijst van sensoren.
-
-**Main success scenario:**
-
-- Gebruiker klikt op "Voeg sensor toe".
-- Systeem geeft invoermogelijkheid weer.
-- Gebruiker vult relevante data in. (Tenminste naam, IP-adres en datatype)
-- Gebruiker klikt op "Toevoegen".
-- Systeem voegt gespecificeerde sensor toe aan de lijst.
-
-**Extensions:**
-
-
-
 ### Inzien sensoren
 
 **Level:** Configuratietoegang
@@ -169,9 +177,49 @@ De lijst met ingestelde sensoren is zichtbaar en doorzoekbaar.
 
 **Main success scenario:**
 
-- Gebruiker kijkt
+1. Gebruiker opent configuratiepaneel.
+2. Systeem toont lijst met bestaande sensoren.
 
 **Extensions:**
+
+1. Er zijn geen sensoren aangemaakt:
+   1. Gebruiker opent configuratiepaneel.
+   2. Systeem toont melding: "Geen sensoren ingesteld."
+
+### Aanmaken sensoren
+
+**Level:** Configuratietoegang
+
+**Primary actor:** Technische dienst, installateur
+
+**Stakeholders and interests:** 
+
+
+
+**Preconditions:**
+
+Het systeem is aan en volledig opgestart.
+
+**Success guarantee:**
+
+Aangemaakte sensoren met hun ingevulde parameters worden opgenomen in de lijst van sensoren.
+
+**Main success scenario:**
+
+1. Gebruiker opent configuratiepaneel.
+2. Gebruiker klikt op "Voeg sensor toe".
+3. Systeem geeft invoermogelijkheid weer.
+4. Gebruiker vult relevante data in. (Tenminste naam, IP-adres en datatype)
+5. Gebruiker klikt op "Toevoegen".
+6. Systeem voegt gespecificeerde sensor toe aan de lijst.
+
+**Extensions:** 
+
+1. Er ontbreekt data (naam, IP-adres of datatype):
+   1. Stappen 1-4 worden uitgevoerd.
+   2. Gebruiker vult een of meerdere relevante datavelden niet in.
+   3. Gebruiker klikt op "Toevoegen".
+   4. Systeem geeft foutmelding "Ontbrekende data" met een rood kader om de betreffende velden.
 
 ### Aanpassen sensoren
 
@@ -183,23 +231,36 @@ De lijst met ingestelde sensoren is zichtbaar en doorzoekbaar.
 
 
 
-**Stakeholders and interests:**
+**Stakeholders and interests:** 
 
 
 
 **Preconditions:**
 
-
+Het systeem is aan, volledig opgestart en er bestaat tenminste 1 sensor.
 
 **Success guarantee:**
 
-
+De gebruiker kan de gegevensvelden van een sensor uit de lijst aanpassen.
 
 **Main success scenario:**
 
-
+1. Gebruiker opent configuratiepaneel.
+2. Systeem toont lijst met sensoren.
+3. Gebruiker selecteert sensor.
+4. Gebruiker klikt op "Aanpassen".
+5. Systeem toont gegevensveld van betreffende sensor.
+6. Gebruiker past gegevens aan.
+7. Gebruiker klikt op "Opslaan".
+8. Systeem werkt lijst van sensoren bij.
 
 **Extensions:**
+
+1. Er ontbreekt data (naam, IP-adres of datatype):
+   1. Stappen 1-4 worden uitgevoerd.
+   2. Gebruiker vult een of meerdere relevante datavelden niet in.
+   3. Gebruiker klikt op "Toevoegen".
+   4. Systeem geeft foutmelding "Ontbrekende data" met een rood kader om de betreffende velden.
 
 ### Verwijderen sensoren
 
