@@ -34,7 +34,7 @@ a4 -- uc8
 
 a2 --- rect2
 
-uc7 --> uc9 : include
+uc7 --> uc9 : <<include>>
 
 uc9 - a5
 
