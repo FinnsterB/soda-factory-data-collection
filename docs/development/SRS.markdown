@@ -306,7 +306,7 @@ De gebruiker kan een sensor verwijderen uit de lijst.
    3. Gebruiker klikt op "Verwijderen".
    4. Succes scenario stappen 5 t/m 7 worden uitgevoerd.
 
-### Inzien meetwaarden realtime
+### Inzien meetwaarden (realtime: laatst uitgelezen waarde)
 
 **Level:** Informatietoegang
 
