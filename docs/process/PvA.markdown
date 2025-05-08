@@ -217,7 +217,7 @@ In de onderstaande tabel staan gebeurtenissen met betrekking tot inleverdeadline
 | 14-4  | Start inceptiefase                                           | Op deze dag begint de inceptiefase en zal ik beginnen met werken aan het plan van aanpak. |
 | 25-4  | Inleveren plan van aanpak(concept)                           | Deadline inleveren plan van aanpak. Hierna wordt er feedback op gegeven en een advies over de opdracht. |
 | 28-4  | Meivakantie                                                  | Op deze dag begint de meivakantie voor school. De docenten zullen niet beschikbaar zijn. |
-| 12-5  | Start elaboratiefase                                         | Op deze dag begint de elaboratiefase en begin ik met de onderzoeken. |
+| 8-5   | Start elaboratiefase                                         | Op deze dag begint de elaboratiefase en begin ik met de onderzoeken. |
 | 16-5  | Milestone: Keuze database/platform gemaakt.                  | Ik streef ernaar om op deze dag dit onderzoek af te ronden en het resultaat te overleggen. |
 | 23-5  | Inleveren plan van aanpak(definitief)                        | Deadline inleveren definitieve versie plan van aanpak.       |
 | 30-5  | Milestone: Tussenlaag IO-link Profinet                       | Ik streef ernaar om op deze dag dit onderzoek af te ronden en een werkend voorbeeld te hebben. Dit is nog geen prototype. |

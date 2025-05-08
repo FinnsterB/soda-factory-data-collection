@@ -278,17 +278,33 @@ De gebruiker kan de gegevensvelden van een sensor uit de lijst aanpassen.
 
 **Preconditions:**
 
-
+Het systeem is aan, volledig opgestart en er bestaat tenminste 1 sensor.
 
 **Success guarantee:**
 
-
+De gebruiker kan een sensor verwijderen uit de lijst.
 
 **Main success scenario:**
 
-
+1. Gebruiker opent configuratiepaneel.
+2. Systeem toont lijst met sensoren.
+3. Gebruiker selecteert sensor.
+4. Gebruiker klikt op "Verwijderen".
+5. Systeem toont dialoog "Weet u het zeker?".
+6. Gebruiker klikt op "Ja".
+7. Systeem werkt lijst met sensoren bij.
 
 **Extensions:**
+
+1. De gebruiker klikt per abuis op "Verwijderen".
+   1. Succes scenario stappen 1-5 worden uitgevoerd.
+   2. Gebruiker klikt op "Nee".
+   3. Systeem werkt lijst met sensoren *niet* bij.
+2. De gebruiker wil meerdere sensoren tegelijk verwijderen.
+   1. Succes scenario stappen 1 en 2 worden uitgevoerd.
+   2. Gebruiker selecteert verschillende sensoren.
+   3. Gebruiker klikt op "Verwijderen".
+   4. Succes scenario stappen 5 t/m 7 worden uitgevoerd.
 
 ### Inzien meetwaarden realtime
 
@@ -402,7 +418,7 @@ De gebruiker kan de gegevensvelden van een sensor uit de lijst aanpassen.
 
 **Extensions:**
 
-### Instellen analyseplatform
+### Instellen analyseplatform(NA ONDERZOEK DATABASE/PLATFORM)
 
 **Level:** IIOT-integratie
 
