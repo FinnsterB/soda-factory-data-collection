@@ -52,36 +52,30 @@ Daarnaast beschikken de IO-link sensoren over preciezere data: 2, 4 of 8 bytes. 
 
 ## Deelvraag 2: Hoeveel data moet er worden opgeslagen?
 
-Wanneer ik een IO-link master van de Soda Factory benader via zijn IoT-Port, dan geeft deze een handige webpagina terug met wat globale waarden: Wat voor sensor zit er op welke poort en wat is de cyclustijd van die port. Dit blijkt gemiddeld zo'n 5ms te zijn. In het ideale geval kan ik dus ongeveer elke 5ms data ophalen van de IO-Link masters. Stel dat ik alle data wil opslaan, dan moet ik 200x per seconde alle sensorwaarden van de hele installatie wegschrijven. 
+Wanneer ik een IO-link master van de Soda Factory benader via zijn IoT-Port, dan geeft deze een handige webpagina terug met wat globale waarden: Wat voor sensor zit er op welke poort en wat is de cyclustijd van die port. Dit blijkt gemiddeld zo'n 5ms te zijn. In het ideale geval kan ik dus ongeveer elke 5ms data ophalen van de IO-Link masters. 
+
+Stel dat ik alle data wil opslaan, dan moet ik 200x per seconde alle sensorwaarden van de hele installatie wegschrijven. Dat betekent dat 113*200, oftewel 22600 writes per *seconde* in het ergste geval. Wanneer ik de sensorwaarden echter opspaar en groepeer dan kan dit aantal verminderd worden.
 
 
 
 ## Deelvraag 3: Welke soorten opslag zijn gemaakt voor het soort data en de hoeveelheid ervan?
 
-Aangezien het doel een historische database is voor sensorwaarden is het handig om een "time series database" te gebruiken. De website [db-engines.com]() heeft een uitgebreide lijst waarin verschillende databases staan. Deze lijst is vooral op populariteit gesorteerd(*DB-Engines Ranking*, z.d.), wat voor mijn doeleind niet perse relevant is, maar wel handig. Hoe populairder een soort database is, hoe meer online ondersteuning er ook voor is. De populariteit zal dus als tie-breaker functioneren. 
+Aangezien de database gebruikt wordt voor sensorwaarden in de tijd is het handig om een "time series database" te gebruiken(Foote, 2022). De website [db-engines.com](https://db-engines.com) heeft een uitgebreide lijst waarin verschillende databases staan. Deze lijst is vooral op populariteit gesorteerd(*DB-Engines Ranking*, z.d.), wat voor mijn doeleind niet perse relevant is, maar wel handig. Hoe populairder een soort database is, hoe meer online ondersteuning er ook voor is. De populariteit zal dus als tie-breaker functioneren. 
+
+Uit mijn vooronderzoek blijkt dat er een Profinet driver voor de real-time Linux kernel is van [Siemens](https://support.industry.siemens.com/cs/document/109974538/profinet-driver-v3-2-pnconfiglib-v1-5-download-software-package?dti=0&lc=en-NL). Deze is in C++ geimplementeerd, en gebruikt de Real Time Linux-kernel. Daarom zijn een C of C++ API en Linux-ondersteuning vereist voor de database. Zo kan de hele codebase van het project C++ blijven en dat maakt het builden en testen makkelijker. Verder moet de database een open source licentie hebben zodat ik hem mag gebruiken.
 
 De volgende "time series databases" zijn beschikbaar en zijn de populairste:
 
-| Naam            | Ondersteunt C++ | Ondersteunt Linux | Open source licentie |
-| --------------- | --------------- | ----------------- | -------------------- |
-| InfluxDB        | Nee             | Ja                | Ja                   |
-| **Prometheus**  | Ja              | Ja                | Ja                   |
-| Kdb             | Ja              | Ja                | Nee                  |
-| Graphite        | Nee             | Ja                | Ja                   |
-| **TimescaleDB** | Ja              | Ja                | Ja                   |
-| **QuestDB**     | Ja              | Ja                | Ja                   |
+| Naam            | Ondersteunt C/C++ API | Ondersteunt Linux | Open source licentie |
+| --------------- | --------------------- | ----------------- | -------------------- |
+| InfluxDB        | Nee                   | Ja                | Ja                   |
+| Prometheus      | Nee                   | Ja                | Ja                   |
+| Kdb             | Ja                    | Ja                | Nee                  |
+| Graphite        | Nee                   | Ja                | Ja                   |
+| **TimescaleDB** | Ja                    | Ja                | Ja                   |
+| QuestDB         | Nee                   | Ja                | Ja                   |
 
-De vetgedrukte databases hebben bij alle criteria een "Ja" en zijn dus allen geschikt.
-
-## Criteria en rationale
-
-
-
-
-
-
-
-## Resultaten
+TimescaleDB komt hieruit als enige die aan alle eisen voldoet. Dit is een extentie op PostgreSQL en biedt dezelfde C interface als PostgreSQL waardoor het goed bruikbaar is voor mijn project. TimescaleDB biedt een aantal optimalisaties voor het opslaan en ophalen van timestamped data.
 
 
 
@@ -90,5 +84,7 @@ De vetgedrukte databases hebben bij alle criteria een "Ja" en zijn dus allen ges
 
 
 ## Bronnen
+
+Foote, K. D. (2022, 15 september). *A Guide to Time Series Databases*. DATAVERSITY. https://www.dataversity.net/a-guide-to-time-series-databases/
 
 *DB-Engines ranking*. (z.d.). DB-Engines. https://db-engines.com/en/ranking/time+series+dbms
