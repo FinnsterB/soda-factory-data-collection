@@ -4,9 +4,7 @@
 
 ## Inleiding
 
-In dit document licht ik mijn onderzoek naar een geschikte database toe. 
-
-
+In dit document licht ik mijn onderzoek naar een geschikte database toe. De [opdracht](../process/PvA.markdown#4-doelstelling-opdracht-en-op-te-leveren-resultaten-voor-het-bedrijf) staat beschreven in het PvA.
 
 
 
@@ -34,7 +32,52 @@ Voor deelvraag 3 gebruik ik available product analysis.
 
 Voor de hoofdvraag gebruik ik de antwoorden op de deelvragen en multi-criteria decision making.
 
+
+
+## Deelvraag 1: Wat voor data moet er worden opgeslagen?
+
+Deze vraag vereist zowel op het gebied van eisen een antwoord, als op het praktische vlak. Om de eis van dit onderdeel vast te stellen moet ik weten of mijn systeem pre-processing op de data moet uitvoeren. 
+
+Stel dat er een heel simpel systeem is dat bestaat uit een watertoevoer met 1 klep met 1 flowsensor. Wanneer de klep aangestuurd wordt om open te gaan, dan duurt het heel even voordat het water gaat stromen. Deze tussentijd is relevant voor de stakeholder. Moet ik dan de tussentijd opslaan en om welke klep en sensor het gaat(pre-processing), of gewoon timestamped data?
+
+De stakeholder heeft gekozen voor de tweede methode. De verwerking en interpretatie van de data wordt op een latere plek in de sequentie gedaan. Op deze manier gaat er geen data verloren die wellicht alsnog handig was. 
+
+Praktisch gezien: Welke sensoren zitten er op de installatie? Hiervoor heb ik de IO-lijst die bij het PLC-programmeren is gebruikt. Hierop staat van alle sensoren en actuatoren wat voor merk, welk model en wat voor datatype(hoeveelheid bytes) ze hebben. 
+
+Volgens de IO-lijst zijn de meeste sensoren en actuatoren aangestuurd of uitgelezen met een binaire waarde. Dit zijn de kleppen en hun feedbacksensoren, levelsensoren voor vloeistof in de tanks en de pompen. In totaal zijn dit 93 bits. 
+
+Daarnaast beschikken de IO-link sensoren over preciezere data: 2, 4 of 8 bytes. Dit zijn 20 sensoren in de installatie. Deze sensoren meten temperatuur, flowrate of druk. Hoeveel opslag dit uiteindelijk gebruikt hangt af van de indeling van de DB.
+
+
+
+## Deelvraag 2: Hoeveel data moet er worden opgeslagen?
+
+Wanneer ik een IO-link master van de Soda Factory benader via zijn IoT-Port, dan geeft deze een handige webpagina terug met wat globale waarden: Wat voor sensor zit er op welke poort en wat is de cyclustijd van die port. Dit blijkt gemiddeld zo'n 5ms te zijn. In het ideale geval kan ik dus ongeveer elke 5ms data ophalen van de IO-Link masters. Stel dat ik alle data wil opslaan, dan moet ik 200x per seconde alle sensorwaarden van de hele installatie wegschrijven. 
+
+
+
+## Deelvraag 3: Welke soorten opslag zijn gemaakt voor het soort data en de hoeveelheid ervan?
+
+Aangezien het doel een historische database is voor sensorwaarden is het handig om een "time series database" te gebruiken. De website [db-engines.com]() heeft een uitgebreide lijst waarin verschillende databases staan. Deze lijst is vooral op populariteit gesorteerd(*DB-Engines Ranking*, z.d.), wat voor mijn doeleind niet perse relevant is, maar wel handig. Hoe populairder een soort database is, hoe meer online ondersteuning er ook voor is. De populariteit zal dus als tie-breaker functioneren. 
+
+De volgende "time series databases" zijn beschikbaar en zijn de populairste:
+
+| Naam            | Ondersteunt C++ | Ondersteunt Linux | Open source licentie |
+| --------------- | --------------- | ----------------- | -------------------- |
+| InfluxDB        | Nee             | Ja                | Ja                   |
+| **Prometheus**  | Ja              | Ja                | Ja                   |
+| Kdb             | Ja              | Ja                | Nee                  |
+| Graphite        | Nee             | Ja                | Ja                   |
+| **TimescaleDB** | Ja              | Ja                | Ja                   |
+| **QuestDB**     | Ja              | Ja                | Ja                   |
+
+De vetgedrukte databases hebben bij alle criteria een "Ja" en zijn dus allen geschikt.
+
 ## Criteria en rationale
+
+
+
+
 
 
 
@@ -43,3 +86,9 @@ Voor de hoofdvraag gebruik ik de antwoorden op de deelvragen en multi-criteria d
 
 
 ## Conclusie
+
+
+
+## Bronnen
+
+*DB-Engines ranking*. (z.d.). DB-Engines. https://db-engines.com/en/ranking/time+series+dbms
