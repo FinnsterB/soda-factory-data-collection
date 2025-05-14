@@ -79,6 +79,8 @@ TimescaleDB komt hieruit als enige die aan alle eisen voldoet. Dit is een extent
 
 
 
+
+
 ## Conclusie
 
 

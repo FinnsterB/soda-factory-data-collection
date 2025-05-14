@@ -1,0 +1,21 @@
+@startuml profinet-io-link-diagram
+
+skinparam componentStyle rectangle
+skinparam defaultTextAlignment center
+
+' Devices
+component "Siemens PLC" as PLC
+component "IO-Link Master" as IOlink
+package "IO-Link Apparaten" {
+  component "Sensor 1" as S1
+  component "Sensor 2" as S2
+  component "Sensor 3" as S3
+}
+
+' Connections
+PLC -- IOlink : Profinet\nCyclische data
+IOlink -- S1 : IO-Link
+IOlink -- S2 : IO-Link
+IOlink -- S3 : IO-Link
+
+@enduml
