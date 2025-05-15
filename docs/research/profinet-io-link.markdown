@@ -8,7 +8,9 @@ Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de in
 
 ![](../../out/docs/research/profinet-io-link-diagram/profinet-io-link-diagram.png)
 
-De sensordata wordt cyclisch opgehaald van de IO-link master. Voor dit onderzoek moet ik er dus achter komen hoe ik aan die sensordata kan komen. Welke interfaces bieden de IO-Link masters en kan ik een computer op de Profinet-bus aansluiten?  De onderzoeksvragen worden beantwoord door middel van de HBO-ICT research methods. 
+
+
+De sensordata wordt cyclisch opgehaald van de IO-link master. Voor dit onderzoek moet ik er dus achter komen hoe ik aan die sensordata kan komen. Profinet ondersteunt daisy-chainen van apparaten. Welke interfaces bieden de IO-Link masters en kan ik een computer op de Profinet-bus aansluiten?  De onderzoeksvragen worden beantwoord door middel van de HBO-ICT research methods. 
 
 ## Hoofdvraag en deelvragen
 
@@ -36,8 +38,17 @@ Alle cyclische data die de PLC gebruikt gaat over Profinet. Profinet gebruikt da
 
 ## Deelvraag 3: Hoe onderschep ik data die over Profinet verstuurd wordt?
 
-Profinet gebruikt Ethernet en TCP/IP. TCP/IP wordt echter alleen gebruikt voor configuratieberichten die bij elke start-up verstuurd worden om het netwerk te configureren. De cyclische data tussen de devices en de PLC gebruikt het Profinet RT protocol. Dit protocol gebruikt geen IP, alleen de MAC-adressen van de apparaten en kan dus alleen gelezen worden door apparaten op het netwerk die het juiste MAC-adres hebben. Door te testen met Wireshark kon ik door aan de switch in de regelkast aan te sluiten en het netwerk te sniffen *geen* Profinet RT pakketten zien. Alleen zo nu en dan een PN-DCP of een PN-PTCP bericht, die gebruikt worden om het netwerk in te stellen, en om Delay_Request te sturen. Deze berichten zijn dus niet interessant voor mij omdat ze geen data bevatten. 
+Profinet gebruikt Ethernet en TCP/IP. TCP/IP wordt echter alleen gebruikt voor configuratieberichten die bij elke start-up verstuurd worden om het netwerk te configureren. De cyclische data tussen de devices en de PLC gebruikt het Profinet RT protocol. Dit protocol gebruikt geen IP, alleen de MAC-adressen van de apparaten en kan dus alleen gelezen worden door apparaten op het netwerk die het juiste MAC-adres hebben. Door te testen met Wireshark kon ik door aan de switch in de regelkast aan te sluiten:
 
-Om wel aan de Profinet RT berichten te komen moet ik ervoor zorgen dat deze berichten bij mijn computer komen, ongeacht het verschillende MAC-adres. Hiervoor zat ik te denken aan een Ethernet TAP, die al het verkeer naar mijn laptop doorstuurt. Dit is echter niet zo'n heel handig iets, deze zijn erg duur en gespecialiseerd. In plaats van de TAP kan ik een *managed* switch gebruiken die de mogelijkheid biedt voor port-mirroring. Bij port-mirroring worden alle pakketten gekopieerd en uit een zogenaamde *monitor* port gestuurd. Een apparaat op die port kan dus al het netwerkverkeer zien, zelfs als het non-IP verkeer betreft. 
+![](Profinet_network.png)
 
-  
+Door op deze manier het netwerk te sniffen kan ik echter *geen* Profinet RT pakketten zien. Alleen zo nu en dan een PN-DCP of een PN-PTCP bericht, die gebruikt worden om het netwerk in te stellen, en om Delay_Request te sturen. Deze berichten zijn niet interessant voor mij omdat ze geen data bevatten. 
+
+Om wel aan de Profinet RT berichten te komen moet ik ervoor zorgen dat deze berichten bij mijn computer komen, ongeacht het verschillende MAC-adres. Hiervoor zat ik te denken aan een Ethernet TAP(Test Access Point), die al het verkeer naar mijn laptop doorstuurt. Deze zijn erg duur en gespecialiseerd, dus niet heel realistisch om voor dit project te gebruiken. In plaats van de TAP kan ik een *managed* switch gebruiken die de mogelijkheid biedt voor port-mirroring. Bij port-mirroring worden alle pakketten gekopieerd en uit een zogenaamde *monitor* port gestuurd. Een apparaat op die port kan dus al het netwerkverkeer zien, zelfs als het non-IP verkeer betreft. 
+
+Voor deze test heeft Marc een managed switch ter beschikking gesteld. Door deze tussen de PLC en de rest van het netwerk aan te sluiten en de ports te mirroren naar de monitor-port moet het mogelijk zijn om de Profinet RT pakketten te zien ondanks dat mijn MAC-adres anders is. Dit zit als volgt aangesloten:
+
+![](Profinet_network_managed.png)
+
+Met deze testopstelling lukt het om Profinet RT pakketten te onderscheppen. De IO-data is zichtbaar in een blok van 40 bytes, alleen is deze nog niet ingedeeld. Welke data bij welke IO-Link sensor hoort kan ik nog niet vaststellen. 
+
