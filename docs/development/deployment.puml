@@ -1,0 +1,35 @@
+@startuml Deployment_diagram
+
+node "PLC" {
+  
+}
+
+node "Port Mirroring Switch" as PM
+
+node "Analyser" {
+    component "Profinet Sniffer" as PS
+    component "Data Handler" as DH
+    component "GSDML Parser" as GP
+    component "User Interface" as UI
+    database "Device Data Storage" as DB1
+    database "Historical IO Data" as DB2
+}
+
+node "IO-Link Master" as IOlink {
+  component "IO-Link Master" as IOM
+}
+node "IO-Link Device" as Device{
+}
+' Connections
+PLC -- PM : Profinet\nCyclische data
+PM --"0..*\n\n" IOM : Profinet\nCyclische data
+PM --> PS : (Mirrored)Profinet\nCyclische data
+IOM --"1..8" Device : IO-Link
+
+DB2 -0)- DH
+DB2 -0)- UI
+DB1 -0)- UI
+DB1 -0)- GP
+PS -0)- DH : Queue
+DH -0)- UI
+@enduml
