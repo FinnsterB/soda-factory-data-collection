@@ -6,6 +6,8 @@ node "PLC" {
 
 node "Port Mirroring Switch" as PM
 
+node "Profinet Device" as PD
+
 node "Analyser" {
     component "Profinet Sniffer" as PS
     component "Data Handler" as DH
@@ -25,6 +27,7 @@ PLC -- PM : Profinet\nCyclische data
 PM --"0..*\n\n" IOM : Profinet\nCyclische data
 PM --> PS : (Mirrored)Profinet\nCyclische data
 IOM --"1..8" Device : IO-Link
+PD- PM : Profinet\nCyclische data
 
 DB2 -0)- DH
 DB2 -0)- UI

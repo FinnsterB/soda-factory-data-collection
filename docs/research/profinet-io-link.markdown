@@ -76,13 +76,29 @@ Met deze testopstelling lukt het om Profinet RT pakketten te onderscheppen. De I
 
 ## Deelvraag 5: Hoe haal ik de vereiste sensordata uit de Profinet-pakketten?
 
+#### Profinet-RT pakketten
+
 De opgehaalde Profinet RT-pakketten zijn opgebouwd uit de eerste 2 lagen van het OSI-model(Bowne, 2019). De andere Profinet-pakketten gebruiken wel TCP/IP. Om de PLC met alle andere apparaten te laten communiceren is een apparaatconfiguratie vereist. De PLC moet namelijk ook weten welke bytes van ieder gegeven Profinet-bericht bij welke sensor horen. Deze configuratie wordt gedaan middels een GSDML-bestand, ook wel GSD(General Station Description) genoemd. Deze bestanden zijn voor elk Profinet apparaat beschikbaar, en worden dus gebruikt om de PLC in te stellen.
 
-Wireshark heeft een ingebouwde Profinet-decoder die ook gebruik maakt van de GSDML-bestanden. Wanneer de GSDML bestanden gebruik die bij de IO-Link masters horen dan kan ik de data inderdaad per sensor zien. Wanneer ik dit vergelijk met dezelfde sensor opgevraagd met de IoT interface dan komt de data overeen:
+Wireshark heeft een ingebouwde Profinet-decoder die ook gebruik maakt van de GSDML-bestanden. Wanneer ik de GSDML bestanden gebruik die bij de IO-Link masters horen dan kan ik de data inderdaad per sensor zien. Wanneer ik dit vergelijk met dezelfde sensor opgevraagd met de IoT interface dan komt de data overeen:
 
 ![](WiresharkvsIoT.png)
 
-De sensordata zit verstopt in deze bitjes. Gek genoeg zit er in het Profinet-pakket nog een byte achteraan, "a0", met onbekende functie. Wanneer dit consistent is, kan ik die gewoon achterwege laten bij het ophalen van data. Dit moet nog getest worden. 
+De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakket nog een byte achteraan, "a0", met onbekende functie. Wanneer dit consistent is, kan ik die gewoon achterwege laten bij het ophalen van data. Dit moet nog getest worden. Bij het ventieleiland is dit niet het geval:
+
+![](first-valve-off.png)
+
+​							Bovenstaande afbeelding heeft alle kleppen uit.
+
+![](first-valve-on.png)
+
+​							Bovenstaande afbeelding heeft de eerste klep aan.
+
+
+
+#### Data-offsets
+
+Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een soort handshake plaats waarin wat relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
 
 
 
