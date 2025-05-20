@@ -100,6 +100,10 @@ De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakke
 
 Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een soort handshake plaats waarin wat relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
 
+![](Profinet_DCP_CM.png)
+
+
+
 
 
 ## Bronnen

@@ -104,6 +104,8 @@ conn = psycopg2.connect(
     password="123"
 )
 writes = 0
+
+#CTRL_C handler that closes DB connection peacefully and reports the amount of writes.
 def quit(signal_number,frame):
     conn.close()
     print("Writes: " + str(writes))
