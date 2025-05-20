@@ -4,11 +4,7 @@
 
 ## Inleiding
 
-In dit document licht ik mijn onderzoek naar een geschikte database toe. De [opdracht](../process/PvA.markdown#4-doelstelling-opdracht-en-op-te-leveren-resultaten-voor-het-bedrijf) staat beschreven in het PvA.
-
-
-
-IP van IO-link master: 169.254.254.160.
+In dit document licht ik mijn onderzoek naar een geschikte database toe. De [opdracht](../process/PvA.markdown#4-doelstelling-opdracht-en-op-te-leveren-resultaten-voor-het-bedrijf) staat beschreven in het PvA. Uiteindelijk wordt dit de grondslag van het database-gedeelte in mijn SDD. Ik beantwoord de deelvragen en de hoofdvragen en ik doe praktische tests om de uitkomst te valideren. 
 
 ## Onderzoeksvraag
 
@@ -160,7 +156,7 @@ In de bovenstaande code ziet de loop er nu iets anders uit. Ik groepeer de waard
 
 Deze test levert 428,300 writes in 20 seconden, 21,415 per seconde. Dat is dicht genoeg in de buurt om de test succesvol te benoemen. Het samenvoegen van writes kan natuurlijk verder toegepast worden dan per unieke sensor. Na deze 20 seconden schrijven is de grootte van de database 35MB. Dit komt neer op 157GB per 24 uur. De opgeslagen data is nu wel 100 keer een DOUBLE PRECISION, die 64 bits lang is. In de praktijk is er per sensor maximaal een 32 bit waarde. Dit kan iets schelen, maar ik vermoed dat er al gauw gekeken moet worden naar nadere optimalisatie. Naarmate data ouder wordt kan ervoor gekozen worden om dit bijvoorbeeld langzaam weg te gooien (*Timescale Documentation | Data Retention*, z.d.). 
 
-Ook kan de stakeholder zich wellicht afvragen of het nodig is om de data 200x per seconde op te slaan. 
+Ook kan de stakeholder zich wellicht afvragen of het nodig is om de data 200x per seconde op te slaan. Dit is nooit een harde eis geweest, slechts een aanname op basis van de cyclustijd van de IO-Link masters. Gegeven genoeg processorkracht en opslag is het dus mogelijk om dit te doen, dit voorbeeld draait namelijk op mijn bijna 6 jaar oude middenklasse laptop. 
 
 ## Conclusie
 
