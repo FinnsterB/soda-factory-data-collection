@@ -7,3 +7,4 @@ SRS: [docs/development/SRS.markdown](docs/development/SRS.markdown)<br>
 SDD: [docs/development/SDD.markdown](docs/development/SDD.markdown)<br>
 
 Onderzoek database/platform: [docs/research/database.markdown](docs/research/database.markdown)<br>
+Onderzoek profinet/IO-Link: [docs/research/profinet-io-link.markdown](docs/research/[profinet-io-link.markdown)<br>
