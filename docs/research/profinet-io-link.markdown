@@ -12,7 +12,7 @@
 
 ## Inleiding
 
-Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet, waarvan een aantal sensoren ook weer aan IO-Link Masters zitten. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Het systeem ziet er dan als volgt uit:
+Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet. Aan deze fieldbus zitten andere apparaten die door de PLC bestuurd en uitgelezen kunnen worden, waaronder IO-Link masters. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Het systeem ziet er dan als volgt uit:
 
 ![](../../out/docs/research/profinet-io-link-diagram/profinet-io-link-diagram.png)
 
@@ -101,6 +101,12 @@ De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakke
 Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een soort handshake plaats waarin wat relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
 
 ![](Profinet_DCP_CM.png)
+
+De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. Ook dat is een probleemscenario. 
+
+
+
+## Conclusie
 
 
 
