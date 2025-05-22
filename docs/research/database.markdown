@@ -162,7 +162,7 @@ Ook kan de stakeholder zich wellicht afvragen of het nodig is om de data 200x pe
 
 ## Conclusie
 
-Het antwoord op de hoofdvraag is dus TimescaleDB, met wat optimalisatie in de manier waarop ik de INSERT-statements groepeer. TimescaleDB blijkt snel genoeg te zijn voor het verwerken van de writes en biedt de juiste features om een goede keuze te zijn voor het project. Wel moet er gekeken worden naar opslag-optimalisatie.
+Het antwoord op de hoofdvraag is dus TimescaleDB, met wat optimalisatie in de manier waarop ik de INSERT-statements groepeer. TimescaleDB blijkt snel genoeg te zijn voor het verwerken van de writes en biedt de juiste features om een goede keuze te zijn voor het project. Wel moet er gekeken worden naar opslag-optimalisatie. 
 
 ## Bronnen
 

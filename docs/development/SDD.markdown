@@ -45,3 +45,8 @@ Deze database bevat de historische IO-data van de hele installatie. De sensoren 
 
 **GSDML Parser**
 
+De GSDML Parser moet de Profinet-configuratie bestanden verwerken en daaruit halen hoe de Profinet-apparaten hun berichten sturen. Dit is cruciaal voor het uitvinden waar de juiste bytes in de Profinet-pakketten verstopt zitten. De gebruiker van het systeem moet deze bestanden aanleveren, ze zijn door de fabrikanten gemaakt. Deze bestanden zijn ook nodig voor het PLC-programmeren in TIA-portal van Siemens. De benodigde data wordt in de Device Data Storage opgeslagen.
+
+**User Interface**
+
+De User Interface biedt visualisatie aan de gebruiker. Deze visualisatie biedt de mogelijkheid om verschillende sensoren met elkaar te vergelijken en verschillende tijdpunten met elkaar te vergelijken. 
