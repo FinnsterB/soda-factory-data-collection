@@ -84,7 +84,7 @@ Wireshark heeft een ingebouwde Profinet-decoder die ook gebruik maakt van de GSD
 
 ![](WiresharkvsIoT.png)
 
-De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakket nog een byte achteraan, "a0", met onbekende functie. Wanneer dit consistent is, kan ik die gewoon achterwege laten bij het ophalen van data. Dit moet nog getest worden. Bij het ventieleiland is dit niet het geval:
+De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakket nog een byte achteraan, "a0". Dit is de Port Qualifier Information (PQI) en die biedt 8 bits aan diagnostische data over het betreffende IO-Link port. Bij het ventieleiland is dit niet het geval:
 
 ![](first-valve-off.png)
 
@@ -98,11 +98,13 @@ De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakke
 
 #### Data-offsets
 
-Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een soort handshake plaats waarin wat relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
+Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een handshake plaats waarin relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
 
 ![](Profinet_DCP_CM.png)
 
-De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. Ook dat is een probleemscenario. 
+De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert echter wel de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. 
+
+
 
 
 
