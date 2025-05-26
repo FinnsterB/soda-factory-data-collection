@@ -12,7 +12,7 @@
 
 ## Inleiding
 
-Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet. Aan deze fieldbus zitten andere apparaten die door de PLC bestuurd en uitgelezen kunnen worden, waaronder IO-Link masters. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Het systeem ziet er dan als volgt uit:
+Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet, alle sensoren en actuatoren (apparaten) communiceren hiermee met de PLC. Naast sensoren en actuatoren zitten er IO-Link masters aan. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Dit systeem ziet er dan als volgt uit:
 
 ![](../../out/docs/research/profinet-io-link-diagram/profinet-io-link-diagram.png)
 
@@ -33,20 +33,22 @@ Om daar achter te komen moet ik de volgende deelvragen beantwoorden:
 
 
 
-## Deelvraag 2: Over welke interfaces beschikken de apparaten?
+## Deelvraag 1: Over welke interfaces beschikken de apparaten?
 
-De IFM AL1303 en AL1900 IO-Link masters zijn hoofdzakelijk gemaakt om met Profinet te communiceren maar beschikken ook over een IoT port die een REST API ontsluit(*AL1303 - IO-Link Master met Profinet-interface - Ifm*, z.d.). Deze REST API biedt toegang tot de precieze sensorwaarden en eventuele digitale in- en uitgangen. 
+De IFM AL1303 en AL1900 IO-Link masters zijn hoofdzakelijk gemaakt om met Profinet te communiceren maar beschikken ook over een IoT port die een REST API ontsluit (*AL1303 - IO-Link Master met Profinet-interface - Ifm*, z.d.). Deze REST API biedt toegang tot de precieze sensorwaarden en eventuele digitale in- en uitgangen. 
 
-Nadeel is dat deze IoT ports per master beschikbaar zijn, dus dat er naar iedere master nog een kabel gelegd moet worden. De kabels moeten allemaal naar een switch en dan pas kunnen alle IO-Link masters bereikt worden. Dan heb ik alleen de waarden uit de IO-Link masters, en dus geen status van het ventieleiland, die alleen via Profinet communiceert.
+Nadeel is dat deze IoT ports per master beschikbaar zijn, dus dat er naar iedere master nog een kabel gelegd moet worden. De kabels moeten allemaal naar een switch en dan pas kunnen alle IO-Link masters bereikt worden. Dan heb ik alleen de waarden uit de IO-Link masters, en dus geen status van het ventieleiland, die alleen via Profinet communiceert. 
+
+Ook zit er een IO-Controller in de regelkast. Veel PLC-gestuurde apparaten zijn aangestuurd met een digitaal signaal en kunnen dus *aan* of *uit* zijn. In de Soda Factory worden alle pompen en verwarmingselementen op deze manier aangestuurd. Ze hebben een output nodig om ze aan te zetten en een input voor het feedbacksignaal. De IO-Controller wordt, net als het ventieleiland alleen cyclisch door Profinet bestuurd. 
 
 Er zijn dus twee beschikbare interfaces:
 
-- Profinet
-- IoT-Port met REST interface
+- Profinet (Alle apparaten, alleen cyclisch)
+- IoT-Port met REST interface (Alleen de IO-Link masters, ook buiten cyclus)
 
 
 
-## Deelvraag 3: Welke interfaces zijn bruikbaar?
+## Deelvraag 2: Welke interfaces zijn bruikbaar?
 
 De IoT ports zijn voor het doel wat ik voor ogen heb niet geheel geschikt; ze vereisen namelijk aanpassingen aan de installatie. Er moet een extra switch in komen en er moet UTP kabel gelegd worden naar alle IO-Link masters. Daarnaast mis ik wat data, omdat sommige onderdelen zoals het ventieleiland en enkele relais aangestuurd worden met Profinet. Ook deze data heb ik uiteindelijk nodig voor analyse, vandaar dat ik liever niet voor deze optie kies.
 
@@ -56,7 +58,7 @@ Een manier om data uit te lezen is door een Profinet *supervisor* te implementer
 
 Om zonder Profinet-driver alsnog aan de cyclische data te komen kan ik de Profinet-pakketten onderscheppen en zelf parsen. In principe laat ik het bestaande netwerk hiermee intact. 
 
-## Deelvraag 4: Hoe onderschep ik pakketten die over Profinet verstuurd worden?
+## Deelvraag 3: Hoe onderschep ik pakketten die over Profinet verstuurd worden?
 
 Profinet gebruikt Ethernet en TCP/IP. TCP/IP wordt echter alleen gebruikt voor configuratieberichten die bij elke start-up verstuurd worden om het netwerk te configureren. De cyclische data tussen de devices en de PLC gebruikt het Profinet RT protocol. Dit protocol gebruikt geen IP, alleen de MAC-adressen van de apparaten en kan dus alleen gelezen worden door apparaten op het netwerk die het juiste MAC-adres hebben. Door te testen met Wireshark kon ik door aan de switch in de regelkast aan te sluiten:
 
@@ -74,7 +76,7 @@ Met deze testopstelling lukt het om Profinet RT pakketten te onderscheppen. De I
 
 ![](40-bytes.png)
 
-## Deelvraag 5: Hoe haal ik de vereiste sensordata uit de Profinet-pakketten?
+## Deelvraag 4: Hoe haal ik de vereiste sensordata uit de Profinet-pakketten?
 
 #### Profinet-RT pakketten
 
@@ -104,13 +106,37 @@ Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en
 
 De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert echter wel de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. 
 
+## Test
 
+### Testomgeving
+
+Om het lezen van Profinet te testen heb ik een testprogramma geschreven dat de Profinet-pakketten ontvangt en uitleest. Voor de rest van dit onderzoek heb ik een grote hoeveelheid pakketten opgeslagen met Wireshark. Deze bevatten gewone databerichten maar ook configuratieberichten. Met de tool TCPReplay kan ik deze pakketten opnieuw over mijn netwerkinterface versturen. Hiervoor gebruik ik de loopback-interface van mijn laptop. Zo kan ik de software die ik schrijf testen zonder elke keer de Soda Factory opnieuw aan te zetten. Mijn collega-afstudeerder vindt dit ook wenselijk aangezien hij actief bezig is met de installatie. 
+
+### Testprogramma
+
+Het testprogramma gebruikt Tins, een library die het sniffen van pakketten toestaat. Doorgaans gebruikt men hiervoor Pcap, maar omdat dit een testprogramma is dat snel geschreven moet worden is de simpele interface die Tins biedt handiger. 
+
+#### Cyclische data
+
+Als eerste test heb ik de voorbeeldcode van Tins gebruikt (*C++ Packet Sniffing And Crafting Library*, z.d.). Deze print van ieder pakketje het bron en bestemmings MAC-adres. Toen dat werkte, heb ik het programma langzaam uitgebreid om te filteren op Profinet-pakketten. Ook dit werkte, de MAC-adressen die nu langs kwamen hoorden allemaal bij de Profinet-apparaten die in de installatie zaten. Hierna ben ik gaan focussen op de payload. Door de offset van de verschillende sensorwaardes af te kijken in Wireshark kon ik deze ook op de databerichten van de IO-Link master *xg1* toepassen. Dit werkte ook, en daarmee heb ik bewezen dat het in elk geval mogelijk is om bij de cyclische Profinet-data te komen. Het programma staat in deze [commit](https://github.com/FinnsterB/soda-factory-data-collection/commit/2b9105272e2ada3c7230594f7efd52de361aa91d).
+
+#### Configuratiedata
+
+Als tweede test ben ik op de configuratieberichten gedoken die in deelvraag 4 voorbijkwamen. Met Wireshark heb ik vastgesteld hoe de *connect request* in elkaar zat. Bepaalde stukken van het bericht waren een vast aantal bytes lang en die kan ik dus overslaan om bij de benodigde data te komen. Andere delen hebben een variabele lengte die in een aantal bytes is meegegeven. Deze moet ik uitlezen en op de offset toepassen. Uiteindelijk heb ik de structuur van het bericht op een gegeneraliseerde manier opgeschreven: 
+
+ ![pn-connect](/home/finn/Documents/Afstudeerstage_MA_IT/soda-factory-data-collection/docs/research/pn-connect.jpg)
+
+​				Afbeelding: *Connect request uitgewerkt*
+
+De belangrijkste gegevens (offsets) staan in de IOCRBlockReq blokken. Als test heb ik deze uitgelezen met [een parser](https://github.com/FinnsterB/soda-factory-data-collection/commit/7fe3a5738e4bc4660ebb0f8553cd060a87ccef05) die ik bij het testprogramma heb gebouwd. Hiermee is het tot dusver gelukt de data-offsets van alle verschillende apparaten op de Soda Factory uit te lezen. Op den duur kan deze data gebruikt worden om het systeem automatisch te configureren. 
+
+Deze parser kan overigens nog niet alle data uit het bericht halen. De *ExpectedSubmoduleBlockReq* bevat nog *SubmoduleIdentNr*'s waarmee uit de GSDML-bestanden extra data gehaald worden. Bij de IO-Link masters kan bijvoorbeeld opgehaald hoe de ports zijn ingesteld, wat de namen van verschillende modules zijn en hoelang de data in de berichten is en hoe deze is opgebouwd. De parser heeft nu alleen de offsets van de data.
 
 
 
 ## Conclusie
 
-
+Dit onderzoek vormt in zijn huidige staat een proof-of-concept voor het hoofdzakelijke deel van het project. Het verkrijgen van de sensordata en het onderscheppen van de configuratieberichten is redelijkerwijs mogelijk en haalbaar voor het project. De vastgestelde software-onderdelen kunnen in het softwareontwerp worden opgenomen en verder aangescherpt. 
 
 
 
@@ -125,3 +151,5 @@ Bowne, M. (2019, 1 maart). *Network Reference Model - PROFINET University*. PROF
 *Industrial Operations X Documentation*. (z.d.). https://docs.industrial-operations-x.siemens.cloud/r/en-us/v3.2.0/profinet-driver/intro/licensing
 
 *AL1303 - IO-Link Master met Profinet-interface - ifm*. (z.d.). https://www.ifm.com/nl/nl/product/AL1303
+
+*C++ packet sniffing and crafting library*. (z.d.). https://libtins.github.io/
