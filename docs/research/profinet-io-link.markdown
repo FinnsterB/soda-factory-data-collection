@@ -106,6 +106,12 @@ Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en
 
 De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert echter wel de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. 
 
+## Test
+
+### Testomgeving
+
+Om het lezen van Profinet te testen heb ik een testprogramma geschreven dat de Profinet-pakketten ontvangt en uitleest. Voor de rest van dit onderzoek heb ik een grote hoeveelheid pakketten opgeslagen met Wireshark. Deze bevatten gewone databerichten maar ook configuratieberichten. Met de tool TCPReplay kan ik deze pakketten opnieuw over mijn netwerkinterface versturen. Hiervoor gebruik ik de loopback-interface van mijn laptop. Zo kan ik de software die ik schrijf testen zonder elke keer de Soda Factory opnieuw aan te zetten. Mijn collega-afstudeerder vindt dit ook wenselijk aangezien hij actief bezig is met de installatie. 
+
 
 
 
