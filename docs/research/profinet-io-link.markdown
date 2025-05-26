@@ -12,7 +12,7 @@
 
 ## Inleiding
 
-Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet, waarvan een aantal sensoren ook weer aan IO-Link Masters zitten. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Het systeem ziet er dan als volgt uit:
+Voor het ophalen van de vereiste data moet ik gegevens van de fieldbus van de installatie halen. De Soda Factory heeft als fieldbus Profinet, alle sensoren en actuatoren (apparaten) communiceren hiermee met de PLC. Naast sensoren en actuatoren zitten er IO-Link masters aan. Een IO-Link master is een Profinet-apparaat dat meerdere sensoren en actuatoren aanstuurt. Zo kan er in een installatie een groep sensoren en actuatoren die bij elkaar in de buurt zitten aangestuurd worden met een master, zodat er slechts korte kabels van de sensoren naar de master hoeven. Er loopt dan een enkele lange Profinet-kabel van de master naar de regelkast. Dit systeem ziet er dan als volgt uit:
 
 ![](../../out/docs/research/profinet-io-link-diagram/profinet-io-link-diagram.png)
 
@@ -35,14 +35,16 @@ Om daar achter te komen moet ik de volgende deelvragen beantwoorden:
 
 ## Deelvraag 2: Over welke interfaces beschikken de apparaten?
 
-De IFM AL1303 en AL1900 IO-Link masters zijn hoofdzakelijk gemaakt om met Profinet te communiceren maar beschikken ook over een IoT port die een REST API ontsluit(*AL1303 - IO-Link Master met Profinet-interface - Ifm*, z.d.). Deze REST API biedt toegang tot de precieze sensorwaarden en eventuele digitale in- en uitgangen. 
+De IFM AL1303 en AL1900 IO-Link masters zijn hoofdzakelijk gemaakt om met Profinet te communiceren maar beschikken ook over een IoT port die een REST API ontsluit (*AL1303 - IO-Link Master met Profinet-interface - Ifm*, z.d.). Deze REST API biedt toegang tot de precieze sensorwaarden en eventuele digitale in- en uitgangen. 
 
-Nadeel is dat deze IoT ports per master beschikbaar zijn, dus dat er naar iedere master nog een kabel gelegd moet worden. De kabels moeten allemaal naar een switch en dan pas kunnen alle IO-Link masters bereikt worden. Dan heb ik alleen de waarden uit de IO-Link masters, en dus geen status van het ventieleiland, die alleen via Profinet communiceert.
+Nadeel is dat deze IoT ports per master beschikbaar zijn, dus dat er naar iedere master nog een kabel gelegd moet worden. De kabels moeten allemaal naar een switch en dan pas kunnen alle IO-Link masters bereikt worden. Dan heb ik alleen de waarden uit de IO-Link masters, en dus geen status van het ventieleiland, die alleen via Profinet communiceert. 
+
+Ook zit er een IO-Controller in de regelkast. Veel PLC-gestuurde apparaten zijn aangestuurd met een digitaal signaal en kunnen dus *aan* of *uit* zijn. In de Soda Factory worden alle pompen en verwarmingselementen op deze manier aangestuurd. Ze hebben een output nodig om ze aan te zetten en een input voor het feedbacksignaal. De IO-Controller wordt, net als het ventieleiland alleen cyclisch door Profinet bestuurd. 
 
 Er zijn dus twee beschikbare interfaces:
 
-- Profinet
-- IoT-Port met REST interface
+- Profinet (Alle apparaten, alleen cyclisch)
+- IoT-Port met REST interface (Alleen de IO-Link masters, ook buiten cyclus)
 
 
 
