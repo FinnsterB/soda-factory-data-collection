@@ -124,7 +124,7 @@ Als eerste test heb ik de voorbeeldcode van Tins gebruikt (*C++ Packet Sniffing 
 
 Als tweede test ben ik op de configuratieberichten gedoken die in deelvraag 4 voorbijkwamen. Met Wireshark heb ik vastgesteld hoe de *connect request* in elkaar zat. Bepaalde stukken van het bericht waren een vast aantal bytes lang en die kan ik dus overslaan om bij de benodigde data te komen. Andere delen hebben een variabele lengte die in een aantal bytes is meegegeven. Deze moet ik uitlezen en op de offset toepassen. Uiteindelijk heb ik de structuur van het bericht op een gegeneraliseerde manier opgeschreven: 
 
- ![pn-connect](/home/finn/Documents/Afstudeerstage_MA_IT/soda-factory-data-collection/docs/research/pn-connect.jpg)
+ ![pn-connect](pn-connect.jpg)
 
 ​				Afbeelding: *Connect request uitgewerkt*
 
