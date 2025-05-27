@@ -32,6 +32,7 @@ Deze database houdt bij welke Profinet-devices er op het netwerk zitten. Voor ie
 - DeviceID
 - VendorID
 - Datapoints met offsets
+- Datatype van elke datapoint
 
 Deze gegevens worden bepaald op basis van de aangeleverde GSDML files door de GSDML-parser en de [Profinet-DCP berichten](../research/profinet-io-link.markdown#data-offsets). 
 
@@ -50,3 +51,18 @@ De GSDML Parser moet de Profinet-configuratie bestanden verwerken en daaruit hal
 **User Interface**
 
 De User Interface biedt visualisatie aan de gebruiker. Deze visualisatie biedt de mogelijkheid om verschillende sensoren met elkaar te vergelijken en verschillende tijdpunten met elkaar te vergelijken. 
+
+### Profinet Sniffer
+
+De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. 
+
+#### Klassendiagram
+
+
+
+#### Sequencediagram
+
+
+
+### Device Data Storage
+

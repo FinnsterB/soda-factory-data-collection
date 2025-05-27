@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
     Tins::NetworkInterface iface("lo");
     Tins::SnifferConfiguration config;
     config.set_promisc_mode(true);
-    //config.set_filter("ether proto 0x8892"); // Filter for Profinet packets
+    config.set_filter("ether proto 0x8892 or (udp src port 49467 and udp dst port 34964)"); // Filter for Profinet packets
     config.set_snap_len(65535); // Set maximum packet size
     config.set_immediate_mode(true);
     
@@ -61,36 +61,28 @@ int main(int argc, char const *argv[])
     sniffer.sniff_loop([](Tins::PDU &pdu){
         std::stringstream ssAddr;
         Tins::EthernetII &eth = pdu.rfind_pdu<Tins::EthernetII>();
+        bool config = false;
+        try
+        {
+            Tins::UDP &udp = pdu.rfind_pdu<Tins::UDP>();
+            config = true;
+        }
+        catch(const std::exception& e)
+        {
+            //std::cerr << e.what() << '\n';
+        }
         Profinet::PNDevice device("00:60:65:57:a2:6c", "x20");
         //std::cout << "Ethernet src: " << eth.src_addr()
         //<< "-> Dst: " << eth.dst_addr() << std::endl;
         ssAddr << eth.src_addr();
         bool printPayload = false;
-        if(ssAddr.str() == xg1.mac){
-            printPayload = true;
-        }
+        
         const Tins::RawPDU *raw = pdu.find_pdu<Tins::RawPDU>();
         if (raw) {
             Tins::RawPDU::payload_type payload = raw->payload();
-            device.parseConnectMessage(payload);
-
-
-            // if(printPayload){
-            //     std::cout << "xg1 data:\n";
-            //     for(uint8_t i = 0; i < xg1.offsets.size(); i++){
-            //         std::ios::fmtflags f(std::cout.flags());
-            //         std::cout << "\tsensor " << (int)i+1 << ": " << std::hex;
-                    
-            //         for (uint8_t j = 0; j < xg1.lengths.at(i); j++)
-            //         {
-            //             std::cout << (int)payload.at(xg1.offsets.at(i)+j+2) << '\t';
-            //         }
-            //         std::cout.flags(f);
-            //         std::cout << "\n";
-            //     }
-            // }
-
-            //std::cout << "Payload size: " << payload.size() << std::endl;
+            if(config == true){
+                device.parseConnectMessage(payload);
+            }
         }
         return true; // Continue sniffing
     });
