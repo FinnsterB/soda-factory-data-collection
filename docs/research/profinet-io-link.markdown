@@ -114,11 +114,11 @@ Om het lezen van Profinet te testen heb ik een testprogramma geschreven dat de P
 
 ### Testprogramma
 
-Het testprogramma gebruikt Tins, een library die het sniffen van pakketten toestaat. Doorgaans gebruikt men hiervoor Pcap, maar omdat dit een testprogramma is dat snel geschreven moet worden is de simpele interface die Tins biedt handiger. 
+Het testprogramma gebruikt libTins, een library die het sniffen van pakketten toestaat. Doorgaans gebruikt men hiervoor Pcap, maar omdat dit een testprogramma is dat snel geschreven moet worden is de simpele interface die Tins biedt handiger. 
 
 #### Cyclische data
 
-Als eerste test heb ik de voorbeeldcode van Tins gebruikt (*C++ Packet Sniffing And Crafting Library*, z.d.). Deze print van ieder pakketje het bron en bestemmings MAC-adres. Toen dat werkte, heb ik het programma langzaam uitgebreid om te filteren op Profinet-pakketten. Ook dit werkte, de MAC-adressen die nu langs kwamen hoorden allemaal bij de Profinet-apparaten die in de installatie zaten. Hierna ben ik gaan focussen op de payload. Door de offset van de verschillende sensorwaardes af te kijken in Wireshark kon ik deze ook op de databerichten van de IO-Link master *xg1* toepassen. Dit werkte ook, en daarmee heb ik bewezen dat het in elk geval mogelijk is om bij de cyclische Profinet-data te komen. Het programma staat in deze [commit](https://github.com/FinnsterB/soda-factory-data-collection/commit/2b9105272e2ada3c7230594f7efd52de361aa91d).
+Als eerste test heb ik de voorbeeldcode van libTins gebruikt (*C++ Packet Sniffing And Crafting Library*, z.d.). Deze print van ieder pakketje het bron en bestemmings MAC-adres. Toen dat werkte, heb ik het programma langzaam uitgebreid om te filteren op Profinet-pakketten. Ook dit werkte, de MAC-adressen die nu langs kwamen hoorden allemaal bij de Profinet-apparaten die in de installatie zaten. Hierna ben ik gaan focussen op de payload. Door de offset van de verschillende sensorwaardes af te kijken in Wireshark kon ik deze ook op de databerichten van de IO-Link master *xg1* toepassen. Dit werkte ook, en daarmee heb ik bewezen dat het in elk geval mogelijk is om bij de cyclische Profinet-data te komen. Het programma staat in deze [commit](https://github.com/FinnsterB/soda-factory-data-collection/commit/2b9105272e2ada3c7230594f7efd52de361aa91d).
 
 #### Configuratiedata
 

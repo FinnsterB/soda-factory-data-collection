@@ -13,8 +13,8 @@ node "Analyser" {
     component "Data Handler" as DH
     component "GSDML Parser" as GP
     component "User Interface" as UI
-    database "Device Data Storage" as DB1
-    database "Historical IO Data" as DB2
+    database "Device Data Storage" as DDS
+    database "Historical IO Data" as HID
 }
 
 node "IO-Link Master" as IOlink {
@@ -29,10 +29,10 @@ PM --> PS : (Mirrored)Profinet\nCyclische data
 IOM --"1..8" Device : IO-Link
 PD- PM : Profinet\nCyclische data
 
-DB2 -0)- DH
-DB2 -0)- UI
-DB1 -0)- UI
-DB1 -0)- GP
-PS -0)- DH : Queue
-DH -0)- UI
+DH -(0 HID
+HID -0)- UI
+DDS -(0 UI
+GP -(0 DDS
+PS -(0 DH : Queue
+PS -0)- GP : Queue
 @enduml

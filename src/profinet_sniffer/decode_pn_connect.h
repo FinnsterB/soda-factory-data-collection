@@ -41,6 +41,11 @@ namespace Profinet{
         std::vector<API_Module_Info> apis;
     };
 
+    class PNConfigMsg
+    {
+        
+    };
+
     class PNDevice
     {
     public:
@@ -54,24 +59,51 @@ namespace Profinet{
         IOCRBlockReq input;
         IOCRBlockReq output;
         std::vector<ExpectedSubmoduleBlockReq> expectedSubmodules;
+
+
+        /**
+         * @brief: Reads a uint8_t from data vector.
+         */
+        uint8_t read8(std::vector<uint8_t>& data, uint16_t& offset){
+            return data.at(offset++);
+        }
+
+        /**
+         * @brief: Reads a uint16_t from data vector.
+         */
+        uint16_t read16(std::vector<uint8_t>& data, uint16_t& offset){
+            uint16_t result = 0;
+            result = data.at(offset++);
+            result << 8;
+            result += data.at(offset++);
+            return result;
+        }
+
+        /**
+         * @brief: Reads a uint32_t from data vector.
+         */
+        uint32_t read32(std::vector<uint8_t>& data, uint16_t& offset){
+            uint32_t result = 0;
+            result = data.at(offset++);
+            result << 8;
+            result += data.at(offset++);
+            result << 8;
+            result += data.at(offset++);
+            result << 8;
+            result += data.at(offset++);
+            return result;
+        }
+
         void parseConnectMessage(std::vector<uint8_t>& data){
             std::cout << "Payload size: "<< data.size() << std::endl;
             uint16_t offset = 0;
             offset += 80;// skip DCE/RPC data(80 bytes)
             offset += 22;// skip until ARBlockReq Blocklength
-            uint16_t lengthToSkip = data.at(offset);// read length
-            lengthToSkip << 8;
-            offset++;
-            lengthToSkip += data.at(offset);
-            offset++;
+            uint16_t lengthToSkip = read16(data, offset);
             std::cout << "Skipping " << lengthToSkip << " bytes";
             offset += lengthToSkip;// skip ARBlockReq Blocklength
             offset += 44;// skip to NumberOfAPIS
-            uint16_t loopAmount = data.at(offset);
-            offset++;
-            loopAmount << 8;
-            loopAmount += data.at(offset);// loopAmount has number of API's
-            offset++;
+            uint16_t loopAmount = read16(data, offset);
             std::cout << "Input IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
             for(uint16_t i = 0; i < loopAmount; i++)
             {
@@ -87,23 +119,11 @@ namespace Profinet{
                 for (uint16_t j = 0; j < numOfIODataObjs; j++)
                 {
                     IODataObject obj;
-                    obj.slot = data.at(offset);
-                    offset++;
-                    obj.slot << 8;
-                    obj.slot += data.at(offset);
-                    offset++;
+                    obj.slot = read16(data, offset);
 
-                    obj.subslot = data.at(offset);
-                    offset++;
-                    obj.subslot << 8;
-                    obj.subslot += data.at(offset);
-                    offset++;
+                    obj.subslot = read16(data, offset);
 
-                    obj.offset = data.at(offset);
-                    offset++;
-                    obj.offset << 8;
-                    obj.offset += data.at(offset);
-                    offset++;
+                    obj.offset = read16(data, offset);
                     api.io_data_objects.push_back(obj);
                 }
 
@@ -116,23 +136,11 @@ namespace Profinet{
                 for (uint16_t j = 0; j < numOfIOCS; j++)
                 {
                     IOCS iocs;
-                    iocs.slot = data.at(offset);
-                    offset++;
-                    iocs.slot << 8;
-                    iocs.slot += data.at(offset);
-                    offset++;
+                    iocs.slot = read16(data, offset);
 
-                    iocs.subslot = data.at(offset);
-                    offset++;
-                    iocs.subslot << 8;
-                    iocs.subslot += data.at(offset);
-                    offset++;
+                    iocs.subslot = read16(data, offset);
 
-                    iocs.offset = data.at(offset);
-                    offset++;
-                    iocs.offset << 8;
-                    iocs.offset += data.at(offset);
-                    offset++;
+                    iocs.offset = read16(data, offset);
                     api.iocs_s.push_back(iocs);
                 }
                 std::cout << "Parsed " << api.io_data_objects.size() << " IODataObjects." << std::endl;
