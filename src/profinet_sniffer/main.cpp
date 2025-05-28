@@ -2,6 +2,7 @@
 #include <vector>
 #include <sstream>
 #include <tins/tins.h>
+#include <signal.h>
 
 #include "decode_pn_connect.h"
 
@@ -48,7 +49,7 @@ int main(int argc, char const *argv[])
     Tins::NetworkInterface iface("lo");
     Tins::SnifferConfiguration config;
     config.set_promisc_mode(true);
-    config.set_filter("ether proto 0x8892 or (udp src port 49467 and udp dst port 34964)"); // Filter for Profinet packets
+    config.set_filter("ether proto 0x8892 or (udp src port 49467 and udp dst port 34964)"); // Filter for Profinet packets and connect messages
     config.set_snap_len(65535); // Set maximum packet size
     config.set_immediate_mode(true);
     
@@ -58,30 +59,32 @@ int main(int argc, char const *argv[])
 
     std::cout << "Listening on interface: " << iface.name() << std::endl;
 
-    sniffer.sniff_loop([](Tins::PDU &pdu){
+    Profinet::SystemConfiguration sysConfig;
+
+    sniffer.sniff_loop([&sysConfig](Tins::PDU &pdu){
         std::stringstream ssAddr;
         Tins::EthernetII &eth = pdu.rfind_pdu<Tins::EthernetII>();
-        bool config = false;
+        bool configMsg = false;
         try
         {
             Tins::UDP &udp = pdu.rfind_pdu<Tins::UDP>();
-            config = true;
+            configMsg = true;
         }
         catch(const std::exception& e)
         {
             //std::cerr << e.what() << '\n';
         }
-        Profinet::PNDevice device("00:60:65:57:a2:6c", "x20");
         //std::cout << "Ethernet src: " << eth.src_addr()
         //<< "-> Dst: " << eth.dst_addr() << std::endl;
-        ssAddr << eth.src_addr();
+        ssAddr << eth.dst_addr();
         bool printPayload = false;
         
         const Tins::RawPDU *raw = pdu.find_pdu<Tins::RawPDU>();
         if (raw) {
             Tins::RawPDU::payload_type payload = raw->payload();
-            if(config == true){
-                device.parseConnectMessage(payload);
+            if(configMsg == true){
+                sysConfig.handleConnect(ssAddr.str(), payload);
+                sysConfig.handleShutdown(1);
             }
         }
         return true; // Continue sniffing
