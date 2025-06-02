@@ -8,9 +8,9 @@ In dit onderzoeksdocument stel ik vast welke embedded controller er gebruikt wor
 
 Met de deelvragen:
 
-1. Wat zijn de performance-eisen aan het systeem? (Literature Study, Lab)
-2. Wat zijn de gebruikerseisen aan het systeem? (Explore User Requirements)
-3. Wat zijn de fysieke eisen aan het systeem? (Explore User Requirements)
+1. Wat zijn de performance-eisen aan de embedded controller? (Literature Study, Lab)
+2. Wat zijn de gebruikerseisen aan de embedded controller? (Explore User Requirements)
+3. Wat zijn de fysieke eisen aan de embedded controller? (Explore User Requirements)
 4. Welke embedded controllers zijn er beschikbaar? (Available Product Analysis)
 
 Deze vragen worden beantwoord door middel van de ICT-Research Methods, waarvan de methode tussen de haakjes achter de (deel)vraag staat.
@@ -21,15 +21,15 @@ Deze vragen worden beantwoord door middel van de ICT-Research Methods, waarvan d
 
 Uit het database-onderzoek blijkt dat op mijn laptop (Ryzen 5 3500U met 4 cores) de database voldoende snel draait. Wanneer ik de beschreven test draai, dus met bijna 22.000 writes per seconde neemt de database volgens *top* ~47% van een enkele CPU-core in beslag en slechts 0.6% RAM:
 
-![](top-db.png)
+![](embedded-controller/top-db.png)
 
 Daarbij komt het wegschrijven met Python en het draaien van de rest van het besturingssysteem, dit zorgt volgens de *gnome-system-monitor* voor ongeveer 20-25% belasting over alle cores:
 
-![](gnome-sysmon-db.png)
+![](embedded-controller/gnome-sysmon-db.png)
 
 Naast het draaien van de database moet er ook ruimte zijn voor een gebruikersinterface en de onderscheppingssoftware, dat samen een softwarepakket wordt. Voor de gebruikersinterface heb ik geen test, maar ik kan als stand-in voor de onderscheppingssoftware de testsoftware uit het Profinet-onderzoek pakken. In plaats van *top* gebruik ik hier *htop* zodat ik kan filteren op mijn *profinet_sniffer*. Wanneer ik deze draai en er met *tcpreplay* netwerkverkeer heen stuur dan gebruikt dit 90% van een enkele CPU:
 
-![](htop-sniffer.png)
+![](embedded-controller/htop-sniffer.png)
 
 Over de gebruikersinterface en daarbij het ophalen van de data kan alleen een educated guess gedaan worden. Het gebruiken van de interface zorgt voor een variabele belasting op het systeem, hoeveel data er opgehaald wordt is namelijk aan de gebruiker. Deze bepaalt indirect hoeveel data er uit de database nodig is door bijvoorbeeld een visualisatie van een groot tijdsbestek te kiezen of slechts van een paar seconden. 
 
@@ -40,3 +40,11 @@ Alle bovenstaande factoren maken het aannemelijk dat een systeem met ongeveer de
 De opslag van het systeem wordt relatief snel gevuld, blijkt uit het database-onderzoek. De logging-precisie is hierbij belangrijk. Uit een gesprek met de stakeholder bleek dat 10Hz(#todo ff navragen) voldoende was. In de test heb ik de maximale snelheid aangehouden die de IO-Link masters konden leveren, 200Hz. Dit leverde echter bijna 160GB per 24 uur op. Binnen 7 dagen is dat een terabyte. 
 
 Op de gevraagde 10Hz levert het systeem slechts 8GB per dag op. Dit is beter haalbaar, op een terabyte kan nu iets meer dan 100 dagen gelogd worden. In het onderzoek is een groter datatype (64 bit double) gekozen voor de sensorwaarde dan die daadwerkelijk voorkomt in de Soda Factory. 
+
+## Deelvraag 2: Wat zijn de gebruikerseisen aan de embedded controller?
+
+#todo interview
+
+Scherm er direct aan, webinterface of een remote connection zoals VNC of xrdp.
+
+## Deelvraag 3: 

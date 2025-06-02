@@ -62,7 +62,7 @@ Om zonder Profinet-driver alsnog aan de cyclische data te komen kan ik de Profin
 
 Profinet gebruikt Ethernet en TCP/IP. TCP/IP wordt echter alleen gebruikt voor configuratieberichten die bij elke start-up verstuurd worden om het netwerk te configureren. De cyclische data tussen de devices en de PLC gebruikt het Profinet RT protocol. Dit protocol gebruikt geen IP, alleen de MAC-adressen van de apparaten en kan dus alleen gelezen worden door apparaten op het netwerk die het juiste MAC-adres hebben. Door te testen met Wireshark kon ik door aan de switch in de regelkast aan te sluiten:
 
-![](Profinet_network.png)
+![](profinet-io-link/Profinet_network.png)
 
 Door op deze manier het netwerk te sniffen kan ik echter *geen* Profinet RT pakketten zien. Alleen zo nu en dan een PN-DCP of een PN-PTCP bericht, die gebruikt worden om het netwerk in te stellen, en om Delay_Request te sturen. Deze berichten zijn niet interessant voor mij omdat ze geen data bevatten. 
 
@@ -70,11 +70,11 @@ Om wel aan de Profinet RT berichten te komen moet ik ervoor zorgen dat deze beri
 
 Voor deze test heeft Marc een managed switch ter beschikking gesteld. Door deze tussen de PLC en de rest van het netwerk aan te sluiten en de ports te mirroren naar de monitor-port moet het mogelijk zijn om de Profinet RT pakketten te zien ondanks dat mijn MAC-adres anders is. Dit zit als volgt aangesloten:
 
-![](Profinet_network_managed.png)
+![](profinet-io-link/Profinet_network_managed.png)
 
 Met deze testopstelling lukt het om Profinet RT pakketten te onderscheppen. De IO-data is zichtbaar in een blok van 40 bytes, alleen is deze nog niet ingedeeld. Welke data bij welke IO-Link sensor hoort kan ik nog niet vaststellen:
 
-![](40-bytes.png)
+![](profinet-io-link/40-bytes.png)
 
 ## Deelvraag 4: Hoe haal ik de vereiste sensordata uit de Profinet-pakketten?
 
@@ -84,15 +84,15 @@ De opgehaalde Profinet RT-pakketten zijn opgebouwd uit de eerste 2 lagen van het
 
 Wireshark heeft een ingebouwde Profinet-decoder die ook gebruik maakt van de GSDML-bestanden. Wanneer ik de GSDML bestanden gebruik die bij de IO-Link masters horen dan kan ik de data inderdaad per sensor zien. Wanneer ik dit vergelijk met dezelfde sensor opgevraagd met de IoT interface dan komt de data overeen:
 
-![](WiresharkvsIoT.png)
+![](profinet-io-link/WiresharkvsIoT.png)
 
 De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakket nog een byte achteraan, "a0". Dit is de Port Qualifier Information (PQI) en die biedt 8 bits aan diagnostische data over het betreffende IO-Link port. Bij het ventieleiland is dit niet het geval:
 
-![](first-valve-off.png)
+![](profinet-io-link/first-valve-off.png)
 
 ​							Bovenstaande afbeelding heeft alle kleppen uit.
 
-![](first-valve-on.png)
+![](profinet-io-link/first-valve-on.png)
 
 ​							Bovenstaande afbeelding heeft de eerste klep aan.
 
@@ -102,7 +102,7 @@ De sensordata zit verstopt in deze bits. Gek genoeg zit er in het Profinet-pakke
 
 Aan het begin van een power-cycle vindt er tussen de Profinet controller(PLC) en de Profinet-devices(IO-Link masters, ventieleiland) een handshake plaats waarin relevante configuratiedata gestuurd wordt. De GSDML-bestanden bevatten iedere mogelijke configuratie die een apparaat kan hebben, maar de daadwerkelijke ingestelde configuratie wordt in die handshake-berichten gestuurd. De handshake ziet er als volgt uit:
 
-![](Profinet_DCP_CM.png)
+![](profinet-io-link/Profinet_DCP_CM.png)
 
 De handshake heb ik uitgeplozen met Wireshark en de hulp van profinetuniversity.com. De twee gemarkeerde berichten zijn voor iedere Profinet-device essentieel om op te vangen. De moeilijkheid hiervan is dat de PLC de handshake initieert. Het systeem dat gerealiseerd moet worden, moet dus draaien voordat de rest van de productielijn aangezet wordt. Waar Profinet zelf in ieder geval elke power-cycle de handshake doet, kan mijn systeem deze data gewoon opslaan: welke data-offsets horen bij welk MAC-adres. Dit creert echter wel de *edge-case* waarbij de configuratie verandert maar het systeem zich daar niet op aanpast. 
 
@@ -124,7 +124,7 @@ Als eerste test heb ik de voorbeeldcode van libTins gebruikt (*C++ Packet Sniffi
 
 Als tweede test ben ik op de configuratieberichten gedoken die in deelvraag 4 voorbijkwamen. Met Wireshark heb ik vastgesteld hoe de *connect request* in elkaar zat. Bepaalde stukken van het bericht waren een vast aantal bytes lang en die kan ik dus overslaan om bij de benodigde data te komen. Andere delen hebben een variabele lengte die in een aantal bytes is meegegeven. Deze moet ik uitlezen en op de offset toepassen. Uiteindelijk heb ik de structuur van het bericht op een gegeneraliseerde manier opgeschreven: 
 
- ![pn-connect](pn-connect.jpg)
+ ![pn-connect](profinet-io-link/pn-connect.jpg)
 
 ​				Afbeelding: *Connect request uitgewerkt*
 
