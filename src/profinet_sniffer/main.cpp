@@ -86,6 +86,9 @@ int main(int argc, char const *argv[])
                 sysConfig.handleConnect(ssAddr.str(), payload);
                 sysConfig.handleShutdown(1);
             }
+            else{
+                std::cout << "IO_data_message from: " << eth.src_addr() << "\n";
+            }
         }
         return true; // Continue sniffing
     });
