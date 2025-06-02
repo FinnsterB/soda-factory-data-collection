@@ -8,3 +8,4 @@ SDD: [docs/development/SDD.markdown](docs/development/SDD.markdown)<br>
 
 Onderzoek database/platform: [docs/research/database.markdown](docs/research/database.markdown)<br>
 Onderzoek profinet/IO-Link: [docs/research/profinet-io-link.markdown](docs/research/profinet-io-link.markdown)<br>
+Onderzoek embedded controller: [docs/research/embedded-controller.markdown](docs/research/embedded-controller.markdown)<br>
