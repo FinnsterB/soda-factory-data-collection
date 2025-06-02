@@ -41,12 +41,6 @@ namespace Profinet{
         std::vector<API_Module_Info> apis;
     };
 
-    class PNConfigMsg
-    {
-        
-    };
-
-
 
     class PNDevice
     {
@@ -78,6 +72,12 @@ namespace Profinet{
         void parseConnectMessage(std::vector<uint8_t>& data);
     };
 
+
+    /**
+     * Profinet system configuration: Holds all Profinet devices except for the 
+     * Controller(PLC). For the purposes of this network the PLC is not included
+     * here.
+     */
     class SystemConfiguration
     {
     public:
