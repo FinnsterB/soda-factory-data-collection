@@ -27,11 +27,11 @@ Daarbij komt het wegschrijven met Python en het draaien van de rest van het best
 
 ![](embedded-controller/gnome-sysmon-db.png)
 
-Naast het draaien van de database moet er ook ruimte zijn voor een gebruikersinterface en de onderscheppingssoftware, dat samen een softwarepakket wordt. Voor de gebruikersinterface heb ik geen test, maar ik kan als stand-in voor de onderscheppingssoftware de testsoftware uit het Profinet-onderzoek pakken. In plaats van *top* gebruik ik hier *htop* zodat ik kan filteren op mijn *profinet_sniffer*. Wanneer ik deze draai en er met *tcpreplay* netwerkverkeer heen stuur dan gebruikt dit 90% van een enkele CPU:
+Naast het draaien van de database moet er ook ruimte zijn voor een gebruikersinterface en de onderscheppingssoftware, dat samen een softwarepakket wordt. Voor de gebruikersinterface heb ik geen test, maar ik kan als stand-in voor de onderscheppingssoftware de testsoftware(*profinet_sniffer*) uit het Profinet-onderzoek pakken. In plaats van *top* gebruik ik hier *htop* zodat ik kan filteren op mijn *profinet_sniffer*. Wanneer ik deze draai en er met *tcpreplay* netwerkverkeer heen stuur dan gebruikt dit 90% van een enkele CPU:
 
 ![](embedded-controller/htop-sniffer.png)
 
-Over de gebruikersinterface en daarbij het ophalen van de data kan alleen een educated guess gedaan worden. Het gebruiken van de interface zorgt voor een variabele belasting op het systeem, hoeveel data er opgehaald wordt is namelijk aan de gebruiker. Deze bepaalt indirect hoeveel data er uit de database nodig is door bijvoorbeeld een visualisatie van een groot tijdsbestek te kiezen of slechts van een paar seconden. 
+Over de gebruikersinterface en daarbij het ophalen van de data kan voorlopig alleen een educated guess gedaan worden. Het gebruiken van de interface zorgt voor een variabele belasting op het systeem, hoeveel data er opgehaald wordt is namelijk aan de gebruiker. Deze bepaalt indirect hoeveel data er uit de database nodig is door bijvoorbeeld een visualisatie van een groot tijdsbestek te kiezen of slechts van een paar seconden. 
 
 Alle bovenstaande factoren maken het aannemelijk dat een systeem met ongeveer dezelfde processorkracht als mijn laptop (moderne X86 quad-core CPU met hyper-threading en 8GB RAM) voldoende is om het hele systeem op te draaien. Uit geen van de tests bleek RAM een probleem te zijn.
 
@@ -47,4 +47,20 @@ Op de gevraagde 10Hz levert het systeem slechts 8GB per dag op. Dit is beter haa
 
 Scherm er direct aan, webinterface of een remote connection zoals VNC of xrdp.
 
-## Deelvraag 3: 
+## Deelvraag 3: Wat zijn de fysieke eisen aan de embedded controller?
+
+
+
+
+
+## Deelvraag 4: Welke embedded controllers zijn beschikbaar?
+
+Op de grote elektrawebsites zoals Mouser en RS-Components zijn industriele PC's beschikbaar. Deze zijn behoorlijk duur omdat industriele PC's veel steviger uitgevoerd zijn en een groter temperatuurbereik hebben. Deze PC's beginnen bij 1000 euro, met een Intel Atom CPU. In deelvraag 1 is vastgesteld dat de PC tenminste een quad-core CPU met hyper-threading moet hebben, en de Atom heeft dat niet. Pas de modernere (van de afgelopen 5 jaar) Intel i3, i5 en i7 processoren beschikken hierover. Industriele PC die daarmee uitgerust zijn, kosten 2000+ Euro. 
+
+## Resultaten
+
+
+
+
+
+## Conclusie
