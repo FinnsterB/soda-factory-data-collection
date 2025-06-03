@@ -5,6 +5,12 @@
 #include <vector>
 
 namespace Profinet{
+    enum BlockTypes{
+        ARBlockReq_nr = 0x0101,
+        IOCRBlockReq_nr = 0x0102,
+        AlarmCRBlockReq_nr = 0x0103,
+        ExpectedSubmoduleBlockReq_nr = 0x0104
+    };
 
     struct IODataObject{
         uint16_t slot;
@@ -69,7 +75,15 @@ namespace Profinet{
          */
         uint32_t read32(std::vector<uint8_t>& data, uint16_t& offset);
 
+        /**
+         * @brief: Parses a connect message that configures a Profinet slave device.
+         */
         void parseConnectMessage(std::vector<uint8_t>& data);
+
+        /**
+         * @brief: Parses a PNIO Connect Block
+         */
+        void parseConnectBlock(std::vector<uint8_t>& data, uint16_t& offset);
     };
 
 

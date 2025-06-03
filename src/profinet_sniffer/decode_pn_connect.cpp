@@ -64,45 +64,71 @@ void Profinet::PNDevice::parseConnectMessage(std::vector<uint8_t>& data){
     }
     uint16_t offset = 0;
     offset += 80;// skip DCE/RPC data(80 bytes)
-    offset += 22;// skip until ARBlockReq Blocklength
-    uint16_t lengthToSkip = read16(data, offset);
-    std::cout << "Skipping " << lengthToSkip << " bytes\n";
-    offset += lengthToSkip;// skip ARBlockReq Blocklength
-    offset += 44;// skip to NumberOfAPIS
-    uint16_t loopAmount = read16(data, offset);
-    std::cout << "Input IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
-    for(uint16_t i = 0; i < loopAmount; i++)
+    offset += 20;// skip until first block BlockType;
+    
+    parseConnectBlock(data, offset);
+
+}
+
+void Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t &offset)
+{
+    uint16_t blockType = read16(data, offset);
+    switch (blockType)
     {
-        offset += 4;
-        uint16_t numOfIODataObjs = read16(data, offset);
-        std::cout << "Api " << i << " has: " << numOfIODataObjs << " IODataObjects" << std::endl;
-
-        API_IO_Data api;
-        for (uint16_t j = 0; j < numOfIODataObjs; j++)
+    case BlockTypes::ARBlockReq_nr:
+        // This case is not relevant, the block will be skipped.
+        uint16_t skip = read16(data, offset);
+        offset += skip;
+        break;
+    case BlockTypes::IOCRBlockReq_nr:
+        // This case is relevant, API data and offsets get parsed from the block.
+        offset += 44;// skip to NumberOfAPIS
+        uint16_t loopAmount = read16(data, offset);
+        std::cout << "Input IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
+        for(uint16_t i = 0; i < loopAmount; i++)
         {
-            IODataObject obj;
-            obj.slot = read16(data, offset);
+            offset += 4;
+            uint16_t numOfIODataObjs = read16(data, offset);
+            std::cout << "Api " << i << " has: " << numOfIODataObjs << " IODataObjects" << std::endl;
 
-            obj.subslot = read16(data, offset);
+            API_IO_Data api;
+            for (uint16_t j = 0; j < numOfIODataObjs; j++)
+            {
+                IODataObject obj;
+                obj.slot = read16(data, offset);
 
-            obj.offset = read16(data, offset);
-            api.io_data_objects.push_back(obj);
+                obj.subslot = read16(data, offset);
+
+                obj.offset = read16(data, offset);
+                api.io_data_objects.push_back(obj);
+            }
+
+            uint16_t numOfIOCS = read16(data, offset);
+            
+            for (uint16_t j = 0; j < numOfIOCS; j++)
+            {
+                IOCS iocs;
+                iocs.slot = read16(data, offset);
+
+                iocs.subslot = read16(data, offset);
+
+                iocs.offset = read16(data, offset);
+                api.iocs_s.push_back(iocs);
+            }
+            std::cout << "Parsed " << api.io_data_objects.size() << " IODataObjects." << std::endl;
+            std::cout << "Parsed " << api.iocs_s.size() << " IOCS's." << std::endl;
+            input.apis.push_back(api);
         }
-
-        uint16_t numOfIOCS = read16(data, offset);
-        
-        for (uint16_t j = 0; j < numOfIOCS; j++)
-        {
-            IOCS iocs;
-            iocs.slot = read16(data, offset);
-
-            iocs.subslot = read16(data, offset);
-
-            iocs.offset = read16(data, offset);
-            api.iocs_s.push_back(iocs);
-        }
-        std::cout << "Parsed " << api.io_data_objects.size() << " IODataObjects." << std::endl;
-        std::cout << "Parsed " << api.iocs_s.size() << " IOCS's." << std::endl;
-        input.apis.push_back(api);
+        break;
+    case BlockTypes::AlarmCRBlockReq_nr:
+        // This case is not relevant, the block will be skipped.
+        uint16_t skip = read16(data, offset);
+        offset += skip;
+        break;
+    case BlockTypes::ExpectedSubmoduleBlockReq_nr:
+        //This case is relevant, GSDML module and submodule ID's will be parsed from the block.
+        break;
+    default:
+        break;
     }
 }
