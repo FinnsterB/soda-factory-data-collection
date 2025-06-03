@@ -63,15 +63,13 @@ Gelukkig zijn er modernere Intel Atom's die beschikken over 4 cores en 4 threads
 
 | Naam                     | Fabrikant       | Leverancier | Processor                   | Voeding  | Montage               | Prijs                                       | Link                                                         |
 | ------------------------ | --------------- | ----------- | --------------------------- | -------- | --------------------- | ------------------------------------------- | ------------------------------------------------------------ |
-| UP Squared Pro 7000 Edge | UP Systems      | Mouser      | Atom x7425E 4C/4T           | 12VDC 6A | Geen/Alleen dev board | 465,60                                      | [Mouser](https://nl.mouser.com/ProductDetail/IEI/TANK-600-CV-N2600-8C-2G-R11?qs=sGAEpiMZZMv0DJfhVcWlK6FmZcYeBHRRZjNuoeJc7hhPcUKxGCxaiA%3D%3D) |
+| UP Squared Pro 7000 Edge | UP Systems      | Mouser      | Atom x7425E 4C/4T           | 12VDC 6A | Geen/Alleen dev board | 465,60(Alleen devboard zonder behuizing)    | [Mouser](https://nl.mouser.com/ProductDetail/IEI/TANK-600-CV-N2600-8C-2G-R11?qs=sGAEpiMZZMv0DJfhVcWlK6FmZcYeBHRRZjNuoeJc7hhPcUKxGCxaiA%3D%3D) |
 | AMOS-3007                | VIA             | Mouser      | Atom x64xx 4C/4T            | 9-36VDC  | VESA/Wall mountable   | 710,60                                      | [Mouser](https://nl.mouser.com/ProductDetail/VIA/AMOS-3007-1Q15A0?qs=sGAEpiMZZMv0DJfhVcWlK9Igd9QWlgUBiExwCzqIKSJJVS1iDs1kMQ%3D%3D) |
 | UPC 2430                 | Phoenix Contact | Mouser      | Atom x6413E 4C/4T           | 24VDC    | DIN                   | 873,21                                      | [Mouser](https://nl.mouser.com/ProductDetail/Phoenix-Contact/1433152?qs=2SLPxufLcgDWNiE2lJTk9A%3D%3D) |
 | Siemens Simatic          | Siemens         | RS-online   | Atom x6413E 4C/4T (4GB RAM) | 24VDC    | Wall mountable        | 861,30                                      | [RS-Online](https://nl.rs-online.com/web/p/industrial-computers/2713544) |
 | Helix 310                | ONLOGIC         | ONLOGIC     | Intel Pentium J6425(4C/4T)  | 24DC     | DIN                   | 710,27 (incl DIN mount, 24V Terminal block) | [ONLOGIC](https://www.onlogic.com/nl/store/hx310/#specifications) |
 
 Alle bovenstaande industriele PC's beschikken over de mogelijkheid om de opslag uit te breiden. Dit kan gedaan worden naar de eisen van de stakeholder.
-
-De Soda Factory beschikt zelf over een B&R Automation PC 910. Deze heeft een Intel Core i7.  
 
 ## Resultaten
 

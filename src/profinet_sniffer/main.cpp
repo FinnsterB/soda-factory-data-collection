@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
     Tins::NetworkInterface iface("lo");
     Tins::SnifferConfiguration config;
     config.set_promisc_mode(true);
-    config.set_filter("ether proto 0x8892 or (udp src port 49467 and udp dst port 34964)"); // Filter for Profinet packets and connect messages
+    config.set_filter("ether proto 0x8892 or (udp dst port 34964)"); // Filter for Profinet packets and connect messages
     config.set_snap_len(65535); // Set maximum packet size
     config.set_immediate_mode(true);
     
@@ -87,7 +87,7 @@ int main(int argc, char const *argv[])
                 sysConfig.handleShutdown(1);
             }
             else{
-                std::cout << "IO_data_message from: " << eth.src_addr() << "\n";
+                //std::cout << "IO_data_message from: " << eth.src_addr() << "\n";
             }
         }
         return true; // Continue sniffing
