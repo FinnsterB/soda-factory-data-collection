@@ -33,7 +33,7 @@ Naast het draaien van de database moet er ook ruimte zijn voor een gebruikersint
 
 Over de gebruikersinterface en daarbij het ophalen van de data kan voorlopig alleen een educated guess gedaan worden. Het gebruiken van de interface zorgt voor een variabele belasting op het systeem, hoeveel data er opgehaald wordt is namelijk aan de gebruiker. Deze bepaalt indirect hoeveel data er uit de database nodig is door bijvoorbeeld een visualisatie van een groot tijdsbestek te kiezen of slechts van een paar seconden. 
 
-Alle bovenstaande factoren maken het aannemelijk dat een systeem met ongeveer dezelfde processorkracht als mijn laptop (moderne X86 quad-core CPU met hyper-threading en 8GB RAM) voldoende is om het hele systeem op te draaien. Uit geen van de tests bleek RAM een probleem te zijn.
+Alle bovenstaande factoren maken het aannemelijk dat een systeem met ongeveer dezelfde processorkracht als mijn laptop (moderne X86 dual-core CPU met hyper-threading en 8GB RAM) ruim voldoende is om het hele systeem op te draaien. Uit geen van de tests bleek RAM een probleem te zijn.
 
 ### Opslag
 
@@ -55,7 +55,23 @@ Scherm er direct aan, webinterface of een remote connection zoals VNC of xrdp.
 
 ## Deelvraag 4: Welke embedded controllers zijn beschikbaar?
 
-Op de grote elektrawebsites zoals Mouser en RS-Components zijn industriele PC's beschikbaar. Deze zijn behoorlijk duur omdat industriele PC's veel steviger uitgevoerd zijn en een groter temperatuurbereik hebben. Deze PC's beginnen bij 1000 euro, met een Intel Atom CPU. In deelvraag 1 is vastgesteld dat de PC tenminste een quad-core CPU met hyper-threading moet hebben, en de Atom heeft dat niet. Pas de modernere (van de afgelopen 5 jaar) Intel i3, i5 en i7 processoren beschikken hierover. Industriele PC die daarmee uitgerust zijn, kosten 2000+ Euro. 
+Op de grote elektrawebsites zoals Mouser en RS-Components zijn industriele PC's beschikbaar. Deze zijn behoorlijk duur omdat industriele PC's veel steviger uitgevoerd zijn dan standaard consumenten PC's. Deze industriele PC's beginnen bij ongeveer 350 euro, maar deze hebben een Intel Atom van een oudere generatie. Deze zijn vaak single- of dual-core met een lage kloksnelheid en voldoen niet aan de performance-eis. 
+
+Industriele PC's beschikken vaak over oudere hardware, ze gebruiken voornamelijk processoren van een aantal generaties oud. Dit is bewust; sommige processoren hebben extra ondersteuning voor embedded toepassingen, en worden daarom langer en rigoureuzer ondersteund en geproduceerd (ElecD3sDSL, 2024). Ook zijn na een aantal jaar de meeste bugs en fouten uit de drivers opgelost, waardoor de softwareondersteuning robuuster is.
+
+Gelukkig zijn er modernere Intel Atom's die beschikken over 4 cores en 4 threads. Deze processoren voldoen aan de performance-eis van het systeem. Deze zijn te vinden in industriele PC's vanaf ongeveer 700 euro. Wanneer ik op de sites van elektraleveranciers kijk dan komt daar de volgende lijst uit:
+
+| Naam                     | Fabrikant       | Leverancier | Processor                   | Voeding  | Montage               | Prijs                                       | Link                                                         |
+| ------------------------ | --------------- | ----------- | --------------------------- | -------- | --------------------- | ------------------------------------------- | ------------------------------------------------------------ |
+| UP Squared Pro 7000 Edge | UP Systems      | Mouser      | Atom x7425E 4C/4T           | 12VDC 6A | Geen/Alleen dev board | 465,60                                      | [Mouser](https://nl.mouser.com/ProductDetail/IEI/TANK-600-CV-N2600-8C-2G-R11?qs=sGAEpiMZZMv0DJfhVcWlK6FmZcYeBHRRZjNuoeJc7hhPcUKxGCxaiA%3D%3D) |
+| AMOS-3007                | VIA             | Mouser      | Atom x64xx 4C/4T            | 9-36VDC  | VESA/Wall mountable   | 710,60                                      | [Mouser](https://nl.mouser.com/ProductDetail/VIA/AMOS-3007-1Q15A0?qs=sGAEpiMZZMv0DJfhVcWlK9Igd9QWlgUBiExwCzqIKSJJVS1iDs1kMQ%3D%3D) |
+| UPC 2430                 | Phoenix Contact | Mouser      | Atom x6413E 4C/4T           | 24VDC    | DIN                   | 873,21                                      | [Mouser](https://nl.mouser.com/ProductDetail/Phoenix-Contact/1433152?qs=2SLPxufLcgDWNiE2lJTk9A%3D%3D) |
+| Siemens Simatic          | Siemens         | RS-online   | Atom x6413E 4C/4T (4GB RAM) | 24VDC    | Wall mountable        | 861,30                                      | [RS-Online](https://nl.rs-online.com/web/p/industrial-computers/2713544) |
+| Helix 310                | ONLOGIC         | ONLOGIC     | Intel Pentium J6425(4C/4T)  | 24DC     | DIN                   | 710,27 (incl DIN mount, 24V Terminal block) | [ONLOGIC](https://www.onlogic.com/nl/store/hx310/#specifications) |
+
+Alle bovenstaande industriele PC's beschikken over de mogelijkheid om de opslag uit te breiden. Dit kan gedaan worden naar de eisen van de stakeholder.
+
+De Soda Factory beschikt zelf over een B&R Automation PC 910. Deze heeft een Intel Core i7.  
 
 ## Resultaten
 
@@ -64,3 +80,11 @@ Op de grote elektrawebsites zoals Mouser en RS-Components zijn industriele PC's 
 
 
 ## Conclusie
+
+
+
+
+
+## Bronvermelding
+
+ElecD3sDSL. (2024, 22 oktober). *Fit and forget – Why do industrial solutions not use the latest technology?* DSL Industrial Computing. https://www.dsl-industrialcomputing.co.uk/industrial-solutions-dont-use-latest-technology/
