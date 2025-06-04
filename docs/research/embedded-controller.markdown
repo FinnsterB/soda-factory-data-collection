@@ -43,35 +43,56 @@ Op de gevraagde 10Hz levert het systeem slechts 8GB per dag op. Dit is beter haa
 
 ## Deelvraag 2: Wat zijn de gebruikerseisen aan de embedded controller?
 
-#todo interview
+Voor deze deelvraag heb ik een aantal interviewvragen gesteld aan de stakeholder, deze zijn beantwoord en de antwoorden staan **dikgedrukt** achter de vraag:
 
-Scherm er direct aan, webinterface of een remote connection zoals VNC of xrdp.
+- Hoeveel opslag/ hoelang moet er gelogd worden? Op 10Hz verwacht ik met 1TB opslag ongeveer 100 dagen te kunnen loggen voor de Soda Factory, dit blijkt uit onderzoek. **10Hz is meer dan genoeg en ook 100 dagen is meer dan zat. Ik denk dat als we een logging history van 30 dagen kunnen houden, dat er tijd genoeg is om analyzes te kunnen doen op de data. Dus 1TB is al plenty. 512 zou ook nog uitkunnen. Zeker als we in de software selectief zouden kunnen zijn in de frequentie van logging per signaal.**
+- Hoe willen we het systeem benaderen qua interface? Gebruiken we een scherm en toetsenbord/muis (maakt het wat minder goed mogelijk om eenvoudig in te bouwen), gebruiken we een Remote Desktop Protocol (dit maakt inbouw eenvoudiger, kan een headless kastje zijn) of misschien een web interface. **RDP is helemaal OK. Ook het meest praktische.** 
+- Wat is het budget voor de embedded controller? (De gehele ontwikkeling kan gewoon plaatsvinden op mijn laptop, maar het is wel leuk om een beetje een idee te hebben waar de stakeholder aan denkt.) **Als ik naar de Lenovo M-series of Asus NUC kijk denk ik dat we voor onder 1000 euro wat moeten kunnen regelen. Naast de PC zullen we ook nog een extra SSD van 512 of 1TB moeten plaatsen. Voor je budget in het verslag mag je daar wel rekening mee houden.**
 
 ## Deelvraag 3: Wat zijn de fysieke eisen aan de embedded controller?
 
+Hetzelfde als bij de vorige deelvraag zijn hier een aantal vragen gesteld:
 
+- Moet het geheel kunnen monteren op de DIN-rail in de regelkast? (Dit maakt het geheel flink duurder, heb ik gezien) **Hoeft niet per se op DIN, is wel mooi (als de ruimte er daarvoor nog zou zijn. Voor de Lenovo ThinkCentre serie zijn wel brackets te verkrijgen. Google search op 'lenovo thinkcentre mounting bracket' voor montage in het besturingspaneel. Montageplaat, zijwand of zelfs onder de 'dubbele bodem'.**
+- Moet de controller op alleen 24V werken of kan het ook gewoon op 230V? **Mag beide. 24VDC zal het meteen erg duur van worden. 230VAC is prima**
+- Moet de netwerkswitch inbegrepen zijn of kunnen we simpelweg de eis stellen dat er een managed netwerkswitch in het de regelkast aanwezig is? **Dat laatste is OK.**
 
 
 
 ## Deelvraag 4: Welke embedded controllers zijn beschikbaar?
 
-Op de grote elektrawebsites zoals Mouser en RS-Components zijn industriele PC's beschikbaar. Deze zijn behoorlijk duur omdat industriele PC's veel steviger uitgevoerd zijn dan standaard consumenten PC's. Deze industriele PC's beginnen bij ongeveer 350 euro, maar deze hebben een Intel Atom van een oudere generatie. Deze zijn vaak single- of dual-core met een lage kloksnelheid en voldoen niet aan de performance-eis. 
+Uit antwoorden op de vorige deelvragen blijkt dat een *small form factor* consumenten-PC zoals een Lenovo ThinkCentre of Asus NUC voldoende is voor het project. 
 
-Industriele PC's beschikken vaak over oudere hardware, ze gebruiken voornamelijk processoren van een aantal generaties oud. Dit is bewust; sommige processoren hebben extra ondersteuning voor embedded toepassingen, en worden daarom langer en rigoureuzer ondersteund en geproduceerd (ElecD3sDSL, 2024). Ook zijn na een aantal jaar de meeste bugs en fouten uit de drivers opgelost, waardoor de softwareondersteuning robuuster is.
+Hierbij is de Lenovo ThinkCentre M75q het meest geschikt omdat die in principe compleet te koop is. Wanneer ik met de Lenovo configurator een AMD-variant configureer die aan de eisen voldoet dan krijg ik het volgende voor 462 euro:
 
-Gelukkig zijn er modernere Intel Atom's die beschikken over 4 cores en 4 threads. Deze processoren voldoen aan de performance-eis van het systeem. Deze zijn te vinden in industriele PC's vanaf ongeveer 700 euro. Wanneer ik op de sites van elektraleveranciers kijk dan komt daar de volgende lijst uit:
+| Onderdeel: | Type:                                   |
+| ---------- | --------------------------------------- |
+| Processor  | AMD Ryzen™ 5 PRO 5655GE, 6C/12T, 3.4GHz |
+| RAM        | 8 GB DDR4-3200MHz                       |
+| Opslag     | 1TB SSD M.2 2280 PCIe Gen4              |
 
-| Naam                     | Fabrikant       | Leverancier | Processor                   | Voeding  | Montage               | Prijs                                       | Link                                                         |
-| ------------------------ | --------------- | ----------- | --------------------------- | -------- | --------------------- | ------------------------------------------- | ------------------------------------------------------------ |
-| UP Squared Pro 7000 Edge | UP Systems      | Mouser      | Atom x7425E 4C/4T           | 12VDC 6A | Geen/Alleen dev board | 465,60(Alleen devboard zonder behuizing)    | [Mouser](https://nl.mouser.com/ProductDetail/IEI/TANK-600-CV-N2600-8C-2G-R11?qs=sGAEpiMZZMv0DJfhVcWlK6FmZcYeBHRRZjNuoeJc7hhPcUKxGCxaiA%3D%3D) |
-| AMOS-3007                | VIA             | Mouser      | Atom x64xx 4C/4T            | 9-36VDC  | VESA/Wall mountable   | 710,60                                      | [Mouser](https://nl.mouser.com/ProductDetail/VIA/AMOS-3007-1Q15A0?qs=sGAEpiMZZMv0DJfhVcWlK9Igd9QWlgUBiExwCzqIKSJJVS1iDs1kMQ%3D%3D) |
-| UPC 2430                 | Phoenix Contact | Mouser      | Atom x6413E 4C/4T           | 24VDC    | DIN                   | 873,21                                      | [Mouser](https://nl.mouser.com/ProductDetail/Phoenix-Contact/1433152?qs=2SLPxufLcgDWNiE2lJTk9A%3D%3D) |
-| Siemens Simatic          | Siemens         | RS-online   | Atom x6413E 4C/4T (4GB RAM) | 24VDC    | Wall mountable        | 861,30                                      | [RS-Online](https://nl.rs-online.com/web/p/industrial-computers/2713544) |
-| Helix 310                | ONLOGIC         | ONLOGIC     | Intel Pentium J6425(4C/4T)  | 24DC     | DIN                   | 710,27 (incl DIN mount, 24V Terminal block) | [ONLOGIC](https://www.onlogic.com/nl/store/hx310/#specifications) |
+Deze ThinkCentre is meer dan sterk genoeg om de software te draaien en vanwege de ingebouwde videokaart is het mogelijk om deze headless te gebruiken. Verder voldoet hij ook aan alle stakeholder-eisen. Ik heb hem zonder OS geconfigureerd omdat er een specifieke Linux-distro op moet komen met de vereiste software.
 
-Alle bovenstaande industriele PC's beschikken over de mogelijkheid om de opslag uit te breiden. Dit kan gedaan worden naar de eisen van de stakeholder.
+Op de grote elektrowebsites zoals Mouser en RS-Components zijn ook industriële PC's beschikbaar. Deze zijn behoorlijk duur omdat industriële PC's veel steviger uitgevoerd zijn dan standaard consumenten PC's. Deze industriele PC's beginnen bij ongeveer 350 euro, maar deze hebben een Intel Atom van een oudere generatie of een ARM-processor. Deze zijn vaak single- of dual-core met een lage kloksnelheid en voldoen niet aan de performance-eis, of in het geval van ARM moet ervoor ge-crosscompiled worden wat de softwareontwikkeling bemoeilijkt.
+
+Industriële PC's beschikken over het algemeen over oudere hardware. Dit is bewust; sommige processoren hebben extra ondersteuning voor embedded toepassingen, en worden daarom langer en rigoureuzer ondersteund en geproduceerd (ElecD3sDSL, 2024). 
+
+
 
 ## Resultaten
+
+De eisen aan de embedded controller zijn als volgt:
+
+| Categorie   | Nummer | Naam              | Beschrijving                                                 |
+| ----------- | ------ | ----------------- | ------------------------------------------------------------ |
+| Performance | P-1    | Processor         | De processor van de embedded controller moet tenminste over 2 processorcores en 4 threads beschikken. |
+|             | P-2    | RAM               | De embedded controller moet tenminste over 8GB RAM beschikken. |
+| Gebruiker   | G-1    | Opslag            | De embedded controller moet tenminste over 512GB opslag beschikken. |
+|             | G-2    | Fysieke interface | Het systeem wordt benaderd via een Remote Desktop Protocol.  |
+| Budget      | B-1    | Budget            | Het budget voor het systeem is 1000 euro.                    |
+| Fysiek      | F-1    | Montage           | Het systeem moet ergens in de regelkast gemonteerd worden met een beugel. Waar precies is niet vastgesteld. |
+|             | F-2    | Voeding           | 230VAC of 24VDC                                              |
+|             | F-3    | Switch            | De managed switch wordt niet inbegrepen in het te leveren systeem; er wordt verwacht dat deze aanwezig is in de regelkast van de stakeholder. |
 
 
 
@@ -79,7 +100,7 @@ Alle bovenstaande industriele PC's beschikken over de mogelijkheid om de opslag 
 
 ## Conclusie
 
-
+De Lenovo ThinkCentre M75q is de uiteindelijke keuze voor gebruik als embedded controller. Deze PC is op hardware-performance niveau voldoende snel en biedt verder de juiste fysieke kenmerken om in het project gebruikt te worden. Omdat het systeem een consumentenproduct is en geen industriële PC is het een stuk goedkoper, en valt dus met gemak onder de budget-eis van 1000 euro. Verder worden er verschillende montage-opties aangeboden voor deze PC waardoor deze goed in de regelkast gebouwd kan worden.
 
 
 
