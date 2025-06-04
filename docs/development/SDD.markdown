@@ -54,11 +54,11 @@ De User Interface biedt visualisatie aan de gebruiker. Deze visualisatie biedt d
 
 ### Profinet Sniffer
 
-De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. 
+De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. Uit de Connect requests kan een groot deel van de Profinet systeemconfiguratie gehaald worden. 
 
 #### Klassendiagram
 
-
+![](../../out/docs/development/pn_sniffer/pn_sniffer_class.png)
 
 #### Sequencediagram
 

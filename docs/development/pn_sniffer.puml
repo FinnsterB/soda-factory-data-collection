@@ -1,0 +1,55 @@
+@startuml pn_sniffer_class
+
+package Profinet{
+    struct IODataObject{
+        uint16_t slot
+        uint16_t subslot
+        uint16_t offset
+    }
+    struct IOCS{
+        uint16_t slot
+        uint16_t subslot
+        uint16_t offset
+    }
+    struct Submodule{
+        uint16_t subslot
+        uint16_t submoduleIdentNr
+    }
+    struct API_IO_Data{
+
+    }
+    struct API_Module_Info{
+
+    }
+    struct IOCRBlockReq{
+        uint16_t iocr_type
+    }
+    struct ExpectedSubmoduleBlockReq{
+
+    }
+    class PNDevice{
+        string mac
+        string name
+        void parseConnectMessage(byte[] data)
+    }
+    class SystemConfiguration{
+        bool deviceExists(PNDevice device)
+        void handleConnect(std::string device_mac, byte[] data)
+    }
+}
+
+SystemConfiguration -- "1..*" PNDevice
+
+PNDevice --"0..*" ExpectedSubmoduleBlockReq
+
+PNDevice --"1" IOCRBlockReq : input
+PNDevice --"1" IOCRBlockReq : output
+IOCRBlockReq --"0..*" API_IO_Data
+API_IO_Data -"0..*" IOCS
+IODataObject "0..*"- API_IO_Data  
+ExpectedSubmoduleBlockReq --"0..*" API_Module_Info
+API_Module_Info -"0..*" Submodule
+
+
+
+@enduml

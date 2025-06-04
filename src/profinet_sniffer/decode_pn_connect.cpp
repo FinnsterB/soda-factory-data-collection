@@ -84,7 +84,7 @@ void Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
         // This case is relevant, API data and offsets get parsed from the block.
         offset += 44;// skip to NumberOfAPIS
         uint16_t loopAmount = read16(data, offset);
-        std::cout << "Input IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
+        std::cout << "IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
         for(uint16_t i = 0; i < loopAmount; i++)
         {
             offset += 4;

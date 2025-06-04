@@ -94,15 +94,9 @@ De eisen aan de embedded controller zijn als volgt:
 |             | F-2    | Voeding           | 230VAC of 24VDC                                              |
 |             | F-3    | Switch            | De managed switch wordt niet inbegrepen in het te leveren systeem; er wordt verwacht dat deze aanwezig is in de regelkast van de stakeholder. |
 
-
-
-
-
 ## Conclusie
 
-De Lenovo ThinkCentre M75q is de uiteindelijke keuze voor gebruik als embedded controller. Deze PC is op hardware-performance niveau voldoende snel en biedt verder de juiste fysieke kenmerken om in het project gebruikt te worden. Omdat het systeem een consumentenproduct is en geen industriële PC is het een stuk goedkoper, en valt dus met gemak onder de budget-eis van 1000 euro. Verder worden er verschillende montage-opties aangeboden voor deze PC waardoor deze goed in de regelkast gebouwd kan worden.
-
-
+De Lenovo ThinkCentre M75q is de uiteindelijke keuze voor gebruik als embedded controller. Deze PC is op hardware-performance niveau voldoende snel en biedt verder de juiste fysieke kenmerken om in het project gebruikt te worden. Omdat het systeem een consumentenproduct is en geen industriële PC is het een stuk goedkoper, en valt dus met gemak onder de budget-eis van 1000 euro. Verder worden er verschillende montage-opties aangeboden voor deze PC waardoor deze goed in de regelkast gebouwd kan worden. 
 
 ## Bronvermelding
 
