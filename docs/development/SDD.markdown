@@ -64,7 +64,19 @@ De Profinet-package biedt een model van de Profinet-fieldbus zoals die relevant 
 
 **SystemConfiguration**
 
-De SystemConfiguration klasse geeft aan welke Profinet Devices er in de productielijn zitten. Deze klasse (todo) biedt (de)serializatie van de gegevens van de Profinet Devices. Wanneer het systeem een Profinet Connect message ziet, wordt de HandleConnect() functie aangeroepen.
+De SystemConfiguration klasse geeft aan welke Profinet Devices er in de productielijn zitten. Deze klasse (todo) biedt (de)serializatie van de gegevens van de Profinet Devices. Wanneer het systeem een Profinet Connect message ziet, wordt de HandleConnect() functie aangeroepen. Deze functie maakt een PNDevice aan die de payload van de Connect message gebruikt om zijn verschillende membervariabelen in de vullen. Uiteindelijk wordt er gecheckt of de PNDevice al bestaat, in welk geval de *nieuwe* configuratie de plaats inneemt van de oude.
+
+**PNMaster**
+
+De PNMaster is een apparaat in het Profinet-netwerk dat de Devices aanstuurt. In vrijwel alle gevallen is dit een PLC. In deze context biedt de PNMaster-klasse slechts een paar gegevens die nodig zijn om de Profinet Realtime-IO berichten in te delen. Dit is de naam van het apparaat voor de GUI en het MAC-adres om in te zien welke berichten *van* de PLC komen en welke berichten *naar* de PLC gaan.
+
+**PNDevice**
+
+De PNDevice-klasse is een representatie van de Profinet-configuratie van een Device. Deze klasse biedt de gegevens om de Realtime-IO payload van deze Profinet Device uit te lezen. De verschillende *structs* die direct en indirect aan PNDevice toebehoren volgen de officiele Profinet-benaming zoals ze ook in de GSDML-bestanden en Wireshark worden weergegeven. 
+
+**Structs**
+
+PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. 
 
 #### Sequencediagram
 
