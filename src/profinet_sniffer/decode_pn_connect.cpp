@@ -66,8 +66,9 @@ void Profinet::PNDevice::parseConnectMessage(std::vector<uint8_t>& data){
     offset += 80;// skip DCE/RPC data(80 bytes)
     offset += 20;// skip until first block BlockType;
     
-    while(parseConnectBlock(data, offset)){
-        std::cout << "Parsing block: ";
+    bool endOfPacket = false;
+    while(endOfPacket){
+        endOfPacket = parseConnectBlock(data, offset);
     }
 }
 
@@ -182,5 +183,5 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
     }
     //Return if last block
     //std::cout << "Current offset: " << offset << " Payload size: " << data.size() << "\n";
-    return (offset + 1) < data.size();
+    return offset == data.size();
 }
