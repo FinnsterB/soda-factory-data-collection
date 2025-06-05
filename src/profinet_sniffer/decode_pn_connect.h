@@ -12,21 +12,41 @@ namespace Profinet{
         ExpectedSubmoduleBlockReq_nr = 0x0104
     };
 
+    enum IOCRTypes{
+        InputCR = 0x0001,
+        OutputCR = 0x0002
+    };
+
     struct IODataObject{
         uint16_t slot;
         uint16_t subslot;
         uint16_t offset;
+        //Not sure if it is a good idea to use this or put it in it's own struct Submodule:
+        uint16_t length;
     };
 
+    /**
+     * @brief According to Siemens documentation from: https://support.industry.siemens.com/dl/files/145/109781145/att_1028016/v1/pn_driver_IO-Base_user_programming_interface_en-US.pdf
+     * the IOCS is the Consumer status. When the PLC sends data TO a device, the PLC is a provider and the device is the consumer. The Consumer Status represents how the consumer
+     * handled the last message: it can be either good or bad. This works the same way in the opposite direction: from Device to PLC. I will not use this status information for now.
+     */
     struct IOCS{
         uint16_t slot;
         uint16_t subslot;
         uint16_t offset;
     };
 
+    struct DataDescription{
+        uint16_t dataDescription;
+        uint16_t SubmoduleDataLength;
+        uint8_t IOCSLength;
+        uint8_t IOPSLength;
+    };
+
     struct Submodule{
         uint16_t subslot;
         uint32_t submoduleIdentNr;
+        DataDescription dataDescription;
     };
 
     struct API_IO_Data{
@@ -43,6 +63,9 @@ namespace Profinet{
         std::vector<API_IO_Data> apis;
     };
 
+    /**
+     * @brief Contains API Module info, which holds the data lengths for IO-data. The data lengths together with the data offsets can be used to decode PN-IO messages. 
+     */
     struct ExpectedSubmoduleBlockReq{
         std::vector<API_Module_Info> apis;
     };
@@ -61,17 +84,17 @@ namespace Profinet{
 
 
         /**
-         * @brief: Reads a uint8_t from data vector.
+         * @brief: Reads a uint8_t from data vector. Offset gets incremented each byte.
          */
         uint8_t read8(std::vector<uint8_t>& data, uint16_t& offset);
 
         /**
-         * @brief: Reads a uint16_t from data vector.
+         * @brief: Reads a uint16_t from data vector. Offset gets incremented each byte.
          */
         uint16_t read16(std::vector<uint8_t>& data, uint16_t& offset);
 
         /**
-         * @brief: Reads a uint32_t from data vector.
+         * @brief: Reads a uint32_t from data vector. Offset gets incremented each byte.
          */
         uint32_t read32(std::vector<uint8_t>& data, uint16_t& offset);
 
@@ -82,8 +105,10 @@ namespace Profinet{
 
         /**
          * @brief: Parses a PNIO Connect Block
+         * 
+         * @returns: bool that signifies if the end of the message has been reached.
          */
-        void parseConnectBlock(std::vector<uint8_t>& data, uint16_t& offset);
+        bool parseConnectBlock(std::vector<uint8_t>& data, uint16_t& offset);
     };
 
 

@@ -60,6 +60,12 @@ De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profine
 
 ![](../../out/docs/development/pn_sniffer/pn_sniffer_class.png)
 
+De Profinet-package biedt een model van de Profinet-fieldbus zoals die relevant is voor de opdracht. 
+
+**SystemConfiguration**
+
+De SystemConfiguration klasse geeft aan welke Profinet Devices er in de productielijn zitten. Deze klasse (todo) biedt (de)serializatie van de gegevens van de Profinet Devices. Wanneer het systeem een Profinet Connect message ziet, wordt de HandleConnect() functie aangeroepen.
+
 #### Sequencediagram
 
 

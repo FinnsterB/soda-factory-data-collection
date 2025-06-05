@@ -66,69 +66,121 @@ void Profinet::PNDevice::parseConnectMessage(std::vector<uint8_t>& data){
     offset += 80;// skip DCE/RPC data(80 bytes)
     offset += 20;// skip until first block BlockType;
     
-    parseConnectBlock(data, offset);
-
+    while(parseConnectBlock(data, offset)){
+        std::cout << "Parsing block: ";
+    }
 }
 
-void Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t &offset)
+bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t &offset)
 {
     uint16_t blockType = read16(data, offset);
     switch (blockType)
     {
-    case BlockTypes::ARBlockReq_nr:
-        // This case is not relevant, the block will be skipped.
-        uint16_t skip = read16(data, offset);
-        offset += skip;
-        break;
-    case BlockTypes::IOCRBlockReq_nr:
-        // This case is relevant, API data and offsets get parsed from the block.
-        offset += 44;// skip to NumberOfAPIS
-        uint16_t loopAmount = read16(data, offset);
-        std::cout << "IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << std::endl;
-        for(uint16_t i = 0; i < loopAmount; i++)
+        case BlockTypes::ARBlockReq_nr:
         {
-            offset += 4;
-            uint16_t numOfIODataObjs = read16(data, offset);
-            std::cout << "Api " << i << " has: " << numOfIODataObjs << " IODataObjects" << std::endl;
-
-            API_IO_Data api;
-            for (uint16_t j = 0; j < numOfIODataObjs; j++)
-            {
-                IODataObject obj;
-                obj.slot = read16(data, offset);
-
-                obj.subslot = read16(data, offset);
-
-                obj.offset = read16(data, offset);
-                api.io_data_objects.push_back(obj);
-            }
-
-            uint16_t numOfIOCS = read16(data, offset);
-            
-            for (uint16_t j = 0; j < numOfIOCS; j++)
-            {
-                IOCS iocs;
-                iocs.slot = read16(data, offset);
-
-                iocs.subslot = read16(data, offset);
-
-                iocs.offset = read16(data, offset);
-                api.iocs_s.push_back(iocs);
-            }
-            std::cout << "Parsed " << api.io_data_objects.size() << " IODataObjects." << std::endl;
-            std::cout << "Parsed " << api.iocs_s.size() << " IOCS's." << std::endl;
-            input.apis.push_back(api);
+            std::cout << "ARBlockReq\n";
+            // This case is not relevant, the block will be skipped.
+            uint16_t skipARBlock = read16(data, offset);
+            std::cout << "ARBlockLenght: " << skipARBlock << "\n";
+            offset += skipARBlock;
+            break;
         }
-        break;
-    case BlockTypes::AlarmCRBlockReq_nr:
-        // This case is not relevant, the block will be skipped.
-        uint16_t skip = read16(data, offset);
-        offset += skip;
-        break;
-    case BlockTypes::ExpectedSubmoduleBlockReq_nr:
-        //This case is relevant, GSDML module and submodule ID's will be parsed from the block.
-        break;
-    default:
-        break;
+        case BlockTypes::IOCRBlockReq_nr:
+        {
+            std::cout << "IOCRBlockReq\n";
+            // This case is relevant, API data and offsets get parsed from the block.
+            offset += 2; // skip to IOCRType
+            uint16_t IOCRType = read16(data, offset);
+            offset += 42;// skip to NumberOfAPIS
+            uint16_t loopAmount = read16(data, offset);
+            std::cout << "IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << "\n";
+            for(uint16_t i = 0; i < loopAmount; i++)
+            {
+                offset += 4;
+                uint16_t numOfIODataObjs = read16(data, offset);
+                std::cout << "Api " << i << " has: " << numOfIODataObjs << " IODataObjects" << "\n";
+
+                API_IO_Data api;
+                for (uint16_t j = 0; j < numOfIODataObjs; j++)
+                {
+                    IODataObject obj;
+                    obj.slot = read16(data, offset);
+
+                    obj.subslot = read16(data, offset);
+
+                    obj.offset = read16(data, offset);
+                    api.io_data_objects.push_back(obj);
+                }
+
+                uint16_t numOfIOCS = read16(data, offset);
+                
+                for (uint16_t j = 0; j < numOfIOCS; j++)
+                {
+                    IOCS iocs;
+                    iocs.slot = read16(data, offset);
+
+                    iocs.subslot = read16(data, offset);
+
+                    iocs.offset = read16(data, offset);
+                    api.iocs_s.push_back(iocs);
+                }
+                switch (IOCRType)
+                {
+                case IOCRTypes::InputCR:
+                    input.apis.push_back(api);
+                    break;
+                case IOCRTypes::OutputCR:
+                    output.apis.push_back(api);
+                    break;
+                }
+                input.apis.push_back(api);
+            }
+            break;
+        }
+        case BlockTypes::AlarmCRBlockReq_nr:
+        {
+            std::cout << "AlarmCRBlockReq\n";
+            // This case is not relevant, the block will be skipped.
+            uint16_t skipAlarmBlock = read16(data, offset);
+            std::cout << "AlarmBlockLenght: " << skipAlarmBlock << "\n";
+            offset += skipAlarmBlock;
+            break;
+        }
+        case BlockTypes::ExpectedSubmoduleBlockReq_nr:
+        {
+            std::cout << "ExpectedSubmoduleBlockReq\n";
+            ExpectedSubmoduleBlockReq expectedSubmoduleBlockReq;
+            //This case is relevant, GSDML module and submodule ID's and data lengths will be parsed from the block.
+            offset += 4;
+            uint16_t numOfApis = read16(data, offset);
+            std::cout << "ExpectedSubmodule numOfApis: " << numOfApis << "\n";
+            for (uint16_t i = 0; i < numOfApis; i++)
+            {
+                API_Module_Info api;
+                // skip to nr of submodules
+                offset += 14;
+                uint16_t nrOfSubmodules = read16(data, offset);
+                for (uint16_t j = 0; j < nrOfSubmodules; j++)
+                {
+                    Submodule submodule;
+                    submodule.subslot = read16(data, offset);
+                    submodule.submoduleIdentNr = read32(data, offset);
+                    submodule.dataDescription.dataDescription = read16(data, offset);
+                    submodule.dataDescription.SubmoduleDataLength = read16(data, offset);
+                    submodule.dataDescription.IOCSLength = read8(data, offset);
+                    submodule.dataDescription.IOPSLength = read8(data, offset);
+                }
+                
+            }
+            expectedSubmodules.push_back(expectedSubmoduleBlockReq);
+            break;
+        }
+        default:
+            std::cerr << "Malformed block, aborting parser.\n" << std::endl;
+            return false;
+            break; 
     }
+    //Return if last block
+    //std::cout << "Current offset: " << offset << " Payload size: " << data.size() << "\n";
+    return (offset + 1) < data.size();
 }
