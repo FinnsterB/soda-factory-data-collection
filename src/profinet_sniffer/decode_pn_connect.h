@@ -85,18 +85,21 @@ namespace Profinet{
 
         /**
          * @brief: Reads a uint8_t from data vector. Offset gets incremented each byte.
+         * Would use std::memcpy for this but te ethernet payload is big-endian.
          */
-        uint8_t read8(std::vector<uint8_t>& data, uint16_t& offset);
+        uint8_t read8(const std::vector<uint8_t>& data, uint16_t& offset);
 
         /**
-         * @brief: Reads a uint16_t from data vector. Offset gets incremented each byte.
+         * @brief: Reads a uint16_t from data vector. Offset gets incremented each byte. 
+         * Would use std::memcpy for this but te ethernet payload is big-endian.
          */
-        uint16_t read16(std::vector<uint8_t>& data, uint16_t& offset);
+        uint16_t read16(const std::vector<uint8_t>& data, uint16_t& offset);
 
         /**
-         * @brief: Reads a uint32_t from data vector. Offset gets incremented each byte.
+         * @brief: Reads a uint32_t from data vector. Offset gets incremented each byte. 
+         * Would use std::memcpy for this but the ethernet payload is big-endian.
          */
-        uint32_t read32(std::vector<uint8_t>& data, uint16_t& offset);
+        uint32_t read32(const std::vector<uint8_t>& data, uint16_t& offset);
 
         /**
          * @brief: Parses a connect message that configures a Profinet slave device.
