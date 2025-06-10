@@ -2,7 +2,11 @@
 
 ## Inleiding
 
-Dit document omschrijft het ontwerp van de gerealiseerde analysesoftware voor de Soda Factory. De volledige opdracht staat omschreven in het Plan van Aanpak. Met behulp van UML-diagrammen wordt de structuur en het gedrag van de software toegelicht. 
+Dit document omschrijft het ontwerp van de gerealiseerde analysesoftware voor de Soda Factory. Deze software moet de sensordata van de Soda factory verkrijgen door de Profinet-fieldbus uit te lezen. Deze data moet opgeslagen worden in een historische database en met een gebruikersinterface inzichtelijk zijn voor een eindgebruiker. De volledige opdracht staat omschreven in het Plan van Aanpak. 
+
+Met behulp van UML-diagrammen wordt de structuur en het gedrag van de software toegelicht. Dit gebeurt in de volgende hoofdstukken:
+
+#TODO Leeswijzer
 
 
 
@@ -52,7 +56,7 @@ De GSDML Parser moet de Profinet-configuratie bestanden verwerken en daaruit hal
 
 De User Interface biedt visualisatie aan de gebruiker. Deze visualisatie biedt de mogelijkheid om verschillende sensoren met elkaar te vergelijken en verschillende tijdpunten met elkaar te vergelijken. 
 
-### Profinet Sniffer
+### Ontwerp Profinet Sniffer
 
 De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. Uit de Connect requests kan een groot deel van de Profinet systeemconfiguratie gehaald worden. 
 
@@ -76,11 +80,41 @@ De PNDevice-klasse is een representatie van de Profinet-configuratie van een Dev
 
 **Structs**
 
-PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. 
+PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. Deze structs volgen de structuur van de Profinet Connect messages en zijn dus generiek voor iedere Profinet device. De structuur van deze berichten is bijzonder complex en vereist een uitgebreide parser.
+
+**IOCRBlockReq:**
+
+**API_IO_Data:**
+
+**IOCS:**
+
+**IO_Data_Object:**
+
+**ExpectedSubmoduleBlockReq:**
+
+**API_Module_Info:**
+
+**Submodule:**
+
+
 
 #### Sequencediagram
 
 
 
-### Device Data Storage
+### Ontwerp Device Data Storage
+
+
+
+
+
+### Ontwerp GSDML Parser
+
+
+
+
+
+### Ontwerp Data Handler
+
+
 
