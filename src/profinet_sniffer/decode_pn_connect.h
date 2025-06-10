@@ -37,7 +37,7 @@ namespace Profinet{
     };
 
     struct DataDescription{
-        uint16_t dataDescription;
+        uint16_t dataDescription; //Input or Output
         uint16_t SubmoduleDataLength;
         uint8_t IOCSLength;
         uint8_t IOPSLength;
@@ -46,7 +46,7 @@ namespace Profinet{
     struct Submodule{
         uint16_t subslot;
         uint32_t submoduleIdentNr;
-        DataDescription dataDescription;
+        std::vector<DataDescription> dataDescriptions;
     };
 
     struct API_IO_Data{
@@ -112,6 +112,12 @@ namespace Profinet{
          * @returns: bool that signifies if the end of the message has been reached.
          */
         bool parseConnectBlock(std::vector<uint8_t>& data, uint16_t& offset);
+
+        /**
+         * @brief: Gets amount of data descriptions a subslot has. If one subslot is
+         * used both for sending and receiving by the Controller. 
+         */
+        uint8_t requiredDataDescriptionAmount(const uint16_t subslotNr);
     };
 
 
@@ -126,7 +132,6 @@ namespace Profinet{
         SystemConfiguration(){};
         bool deviceExists(PNDevice& device);
         void handleConnect(const std::string& device_mac, std::vector<uint8_t>& data);
-        void handleShutdown(int s);
         std::vector<PNDevice> devices;
     };
 

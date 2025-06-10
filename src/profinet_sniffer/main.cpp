@@ -84,7 +84,6 @@ int main(int argc, char const *argv[])
             Tins::RawPDU::payload_type payload = raw->payload();
             if(configMsg == true){
                 sysConfig.handleConnect(ssAddr.str(), payload);
-                sysConfig.handleShutdown(1);
             }
             else{
                 //std::cout << "IO_data_message from: " << eth.src_addr() << "\n";

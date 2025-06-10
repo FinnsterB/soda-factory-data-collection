@@ -2,7 +2,7 @@
 
 ## Inleiding
 
-
+Dit document omschrijft het ontwerp van de gerealiseerde analysesoftware voor de Soda Factory. De volledige opdracht staat omschreven in het Plan van Aanpak. Met behulp van UML-diagrammen wordt de structuur en het gedrag van de software toegelicht. 
 
 
 

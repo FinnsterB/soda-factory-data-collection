@@ -17,6 +17,7 @@ bool Profinet::SystemConfiguration::deviceExists(PNDevice& device)
 void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac, std::vector<uint8_t>& data)
 {
     PNDevice device(device_mac, "placeholder");
+    std::cout << "Parsing Connect Message from MAC: " << device_mac << std::endl;
     device.parseConnectMessage(data);
 
     if (!deviceExists(device))
@@ -30,7 +31,7 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
             {
                 std::pair<uint16_t, uint16_t> interface;
                 interface.first = device.input.apis.at(i).io_data_objects.at(j).offset;
-                interface.second = device.expectedSubmodules.at(i).apis.at(0).submodules.at(j).dataDescription.SubmoduleDataLength;
+                interface.second = device.expectedSubmodules.at(i).apis.at(0).submodules.at(j).dataDescriptions.at(0).SubmoduleDataLength;
                 offsetAndLength.push_back(interface);
                 
             }
@@ -45,11 +46,6 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
         
     }
     
-}
-
-void Profinet::SystemConfiguration::handleShutdown(int s)
-{
-    std::cout << "Unique Profinet devices found: " << devices.size() << std::endl;
 }
 
 Profinet::PNDevice::PNDevice(std::string aMac, std::string aName): mac(aMac), name(aName)
@@ -156,7 +152,6 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
                     output.apis.push_back(api);
                     break;
                 }
-                input.apis.push_back(api);
             }
             break;
         }
@@ -189,10 +184,17 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
                     submodule.subslot = read16(data, offset);
                     submodule.submoduleIdentNr = read32(data, offset);
                     offset += 2; // Skip submodule properties.
-                    submodule.dataDescription.dataDescription = read16(data, offset);
-                    submodule.dataDescription.SubmoduleDataLength = read16(data, offset);
-                    submodule.dataDescription.IOCSLength = read8(data, offset);
-                    submodule.dataDescription.IOPSLength = read8(data, offset);
+                    //Apparently there can be multiple dataDescriptions: 
+                    for (uint16_t k = 0; k < requiredDataDescriptionAmount(submodule.subslot); k++)
+                    {
+                        DataDescription dataDesc;
+                        dataDesc.dataDescription = read16(data, offset);
+                        dataDesc.SubmoduleDataLength = read16(data, offset);
+                        dataDesc.IOCSLength = read8(data, offset);
+                        dataDesc.IOPSLength = read8(data, offset);
+                        submodule.dataDescriptions.push_back(dataDesc);
+                    }
+                    
                     api.submodules.push_back(submodule);
                 }
                 expectedSubmoduleBlockReq.apis.push_back(api);
@@ -201,11 +203,39 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
             break;
         }
         default:
-            std::cerr << "Malformed block, aborting parser.\n" << std::endl;
+            std::cerr << "Malformed block or end of packet, aborting parser.\n" << std::endl;
+            offset = data.size();
             return false;
-            break; 
+            break;
     }
     //Return if last block
     //std::cout << "Current offset: " << offset << " Payload size: " << data.size() << "\n";
     return offset == data.size();
+}
+
+uint8_t Profinet::PNDevice::requiredDataDescriptionAmount(const uint16_t subslotNr)
+{
+    bool input_exists = false;
+    bool output_exists = false;
+    for (auto& inputSubslot : input.apis)
+    {
+          for(auto& io_d_obj : inputSubslot.io_data_objects) {
+            if (io_d_obj.subslot == subslotNr)
+            {
+                input_exists = true;
+            }
+            
+          }
+    }
+    for (auto& outputSubslot : output.apis)
+    {
+          for(auto& io_d_obj : outputSubslot.io_data_objects) {
+            if (io_d_obj.subslot == subslotNr)
+            {
+                output_exists = true;
+            }
+            
+          }
+    }
+    return (uint8_t)input_exists + output_exists;
 }
