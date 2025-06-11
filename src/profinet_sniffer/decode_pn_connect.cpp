@@ -17,13 +17,12 @@ bool Profinet::SystemConfiguration::deviceExists(PNDevice& device)
 void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac, std::vector<uint8_t>& data)
 {
     PNDevice device(device_mac, "placeholder");
-    std::cout << "Parsing Connect Message from MAC: " << device_mac << std::endl;
+    std::cout << "Parsing Connect Message from MAC: " << device_mac << "\n\n";
     device.parseConnectMessage(data);
 
     if (!deviceExists(device))
     {
         devices.push_back(device);
-        std::cout << "New Device Found with MAC: " << device_mac << "\nInput interfaces:\n";
         std::vector<std::pair<uint16_t, uint16_t>> offsetAndLengthInput;
         std::vector<std::pair<uint16_t, uint16_t>> offsetAndLengthOutput;
         for (uint16_t i = 0; i < device.input.apis.size(); i++)
@@ -58,6 +57,7 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
         {
             std::cout << "Output interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
         }
+        std::cout << std::endl;
         
     }
     
@@ -90,7 +90,6 @@ uint32_t Profinet::PNDevice::read32(const std::vector<uint8_t>& data, uint16_t& 
 }
 
 void Profinet::PNDevice::parseConnectMessage(std::vector<uint8_t>& data){
-    std::cout << "Payload size: "<< data.size() << std::endl;
     if(data.size() < 200){
         return;
     }
@@ -111,27 +110,22 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
     {
         case BlockTypes::ARBlockReq_nr:
         {
-            std::cout << "ARBlockReq\n";
             // This case is not relevant, the block will be skipped.
             uint16_t skipARBlock = read16(data, offset);
-            std::cout << "ARBlockLenght: " << skipARBlock << "\n";
             offset += skipARBlock;
             break;
         }
         case BlockTypes::IOCRBlockReq_nr:
         {
-            std::cout << "IOCRBlockReq\n";
             // This case is relevant, API data and offsets get parsed from the block.
             offset += 4; // skip to IOCRType
             uint16_t IOCRType = read16(data, offset);
             offset += 36;// skip to NumberOfAPIS
             uint16_t loopAmount = read16(data, offset);
-            std::cout << "IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << "\n";
             for(uint16_t i = 0; i < loopAmount; i++)
             {
                 offset += 4;
                 uint16_t numOfIODataObjs = read16(data, offset);
-                std::cout << "Api " << i << " has: " << numOfIODataObjs << " IODataObjects" << "\n";
 
                 API_IO_Data api;
                 for (uint16_t j = 0; j < numOfIODataObjs; j++)
@@ -171,21 +165,17 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
         }
         case BlockTypes::AlarmCRBlockReq_nr:
         {
-            std::cout << "AlarmCRBlockReq\n";
             // This case is not relevant, the block will be skipped.
             uint16_t skipAlarmBlock = read16(data, offset);
-            std::cout << "AlarmBlockLenght: " << skipAlarmBlock << "\n";
             offset += skipAlarmBlock;
             break;
         }
         case BlockTypes::ExpectedSubmoduleBlockReq_nr:
         {
-            std::cout << "ExpectedSubmoduleBlockReq\n";
             ExpectedSubmoduleBlockReq expectedSubmoduleBlockReq;
             //This case is relevant, GSDML module and submodule ID's and data lengths will be parsed from the block.
             offset += 4;
             uint16_t numOfApis = read16(data, offset);
-            std::cout << "ExpectedSubmodule numOfApis: " << numOfApis << "\n";
             for (uint16_t i = 0; i < numOfApis; i++)
             {
                 API_Module_Info api;
@@ -225,7 +215,6 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
             break;
     }
     //Return if last block
-    //std::cout << "Current offset: " << offset << " Payload size: " << data.size() << "\n";
     return offset == data.size();
 }
 
