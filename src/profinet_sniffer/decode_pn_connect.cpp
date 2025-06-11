@@ -24,7 +24,8 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
     {
         devices.push_back(device);
         std::cout << "New Device Found with MAC: " << device_mac << "\nInput interfaces:\n";
-        std::vector<std::pair<uint16_t, uint16_t>> offsetAndLength;
+        std::vector<std::pair<uint16_t, uint16_t>> offsetAndLengthInput;
+        std::vector<std::pair<uint16_t, uint16_t>> offsetAndLengthOutput;
         for (uint16_t i = 0; i < device.input.apis.size(); i++)
         {
             for (uint16_t j = 0; j < device.input.apis.at(i).io_data_objects.size(); j++)
@@ -32,17 +33,31 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
                 std::pair<uint16_t, uint16_t> interface;
                 interface.first = device.input.apis.at(i).io_data_objects.at(j).offset;
                 interface.second = device.expectedSubmodules.at(i).apis.at(0).submodules.at(j).dataDescriptions.at(0).SubmoduleDataLength;
-                offsetAndLength.push_back(interface);
-                
+                offsetAndLengthInput.push_back(interface);
+            }
+            
+        }
+        for (uint16_t i = 0; i < device.output.apis.size(); i++)
+        {
+            for (uint16_t j = 0; j < device.output.apis.at(i).io_data_objects.size(); j++)
+            {
+                std::pair<uint16_t, uint16_t> interface;
+                interface.first = device.output.apis.at(i).io_data_objects.at(j).offset;
+                interface.second = device.expectedSubmodules.at(i).apis.at(0).submodules.at(j).dataDescriptions.at(0).SubmoduleDataLength;
+                offsetAndLengthOutput.push_back(interface);
             }
             
         }
         uint16_t counter = 0;
-        for (auto& ol : offsetAndLength)
+        for (auto& ol : offsetAndLengthInput)
         {
-            std::cout << "Interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
+            std::cout << "Input interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
         }
-        
+        counter = 0;
+        for (auto& ol : offsetAndLengthOutput)
+        {
+            std::cout << "Output interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
+        }
         
     }
     
@@ -73,7 +88,6 @@ uint32_t Profinet::PNDevice::read32(const std::vector<uint8_t>& data, uint16_t& 
     offset += 4;
     return result;
 }
-
 
 void Profinet::PNDevice::parseConnectMessage(std::vector<uint8_t>& data){
     std::cout << "Payload size: "<< data.size() << std::endl;
@@ -108,9 +122,9 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
         {
             std::cout << "IOCRBlockReq\n";
             // This case is relevant, API data and offsets get parsed from the block.
-            offset += 2; // skip to IOCRType
+            offset += 4; // skip to IOCRType
             uint16_t IOCRType = read16(data, offset);
-            offset += 38;// skip to NumberOfAPIS
+            offset += 36;// skip to NumberOfAPIS
             uint16_t loopAmount = read16(data, offset);
             std::cout << "IOCRBlockReq number of api's: " << loopAmount << " at offset " << offset << "\n";
             for(uint16_t i = 0; i < loopAmount; i++)
@@ -176,7 +190,9 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
             {
                 API_Module_Info api;
                 // skip to nr of submodules
-                offset += 12;
+                offset += 4; //Skip API nr
+                api.slot = read16(data, offset);
+                offset += 6; //Skip ModuleIdentNr and properties
                 uint16_t nrOfSubmodules = read16(data, offset);
                 for (uint16_t j = 0; j < nrOfSubmodules; j++)
                 {
@@ -185,7 +201,7 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
                     submodule.submoduleIdentNr = read32(data, offset);
                     offset += 2; // Skip submodule properties.
                     //Apparently there can be multiple dataDescriptions: 
-                    for (uint16_t k = 0; k < requiredDataDescriptionAmount(submodule.subslot); k++)
+                    for (uint16_t k = 0; k < requiredDataDescriptionAmount(api.slot, submodule.subslot); k++)
                     {
                         DataDescription dataDesc;
                         dataDesc.dataDescription = read16(data, offset);
@@ -213,14 +229,14 @@ bool Profinet::PNDevice::parseConnectBlock(std::vector<uint8_t> &data, uint16_t 
     return offset == data.size();
 }
 
-uint8_t Profinet::PNDevice::requiredDataDescriptionAmount(const uint16_t subslotNr)
+uint8_t Profinet::PNDevice::requiredDataDescriptionAmount(const uint16_t slotNr, const uint16_t subslotNr)
 {
     bool input_exists = false;
     bool output_exists = false;
     for (auto& inputSubslot : input.apis)
     {
           for(auto& io_d_obj : inputSubslot.io_data_objects) {
-            if (io_d_obj.subslot == subslotNr)
+            if (io_d_obj.subslot == subslotNr && io_d_obj.slot == slotNr)
             {
                 input_exists = true;
             }
@@ -230,7 +246,7 @@ uint8_t Profinet::PNDevice::requiredDataDescriptionAmount(const uint16_t subslot
     for (auto& outputSubslot : output.apis)
     {
           for(auto& io_d_obj : outputSubslot.io_data_objects) {
-            if (io_d_obj.subslot == subslotNr)
+            if (io_d_obj.subslot == subslotNr && io_d_obj.slot == slotNr)
             {
                 output_exists = true;
             }

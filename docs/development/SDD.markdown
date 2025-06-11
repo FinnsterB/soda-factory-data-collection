@@ -80,7 +80,7 @@ De PNDevice-klasse is een representatie van de Profinet-configuratie van een Dev
 
 **Structs**
 
-PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. Deze structs volgen de structuur van de Profinet Connect messages en zijn dus generiek voor iedere Profinet device. De structuur van deze berichten is bijzonder complex en vereist een uitgebreide parser.
+PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. Deze structs volgen de structuur van de Profinet Connect messages en zijn dus generiek voor iedere Profinet device. De structuur van deze berichten is complex en vereist een uitgebreide parser. 
 
 **IOCRBlockReq:**
 

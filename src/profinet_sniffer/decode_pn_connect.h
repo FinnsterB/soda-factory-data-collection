@@ -56,6 +56,7 @@ namespace Profinet{
 
     struct API_Module_Info{
         std::vector<Submodule> submodules;
+        uint16_t slot;
     };
 
     struct IOCRBlockReq{
@@ -81,7 +82,6 @@ namespace Profinet{
         IOCRBlockReq input;
         IOCRBlockReq output;
         std::vector<ExpectedSubmoduleBlockReq> expectedSubmodules;
-
 
         /**
          * @brief: Reads a uint8_t from data vector. Offset gets incremented each byte.
@@ -117,14 +117,14 @@ namespace Profinet{
          * @brief: Gets amount of data descriptions a subslot has. If one subslot is
          * used both for sending and receiving by the Controller. 
          */
-        uint8_t requiredDataDescriptionAmount(const uint16_t subslotNr);
+        uint8_t requiredDataDescriptionAmount(const uint16_t slotNr, const uint16_t subslotNr);
     };
 
 
     /**
      * Profinet system configuration: Holds all Profinet devices except for the 
      * Controller(PLC). For the purposes of this network the PLC is not included
-     * here.
+     * here. 
      */
     class SystemConfiguration
     {
