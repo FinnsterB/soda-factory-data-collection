@@ -45,6 +45,12 @@ void setupMasters(){
 
 int main(int argc, char const *argv[])
 {
+    //Print sensor data for MAC from argument
+    std::string verboseMAC = "";
+    if(argc > 1){
+        verboseMAC = argv[1];
+    }
+
     //setupMasters();
     Tins::NetworkInterface iface("lo");
     Tins::SnifferConfiguration config;
@@ -60,8 +66,7 @@ int main(int argc, char const *argv[])
     std::cout << "Listening on interface: " << iface.name() << std::endl;
 
     Profinet::SystemConfiguration sysConfig;
-
-    sniffer.sniff_loop([&sysConfig](Tins::PDU &pdu){
+    sniffer.sniff_loop([&sysConfig, &verboseMAC](Tins::PDU &pdu){
         std::stringstream ssAddr;
         Tins::EthernetII &eth = pdu.rfind_pdu<Tins::EthernetII>();
         bool configMsg = false;
@@ -87,6 +92,9 @@ int main(int argc, char const *argv[])
             }
             else{
                 //std::cout << "IO_data_message from: " << eth.src_addr() << "\n";
+                if(eth.src_addr() == verboseMAC){
+                    
+                }
             }
         }
         return true; // Continue sniffing

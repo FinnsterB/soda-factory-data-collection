@@ -17,7 +17,7 @@ bool Profinet::SystemConfiguration::deviceExists(PNDevice& device)
 void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac, std::vector<uint8_t>& data)
 {
     PNDevice device(device_mac, "placeholder");
-    std::cout << "Parsing Connect Message from MAC: " << device_mac << "\n\n";
+    std::cout << "Parsing Connect Message for MAC: " << device_mac << "\n\n";
     device.parseConnectMessage(data);
 
     if (!deviceExists(device))
