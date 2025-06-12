@@ -133,6 +133,13 @@ namespace Profinet{
         bool deviceExists(PNDevice& device);
         void handleConnect(const std::string& device_mac, std::vector<uint8_t>& data);
         std::vector<PNDevice> devices;
+        std::string PLC_MAC;
+
+        /**
+         * @brief This function gets the device interface required to decode PNIO messages. 
+         * @return A vector of pairs where the first member is the data offset and the second is the data length. 
+         */
+        std::vector<std::pair<uint16_t, uint16_t>> getDeviceInterface(const std::string& src_mac, const std::string& dst_mac);
     };
 
 };

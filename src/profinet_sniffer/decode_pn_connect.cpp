@@ -63,6 +63,11 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
     
 }
 
+std::vector<std::pair<uint16_t, uint16_t>> Profinet::SystemConfiguration::getDeviceInterface(const std::string &src_mac, const std::string &dst_mac)
+{
+    return std::vector<std::pair<uint16_t, uint16_t>>();
+}
+
 Profinet::PNDevice::PNDevice(std::string aMac, std::string aName): mac(aMac), name(aName)
 {
 }
