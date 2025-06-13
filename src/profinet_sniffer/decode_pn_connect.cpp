@@ -56,7 +56,6 @@ Profinet::DeviceInterface Profinet::SystemConfiguration::getDeviceDataOffsets(co
     bool isInput = PLC_MAC == dst_mac;
     
     std::optional<PNDevice> device = getDevice(deviceMac);
-    device.value();
     if (device.has_value())
     {
         if(isInput)

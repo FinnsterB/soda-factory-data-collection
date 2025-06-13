@@ -27,6 +27,11 @@ namespace Profinet{
          * Would use std::memcpy for this but the ethernet payload is big-endian.
          */
         static uint32_t read32(const std::vector<uint8_t>& data, uint16_t& offset);
+        /**
+         * @brief: Reads a uint64_t from data vector. Offset gets incremented each byte. 
+         * Would use std::memcpy for this but the ethernet payload is big-endian.
+         */
+        static uint64_t read64(const std::vector<uint8_t>& data, uint16_t& offset);
     };
 
     class PNIO_msg{
