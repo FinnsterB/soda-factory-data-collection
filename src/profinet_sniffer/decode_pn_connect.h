@@ -2,9 +2,18 @@
 #define DECODE_PN_CONNECT_H
 
 #include <iostream>
+#include <cstdint>
 #include <vector>
+#include <utility>
+#include <optional>
 
 namespace Profinet{
+    /**
+     * @brief: The deviceInterface is a vector with the data length and offset in a pair<length, offset>
+     */
+    typedef std::vector<std::pair<uint16_t, uint16_t>> DeviceInterface;
+
+
     enum BlockTypes{
         ARBlockReq_nr = 0x0101,
         IOCRBlockReq_nr = 0x0102,
@@ -27,8 +36,10 @@ namespace Profinet{
 
     /**
      * @brief According to Siemens documentation from: https://support.industry.siemens.com/dl/files/145/109781145/att_1028016/v1/pn_driver_IO-Base_user_programming_interface_en-US.pdf
-     * the IOCS is the Consumer status. When the PLC sends data TO a device, the PLC is a provider and the device is the consumer. The Consumer Status represents how the consumer
-     * handled the last message: it can be either good or bad. This works the same way in the opposite direction: from Device to PLC. I will not use this status information for now.
+     * the IOCS is the Consumer status. When the PLC sends data TO a device, the PLC is a provider 
+     * and the device is the consumer. The Consumer Status represents how the consumer handled the 
+     * last message: it can be either good or bad. This works the same way in the opposite direction: 
+     * from Device to PLC. I will not use this status information for now.
      */
     struct IOCS{
         uint16_t slot;
@@ -65,7 +76,8 @@ namespace Profinet{
     };
 
     /**
-     * @brief Contains API Module info, which holds the data lengths for IO-data. The data lengths together with the data offsets can be used to decode PN-IO messages. 
+     * @brief Contains API Module info, which holds the data lengths for IO-data. The 
+     * data lengths together with the data offsets can be used to decode PN-IO messages. 
      */
     struct ExpectedSubmoduleBlockReq{
         std::vector<API_Module_Info> apis;
@@ -84,23 +96,9 @@ namespace Profinet{
         std::vector<ExpectedSubmoduleBlockReq> expectedSubmodules;
 
         /**
-         * @brief: Reads a uint8_t from data vector. Offset gets incremented each byte.
-         * Would use std::memcpy for this but te ethernet payload is big-endian.
+         * @brief: Gets a dataDescription from a device subslot.
          */
-        uint8_t read8(const std::vector<uint8_t>& data, uint16_t& offset);
-
-        /**
-         * @brief: Reads a uint16_t from data vector. Offset gets incremented each byte. 
-         * Would use std::memcpy for this but te ethernet payload is big-endian.
-         */
-        uint16_t read16(const std::vector<uint8_t>& data, uint16_t& offset);
-
-        /**
-         * @brief: Reads a uint32_t from data vector. Offset gets incremented each byte. 
-         * Would use std::memcpy for this but the ethernet payload is big-endian.
-         */
-        uint32_t read32(const std::vector<uint8_t>& data, uint16_t& offset);
-
+        DataDescription getDataDescriptionBySubslot(uint16_t slot, uint16_t subslot);
         /**
          * @brief: Parses a connect message that configures a Profinet slave device.
          */
@@ -139,7 +137,11 @@ namespace Profinet{
          * @brief This function gets the device interface required to decode PNIO messages. 
          * @return A vector of pairs where the first member is the data offset and the second is the data length. 
          */
-        std::vector<std::pair<uint16_t, uint16_t>> getDeviceInterface(const std::string& src_mac, const std::string& dst_mac);
+        DeviceInterface getDeviceDataOffsets(const std::string& src_mac, const std::string& dst_mac);
+        /**
+         * @brief This function returns a device by it's MAC-address. 
+         */
+        std::optional<PNDevice> getDevice(std::string deviceMAC);
     };
 
 };
