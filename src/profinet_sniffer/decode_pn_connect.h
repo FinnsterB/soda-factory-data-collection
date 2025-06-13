@@ -130,6 +130,7 @@ namespace Profinet{
         SystemConfiguration(){};
         bool deviceExists(PNDevice& device);
         void handleConnect(const std::string& device_mac, std::vector<uint8_t>& data);
+        void handleIdentify(const std::string& device_mac, std::vector<uint8_t>& data);
         std::vector<PNDevice> devices;
         std::string PLC_MAC;
 

@@ -50,7 +50,7 @@ Deze database bevat de historische IO-data van de hele installatie. De sensoren 
 
 **GSDML Parser**
 
-De GSDML Parser moet de Profinet-configuratie bestanden verwerken en daaruit halen hoe de Profinet-apparaten hun berichten sturen. Dit is cruciaal voor het uitvinden waar de juiste bytes in de Profinet-pakketten verstopt zitten. De gebruiker van het systeem moet deze bestanden aanleveren, ze zijn door de fabrikanten gemaakt. Deze bestanden zijn ook nodig voor het PLC-programmeren in TIA-portal van Siemens. De benodigde data wordt in de Device Data Storage opgeslagen.
+De GSDML Parser moet de Profinet-configuratie bestanden verwerken en daaruit halen hoe de Profinet-apparaten hun berichten sturen. Dit is cruciaal voor het uitvinden waar de juiste bytes in de Profinet-pakketten verstopt zitten. De gebruiker van het systeem moet deze bestanden aanleveren, ze zijn door de fabrikanten gemaakt. Deze bestanden zijn ook nodig voor het PLC-programmeren in TIA-portal van Siemens. De benodigde data wordt in de Device Data Storage opgeslagen. 
 
 **User Interface**
 
@@ -58,7 +58,7 @@ De User Interface biedt visualisatie aan de gebruiker. Deze visualisatie biedt d
 
 ### Ontwerp Profinet Sniffer
 
-De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. Uit de Connect requests kan een groot deel van de Profinet systeemconfiguratie gehaald worden. 
+De techniek achter de Profinet Sniffer staat beschreven in het onderzoek Profinet/IO-Link. De Profinet Sniffer moet twee soorten berichten uitlezen: de Profinet connect requests en de Profinet Real Time IO messages. Uit de Connect requests kan een groot deel van de Profinet systeemconfiguratie gehaald worden en de Profinet RTIO messages bevatten de cyclische data die tussen de PLC en de Profinet Devices wordt uitgewisseld. 
 
 #### Klassendiagram
 
@@ -80,21 +80,26 @@ De PNDevice-klasse is een representatie van de Profinet-configuratie van een Dev
 
 **Structs**
 
-PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. Deze structs volgen de structuur van de Profinet Connect messages en zijn dus generiek voor iedere Profinet device. De structuur van deze berichten is complex en vereist een uitgebreide parser. 
+PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. Deze structs volgen de structuur van de Profinet Connect messages en zijn dus generiek voor iedere Profinet device. De structuur van deze berichten is vrij complex en vereist een uitgebreide decoder. De Profinet Connect messages bestaan hoofdzakelijk uit de volgende onderdelen:
 
-**IOCRBlockReq:**
+- **IOCRBlockReq:** Bevat verschillende instellingen van bijvoorbeeld de timing en de opbouw van de IO-berichten en bijbehorende statusdata(IOxS) van zowel de Device als de PLC.
+  - **API_IO_Data:**
+    - **IO_Data_Object:**
+    - **IOCS:**
 
-**API_IO_Data:**
+- **ExpectedSubmoduleBlockReq:**
+  - **API_Module_Info:**
+    - **Submodule:**
+- *ARBlockReq*:
+- *AlarmCRBlockReq:*
 
-**IOCS:**
+**PNUtils**
 
-**IO_Data_Object:**
 
-**ExpectedSubmoduleBlockReq:**
 
-**API_Module_Info:**
+**PNIO_msg**
 
-**Submodule:**
+Deze klasse biedt een functie om de Profinet Real Time IO messages te decoden op basis van de dataconfiguratie van de Device. De functie decodeMessage maakt van de message payload een lijst van datapunten. 
 
 
 
@@ -110,7 +115,9 @@ PNDevice heeft verschillende structs waar zijn configuratie in verdeeld staat. D
 
 ### Ontwerp GSDML Parser
 
+De GSDML-Parser moet de juiste GSDML-File vinden bij een opgegeven PNDevice. De PNDevice heeft een manufacturer ID en een Device ID. De PNDevice heeft ook een aantal DataDescriptions uit zijn Connect message gehaald. De DataDescriptions bevatten een SubmoduleIdentNumber en hiermee kan uit de GSDML-File opgehaald worden hoe de payload data van de Submodule in elkaar zit. 
 
+De AL1303 IFM IO-link masters sturen bijvoorbeeld in hun payload data per sensor een byte PQI mee die de status van het de port aangeeft. In de Connect message staat dan dat de payloaddata voor een sensor 5 bytes lang is, maar feitelijk zijn de eerste 4 bytes de meetwaarde en de laatste byte de PQI.
 
 
 

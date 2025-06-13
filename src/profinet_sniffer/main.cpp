@@ -34,6 +34,8 @@ int main(int argc, char const *argv[])
     sniffer.sniff_loop([&sysConfig, &verboseMAC](Tins::PDU &pdu){
         std::stringstream ssAddr;
         Tins::EthernetII &eth = pdu.rfind_pdu<Tins::EthernetII>();
+
+        //Determine if this is a config message
         bool configMsg = false;
         try
         {
@@ -48,14 +50,14 @@ int main(int argc, char const *argv[])
         {
             //std::cerr << e.what() << '\n';
         }
-
+        
         ssAddr << eth.dst_addr();
         bool printPayload = false;
         
         const Tins::RawPDU *raw = pdu.find_pdu<Tins::RawPDU>();
         if (raw) {
             Tins::RawPDU::payload_type payload = raw->payload();
-            if(configMsg == true){
+            if(configMsg){
                 //Handle PN Connect messages
                 sysConfig.handleConnect(ssAddr.str(), payload);
             }

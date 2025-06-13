@@ -7,7 +7,7 @@ add_executable(profinet_sniffer main.cpp decode_pn_connect.h decode_pn_connect.c
 target_include_directories(profinet_sniffer PRIVATE ${LIBTINS_INCLUDE_DIRS})
 
 # Link libtins
-target_link_libraries(profinet_sniffer PRIVATE ${LIBTINS_LIBRARIES})
+target_link_libraries(profinet_sniffer PRIVATE ${LIBTINS_LIBRARIES} GSDML_parser)
 
 add_custom_command(TARGET profinet_sniffer POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E echo "Setting capabilities"

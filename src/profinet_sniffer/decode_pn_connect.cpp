@@ -45,6 +45,10 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
     
 }
 
+void Profinet::SystemConfiguration::handleIdentify(const std::string &device_mac, std::vector<uint8_t> &data)
+{
+}
+
 Profinet::DeviceInterface Profinet::SystemConfiguration::getDeviceDataOffsets(const std::string &src_mac, const std::string &dst_mac)
 {
 
