@@ -117,7 +117,7 @@ Deze klasse biedt een functie om de Profinet Real Time IO messages te decoden op
 
 De GSDML-Parser moet de juiste GSDML-File vinden bij een opgegeven PNDevice. De PNDevice heeft een manufacturer ID en een Device ID. De PNDevice heeft ook een aantal DataDescriptions uit zijn Connect message gehaald. De DataDescriptions bevatten een SubmoduleIdentNumber en hiermee kan uit de GSDML-File opgehaald worden hoe de payload data van de Submodule in elkaar zit. 
 
-De AL1303 IFM IO-link masters sturen bijvoorbeeld in hun payload data per sensor een byte PQI mee die de status van het de port aangeeft. In de Connect message staat dan dat de payloaddata voor een sensor 5 bytes lang is, maar feitelijk zijn de eerste 4 bytes de meetwaarde en de laatste byte de PQI.
+De AL1303 IFM IO-link masters sturen bijvoorbeeld in hun payload data per sensor een byte PQI mee die de status van het de port aangeeft. In de Connect message staat dan dat de payloaddata voor een sensor 5 bytes lang is, maar feitelijk zijn de eerste 4 bytes de meetwaarde en de laatste byte de PQI. 
 
 
 

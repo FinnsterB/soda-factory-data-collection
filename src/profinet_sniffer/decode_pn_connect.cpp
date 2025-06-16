@@ -47,6 +47,27 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
 
 void Profinet::SystemConfiguration::handleIdentify(const std::string &device_mac, std::vector<uint8_t> &data)
 {
+    //From this block only the Name of Station, VendorID and DeviceID are required:
+
+    
+    uint16_t offset = 11; // Skip FrameID and ServiceID/Type
+    uint16_t DCPDataLength = PNUtils::read16(data, offset); //Total length of DCP blocks combined.
+    std::string nameOfStation = "";
+    uint16_t vendorID = 0;
+    uint16_t deviceID = 0;
+    bool endOfData = false;
+    while(!endOfData){
+        if(PNUtils::read8(data, offset) == 2 && PNUtils::read8(data, offset) == 2){ // Option and suboption mean Name Of Station is in this block.
+            uint16_t blockLength = PNUtils::read16(data, offset);
+            for (uint16_t i = 1; i < blockLength; i++) //Loop starts at 1 because it needs to skip the reserved BlockInfo byte.
+            {
+                nameOfStation.push_back(PNUtils::read8(data, offset));
+            }
+            offset++; //Skip padding byte
+            endOfData = offset + 1 > DCPDataLength;
+        }
+    }
+
 }
 
 Profinet::DeviceInterface Profinet::SystemConfiguration::getDeviceDataOffsets(const std::string &src_mac, const std::string &dst_mac)

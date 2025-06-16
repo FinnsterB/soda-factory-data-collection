@@ -1,5 +1,9 @@
 find_package(PkgConfig REQUIRED)
+find_package(Curses REQUIRED)
 pkg_check_modules(LIBTINS REQUIRED libtins)
+
+include_directories(${CURSES_INCLUDE_DIR})
+
 
 add_executable(profinet_sniffer main.cpp decode_pn_connect.h decode_pn_connect.cpp decode_pnio_msg.cpp decode_pnio_msg.h)
 
@@ -7,7 +11,7 @@ add_executable(profinet_sniffer main.cpp decode_pn_connect.h decode_pn_connect.c
 target_include_directories(profinet_sniffer PRIVATE ${LIBTINS_INCLUDE_DIRS})
 
 # Link libtins
-target_link_libraries(profinet_sniffer PRIVATE ${LIBTINS_LIBRARIES} GSDML_parser)
+target_link_libraries(profinet_sniffer PRIVATE ${LIBTINS_LIBRARIES} ${CURSES_LIBRARIES} GSDML_parser)
 
 add_custom_command(TARGET profinet_sniffer POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E echo "Setting capabilities"

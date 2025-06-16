@@ -1,0 +1,8 @@
+@startuml GSDML_class
+
+class parser{
+    void stationDescriptionAvailable(uint16 vendorID, uint16 deviceID);
+    void getIODataDescription(uint16 vendorID, uint16 deviceID, uint32 submoduleIdentNr);
+}
+
+@enduml

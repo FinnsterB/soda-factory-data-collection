@@ -32,7 +32,6 @@ int main(int argc, char const *argv[])
 
     Profinet::SystemConfiguration sysConfig;
     sniffer.sniff_loop([&sysConfig, &verboseMAC](Tins::PDU &pdu){
-        std::stringstream ssAddr;
         Tins::EthernetII &eth = pdu.rfind_pdu<Tins::EthernetII>();
 
         //Determine if this is a config message
@@ -50,16 +49,24 @@ int main(int argc, char const *argv[])
         {
             //std::cerr << e.what() << '\n';
         }
-        
-        ssAddr << eth.dst_addr();
         bool printPayload = false;
         
         const Tins::RawPDU *raw = pdu.find_pdu<Tins::RawPDU>();
         if (raw) {
             Tins::RawPDU::payload_type payload = raw->payload();
+            //Parse message type, read FrameID, ServiceID and ServiceType using dataOffset.
+            uint16_t dataOffset = 0;
+            uint16_t frameID = Profinet::PNUtils::read16(payload, dataOffset);
+            uint16_t serviceID = Profinet::PNUtils::read16(payload, dataOffset);
+            uint16_t serviceType = Profinet::PNUtils::read16(payload, dataOffset);
+
             if(configMsg){
                 //Handle PN Connect messages
-                sysConfig.handleConnect(ssAddr.str(), payload);
+                sysConfig.handleConnect(eth.dst_addr().to_string(), payload);
+            }
+            else if(frameID == 0xFFEF && serviceID == 5 && serviceType == 1){
+                //Handle PN-DCP Identify request
+                sysConfig.handleIdentify(eth.dst_addr().to_string(), payload);
             }
             else{
                 //Handle IO messages

@@ -13,3 +13,4 @@ endif()
 # Add subdirectories
 # add_subdirectory(src/data_handler)
 add_subdirectory(src/profinet_sniffer)
+add_subdirectory(src/GSDML_parser)
