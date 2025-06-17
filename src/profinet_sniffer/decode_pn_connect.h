@@ -21,6 +21,32 @@ namespace Profinet{
         ExpectedSubmoduleBlockReq_nr = 0x0104
     };
 
+    enum IdentifyOptions{
+        IP_nr = 1,
+        DeviceProperties_nr = 2
+    };
+
+    enum IdentifyIPSubOptions{
+        IPAdress_nr = 1,
+        MACAdress_nr = 2
+    };
+
+    enum IdentifyDevicePropertiesSubOptions{
+        TypeOfStation_nr = 1,
+        NameOfStation_nr = 2,
+        DeviceID_nr = 3,
+        DeviceRole_nr = 4,
+        DeviceOptions_nr = 5
+    };
+
+    struct DeviceIdentification{
+        std::string MAC;
+        std::string nameOfStation;
+        std::string typeOfStation;
+        uint16_t vendorID;
+        uint16_t deviceID;
+    };
+
     enum IOCRTypes{
         InputCR = 0x0001,
         OutputCR = 0x0002
@@ -132,6 +158,7 @@ namespace Profinet{
         void handleConnect(const std::string& device_mac, std::vector<uint8_t>& data);
         void handleIdentify(const std::string& device_mac, std::vector<uint8_t>& data);
         std::vector<PNDevice> devices;
+        std::vector<DeviceIdentification> deviceIdentifications;
         std::string PLC_MAC;
 
         /**
@@ -143,6 +170,20 @@ namespace Profinet{
          * @brief This function returns a device by it's MAC-address. 
          */
         std::optional<PNDevice> getDevice(std::string deviceMAC);
+        /**
+         * @brief This function returns a device by it's MAC-address. 
+         */
+        std::optional<DeviceIdentification> getDeviceIdentification(std::string deviceMAC);
+        /**
+         * @brief This function calls push_back on the devices vector only
+         * if the device doesn't exist yet. 
+         */
+        void updateDevice(PNDevice device);
+        /**
+         * @brief This function calls push_back on the deviceIdentifications
+         * only if the device doesn't exist yet.
+         */
+        void updateDeviceIdentification(DeviceIdentification devIdent);
     };
 
 };

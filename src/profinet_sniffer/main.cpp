@@ -57,16 +57,17 @@ int main(int argc, char const *argv[])
             //Parse message type, read FrameID, ServiceID and ServiceType using dataOffset.
             uint16_t dataOffset = 0;
             uint16_t frameID = Profinet::PNUtils::read16(payload, dataOffset);
-            uint16_t serviceID = Profinet::PNUtils::read16(payload, dataOffset);
-            uint16_t serviceType = Profinet::PNUtils::read16(payload, dataOffset);
+            uint16_t serviceID = Profinet::PNUtils::read8(payload, dataOffset);
+            uint16_t serviceType = Profinet::PNUtils::read8(payload, dataOffset);
 
             if(configMsg){
                 //Handle PN Connect messages
                 sysConfig.handleConnect(eth.dst_addr().to_string(), payload);
             }
-            else if(frameID == 0xFFEF && serviceID == 5 && serviceType == 1){
+            else if(frameID == 0xFEFF && serviceID == 5 && serviceType == 1){
                 //Handle PN-DCP Identify request
-                sysConfig.handleIdentify(eth.dst_addr().to_string(), payload);
+                std::cout << "Parsing Identify Request" << std::endl;
+                sysConfig.handleIdentify(eth.src_addr().to_string(), payload);
             }
             else{
                 //Handle IO messages

@@ -24,24 +24,21 @@ void Profinet::SystemConfiguration::handleConnect(const std::string& device_mac,
         device.parseConnectMessage(data);
     }
 
-    if (!deviceExists(device))
+
+    updateDevice(device);
+    DeviceInterface offsetAndLengthInput = getDeviceDataOffsets(device_mac, PLC_MAC);
+    DeviceInterface offsetAndLengthOutput = getDeviceDataOffsets(PLC_MAC, device_mac);
+    uint16_t counter = 0;
+    for (auto& ol : offsetAndLengthInput)
     {
-        devices.push_back(device);
-        DeviceInterface offsetAndLengthInput = getDeviceDataOffsets(device_mac, PLC_MAC);
-        DeviceInterface offsetAndLengthOutput = getDeviceDataOffsets(PLC_MAC, device_mac);
-        uint16_t counter = 0;
-        for (auto& ol : offsetAndLengthInput)
-        {
-            std::cout << "Input interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
-        }
-        counter = 0;
-        for (auto& ol : offsetAndLengthOutput)
-        {
-            std::cout << "Output interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
-        }
-        std::cout << std::endl;
-        
+        std::cout << "Input interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
     }
+    counter = 0;
+    for (auto& ol : offsetAndLengthOutput)
+    {
+        std::cout << "Output interface | " << counter++ << " Data Offset: " << ol.first << " Length: " << ol.second << "\n";
+    }
+    std::cout << std::endl;
     
 }
 
@@ -50,24 +47,70 @@ void Profinet::SystemConfiguration::handleIdentify(const std::string &device_mac
     //From this block only the Name of Station, VendorID and DeviceID are required:
 
     
-    uint16_t offset = 11; // Skip FrameID and ServiceID/Type
+    uint16_t offset = 10; // Skip FrameID and ServiceID/Type
     uint16_t DCPDataLength = PNUtils::read16(data, offset); //Total length of DCP blocks combined.
-    std::string nameOfStation = "";
-    uint16_t vendorID = 0;
-    uint16_t deviceID = 0;
+    DeviceIdentification deviceIdentification;
+    deviceIdentification.MAC = device_mac;
     bool endOfData = false;
     while(!endOfData){
-        if(PNUtils::read8(data, offset) == 2 && PNUtils::read8(data, offset) == 2){ // Option and suboption mean Name Of Station is in this block.
-            uint16_t blockLength = PNUtils::read16(data, offset);
-            for (uint16_t i = 1; i < blockLength; i++) //Loop starts at 1 because it needs to skip the reserved BlockInfo byte.
+        uint16_t option = PNUtils::read8(data, offset); //DCP blocks always start with an option byte
+        uint16_t subOption = PNUtils::read8(data, offset); //followed by a suboption byte.
+
+        //Followed by the length of the block. 
+        switch (option)
+        {
+        case IdentifyOptions::DeviceProperties_nr:
+            switch (subOption)
             {
-                nameOfStation.push_back(PNUtils::read8(data, offset));
+            case IdentifyDevicePropertiesSubOptions::TypeOfStation_nr:
+            {
+                uint16_t blockLength = PNUtils::read16(data, offset);
+                offset += 2; //Skip reserved bytes
+                for (uint16_t i = 2; i < blockLength; i++) //Loop starts at 2 because it needs to skip the reserved BlockInfo bytes.
+                {
+                    deviceIdentification.typeOfStation.push_back(PNUtils::read8(data, offset));
+                }
+                offset++; //Skip padding byte after string value.
+                endOfData = offset + 1 > DCPDataLength; //Check if max length is reached.
+                break;
             }
-            offset++; //Skip padding byte
-            endOfData = offset + 1 > DCPDataLength;
+            case IdentifyDevicePropertiesSubOptions::NameOfStation_nr:
+            {
+                uint16_t blockLength = PNUtils::read16(data, offset);
+                offset += 2; //Skip reserved bytes
+                for (uint16_t i = 2; i < blockLength; i++) //Loop starts at 1 because it needs to skip the reserved BlockInfo bytes.
+                {
+                    deviceIdentification.nameOfStation.push_back(PNUtils::read8(data, offset));
+                }
+                offset++; //Skip padding byte after string value.
+                endOfData = offset + 1 > DCPDataLength; //Check if max length is reached.
+                break;
+            }
+            case IdentifyDevicePropertiesSubOptions::DeviceID_nr:
+            {
+                uint16_t blockLength = PNUtils::read16(data, offset);
+                offset += 2; //Skip reserved bytes
+                deviceIdentification.vendorID = PNUtils::read16(data, offset);
+                deviceIdentification.deviceID = PNUtils::read16(data, offset);
+                endOfData = offset + 1 > DCPDataLength; //Check if max length is reached.
+                break;
+            }
+            default:
+                uint16_t blockLength = PNUtils::read16(data, offset);
+                offset += blockLength;
+                endOfData = offset + 1 > DCPDataLength; //Check if max length is reached.
+                break;
+            }
+            break;
+        default: //Only need the Device Properties, IP is usually not set yet and we can get it from the eth/ip data.
+            uint16_t blockLength = PNUtils::read16(data, offset);
+            offset += blockLength;
+            endOfData = offset + 1 > DCPDataLength; //Check if max length is reached.
+            break;
         }
     }
 
+    updateDeviceIdentification(deviceIdentification);
 }
 
 Profinet::DeviceInterface Profinet::SystemConfiguration::getDeviceDataOffsets(const std::string &src_mac, const std::string &dst_mac)
@@ -129,6 +172,33 @@ std::optional<Profinet::PNDevice> Profinet::SystemConfiguration::getDevice(std::
         }
     }
     return std::nullopt;
+}
+
+void Profinet::SystemConfiguration::updateDevice(PNDevice device)
+{
+    //Loop though devices to find the same MAC-address:
+    for (PNDevice& existingDevice : devices)
+    {
+        if(existingDevice.mac == device.mac){
+            existingDevice = device;
+            std::cout << "Updated configuration of " << device.mac << '\n';
+            return;
+        }
+    }
+    devices.push_back(device);
+}
+
+void Profinet::SystemConfiguration::updateDeviceIdentification(DeviceIdentification devIdent)
+{
+    //Loop though devices to find the same MAC-address:
+    for(DeviceIdentification& existingDevIdent : deviceIdentifications){
+        if(existingDevIdent.MAC == devIdent.MAC){
+            existingDevIdent = devIdent;
+            std::cout << "Updated identity of " << existingDevIdent.MAC << '\n';
+            return;
+        }
+    }
+    deviceIdentifications.push_back(devIdent);
 }
 
 Profinet::PNDevice::PNDevice(std::string aMac, std::string aName): mac(aMac), name(aName)
