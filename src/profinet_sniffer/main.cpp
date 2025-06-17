@@ -67,6 +67,7 @@ int main(int argc, char const *argv[])
             else if(frameID == 0xFEFF && serviceID == 5 && serviceType == 1){
                 //Handle PN-DCP Identify request
                 std::cout << "Parsing Identify Request" << std::endl;
+                sysConfig.PLC_MAC = eth.dst_addr().to_string();
                 sysConfig.handleIdentify(eth.src_addr().to_string(), payload);
             }
             else{
